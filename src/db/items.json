@@ -1,0 +1,194 @@
+[
+  {
+    "id": 0,
+    "img": "/top0.jpg",
+    "name": "keke denim shirt",
+    "price": 77000,
+    "category": "tops",
+    "likes": 0
+  },
+  {
+    "id": 1,
+    "img": "/top1.jpg",
+    "name": "keke good T-shirt",
+    "price": 66000,
+    "category": "tops",
+    "likes": 0
+  },
+  {
+    "id": 2,
+    "img": "/top2.jpg",
+    "name": "keke good outer",
+    "price": 32000,
+    "category": "tops",
+    "likes": 0
+  },
+  {
+    "id": 3,
+    "img": "/top3.jpg",
+    "name": "keke denim shirt",
+    "price": 88000,
+    "category": "tops",
+    "likes": 0
+  },
+  {
+    "id": 4,
+    "img": "/top4.jpg",
+    "name": "keke T-shirt",
+    "price": 110000,
+    "category": "tops",
+    "likes": 0
+  },
+  {
+    "id": 5,
+    "img": "/top5.jpg",
+    "name": "keke outer",
+    "price": 120000,
+    "category": "tops",
+    "likes": 0
+  },
+  {
+    "id": 6,
+    "img": "/top6.jpg",
+    "name": "keke good T-shirt",
+    "price": 59000,
+    "category": "tops",
+    "likes": 0
+  },
+  {
+    "id": 7,
+    "img": "/top7.jpg",
+    "name": "keke red shirt",
+    "price": 78000,
+    "category": "tops",
+    "likes": 0
+  },
+  {
+    "id": 8,
+    "img": "/pants0.jpg",
+    "name": "keke red pants",
+    "price": 77000,
+    "category": "pants",
+    "likes": 0
+  },
+  {
+    "id": 9,
+    "img": "/pants1.jpg",
+    "name": "keke good pants",
+    "price": 66000,
+    "category": "pants",
+    "likes": 0
+  },
+  {
+    "id": 10,
+    "img": "/pants2.jpg",
+    "name": "keke pants",
+    "price": 32000,
+    "category": "pants",
+    "likes": 0
+  },
+  {
+    "id": 11,
+    "img": "/pants3.jpg",
+    "name": "keke denim pants",
+    "price": 88000,
+    "category": "pants",
+    "likes": 0
+  },
+  {
+    "id": 12,
+    "img": "/pants4.jpg",
+    "name": "keke pants",
+    "price": 110000,
+    "category": "pants",
+    "likes": 0
+  },
+  {
+    "id": 13,
+    "img": "/pants5.jpg",
+    "name": "keke good pants",
+    "price": 120000,
+    "category": "pants",
+    "likes": 0
+  },
+  {
+    "id": 14,
+    "img": "/pants6.jpg",
+    "name": "keke very good pants",
+    "price": 59000,
+    "category": "pants",
+    "likes": 0
+  },
+  {
+    "id": 15,
+    "img": "/pants7.jpg",
+    "name": "keke pants",
+    "price": 78000,
+    "category": "pants",
+    "likes": 0
+  },
+  {
+    "id": 16,
+    "img": "/shoes0.jpg",
+    "name": "keke shoes",
+    "price": 77000,
+    "category": "shoes",
+    "likes": 0
+  },
+  {
+    "id": 17,
+    "img": "/shoes1.jpg",
+    "name": "keke good shoes",
+    "price": 66000,
+    "category": "shoes",
+    "likes": 0
+  },
+  {
+    "id": 18,
+    "img": "/shoes2.jpg",
+    "name": "keke very good shoes",
+    "price": 32000,
+    "category": "shoes",
+    "likes": 0
+  },
+  {
+    "id": 19,
+    "img": "/shoes3.jpg",
+    "name": "keke denim shoes",
+    "price": 88000,
+    "category": "shoes",
+    "likes": 0
+  },
+  {
+    "id": 20,
+    "img": "/shoes4.jpg",
+    "name": "keke shoes",
+    "price": 110000,
+    "category": "shoes",
+    "likes": 0
+  },
+  {
+    "id": 21,
+    "img": "/shoes5.jpg",
+    "name": "keke shoes",
+    "price": 120000,
+    "category": "shoes",
+    "likes": 0
+  },
+  {
+    "id": 22,
+    "img": "/shoes6.jpg",
+    "name": "keke good shoes",
+    "price": 59000,
+    "category": "shoes",
+    "likes": 0
+  },
+  {
+    "id": 23,
+    "img": "/shoes7.jpg",
+    "name": "keke red shoes",
+    "price": 78000,
+    "category": "shoes",
+    "likes": 0
+  }
+]
