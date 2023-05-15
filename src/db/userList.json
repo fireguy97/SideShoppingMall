@@ -1,0 +1,28 @@
+
+
+[
+    {
+        "username": "김민규",
+        "userID": "mk97",
+        "userType": "master",
+        "userJoinDate": "2023.05.14",
+        "userAmount" : "none",
+        "userPost" : "6"
+    },
+    {
+        "username": "박지현",
+        "userID": "ji_park",
+        "userType": "master",
+        "userJoinDate": "2023.05.14",
+        "userAmount" : "none",
+        "userPost" : "3"
+    },
+    {
+        "username": "박채림",
+        "userID": "park",
+        "userType": "master",
+        "userJoinDate": "2023.05.14",
+        "userAmount" : "none",
+        "userPost" : "5"
+    }
+]

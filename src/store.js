@@ -1,4 +1,5 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
+import userListReducer from "./Redux/userList";
 
 const cart = createSlice({
   name: "cart",
@@ -29,5 +30,6 @@ export const { addItem, deleteItem, plusCount, minusCount } = cart.actions;
 export default configureStore({
   reducer: {
     cart: cart.reducer,
+    userList: userListReducer,
   },
 });

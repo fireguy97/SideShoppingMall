@@ -15,6 +15,10 @@ const Header = () => {
     navigate(`/search/${searchKeyWord}`, { state: { searchResults: results } });
   };
 
+  const moveLogin = () => {
+    navigate("/Login");
+  };
+
   return (
     <>
       <div className="header">
@@ -23,12 +27,14 @@ const Header = () => {
             <img
               src={process.env.PUBLIC_URL + "/menu.png"}
               className="header_img1"
-              alt=""></img>
+              alt=""
+            ></img>
             <h3
               className="header_h3"
               onClick={() => {
                 navigate("/");
-              }}>
+              }}
+            >
               KEKEMON
             </h3>
           </div>
@@ -38,35 +44,40 @@ const Header = () => {
                 className="header_li"
                 onClick={() => {
                   navigate("/item/best");
-                }}>
+                }}
+              >
                 Best
               </li>
               <li
                 className="header_li"
                 onClick={() => {
                   navigate("/item/tops");
-                }}>
+                }}
+              >
                 Tops
               </li>
               <li
                 className="header_li"
                 onClick={() => {
                   navigate("/item/pants");
-                }}>
+                }}
+              >
                 Pants
               </li>
               <li
                 className="header_li"
                 onClick={() => {
                   navigate("/item/shoes");
-                }}>
+                }}
+              >
                 Shoes
               </li>
               <li
                 className="header_li"
                 onClick={() => {
                   navigate("/cart");
-                }}>
+                }}
+              >
                 Cart
               </li>
 
@@ -89,7 +100,9 @@ const Header = () => {
             </ui>
           </div>
           <div className="header_warp3">
-            <div className="header_div1">Login</div>
+            <div className="header_div1" onClick={moveLogin}>
+              Login
+            </div>
             <div className="header_div2"></div>
             <div className="header_div1">Help</div>
           </div>

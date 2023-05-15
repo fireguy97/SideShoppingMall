@@ -10,6 +10,11 @@ import ItemDetail from "./page/ItemDetail";
 import items from "./db/items.json";
 import { useState } from "react";
 import Search from "./page/Search";
+import LoginPage from "./page/LoginPage";
+import FindPage from "./page/FindPage";
+import ManagerPage from "./page/MangerPage";
+import ProfilePage from "./page/ProfilePage";
+import JoinPage from "./page/JoinPage";
 
 function App() {
   const [searchResults, setSearchResults] = useState([]);
@@ -23,6 +28,11 @@ function App() {
         <Route path="/item/pants" element={<Pants />} />
         <Route path="/item/shoes" element={<Shoes />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/Login" element={<LoginPage />} />
+        <Route path="/Join" element={<JoinPage />} />
+        <Route path="/IdPasswordFind" element={<FindPage />} />
+        <Route path="/Profile" element={<ProfilePage />} />
+        <Route path="/ManagerPage" element={<ManagerPage />} />
         <Route
           path="/search/:searchKeyword"
           element={
