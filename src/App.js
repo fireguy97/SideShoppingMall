@@ -23,7 +23,7 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<Main />} />
-        <Route path="/item/best" element={<Best />} />
+        <Route path="/item/best" element={<Best filteredItems={items} />} />
         <Route path="/item/tops" element={<Tops />} />
         <Route path="/item/pants" element={<Pants />} />
         <Route path="/item/shoes" element={<Shoes />} />
