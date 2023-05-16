@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { money } from "../../func";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,19 +6,31 @@ import { addItem, incrementLikes } from "../../store";
 
 const ItemDetailRight = ({ filteredItems }) => {
   const { id } = useParams();
-  const findItem = filteredItems.find((item) => item.id == id);
+  const [findItem, setFindItem] = useState(
+    filteredItems.find((item) => item.id == id)
+  );
+
   const [itemSize, setItemSize] = useState("");
   const [count, setCount] = useState(1);
 
   const navigate = useNavigate();
-
-  const state = useSelector((state) => state);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    setFindItem(filteredItems.find((item) => item.id == id));
+  }, [filteredItems, id]);
 
   const handleSizeChange = (e) => {
     setItemSize(e.target.value);
   };
 
+  const handleLike = () => {
+    dispatch(incrementLikes(findItem.id));
+    setFindItem((prevItem) => ({
+      ...prevItem,
+      likes: prevItem.likes + 1,
+    }));
+  };
   return (
     <>
       <div className="itemDetail_right">
@@ -29,8 +41,11 @@ const ItemDetailRight = ({ filteredItems }) => {
           <div>{money(findItem.price)} KRW</div>
           <div>
             {findItem.likes}
-            <button>like</button>
+            <span className="likes_button" onClick={handleLike}>
+              ❤️
+            </span>
           </div>
+          <div>Current Likes: {findItem.likes}</div>
           <select
             className="itemDetail_size"
             value={itemSize}

@@ -27,9 +27,26 @@ const cart = createSlice({
 
 export const { addItem, deleteItem, plusCount, minusCount } = cart.actions;
 
+const likeSlice = createSlice({
+  name: "like",
+  initialState: [],
+  reducers: {
+    incrementLikes: (state, action) => {
+      const itemId = action.payload;
+      const item = state.find((item) => item.id === itemId);
+      if (item) {
+        item.likes += 1;
+      }
+    },
+  },
+});
+
+export const { incrementLikes } = likeSlice.actions;
+
 export default configureStore({
   reducer: {
     cart: cart.reducer,
+    like: likeSlice.reducer,
     userList: userListReducer,
   },
 });
