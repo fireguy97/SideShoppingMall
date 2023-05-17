@@ -154,6 +154,7 @@ export default function IdPasswordFind() {
 const StyledIdPasswordFind = styled.div`
   display: flex;
   justify-content: center;
+  height: 625px;
   .exitBtn {
     font-size: 45px;
     position: absolute;

@@ -122,6 +122,7 @@ export default function Login() {
 }
 
 const StyledLogin = styled.div`
+  height: 575px;
   ul,
   ol,
   li {
@@ -135,7 +136,7 @@ const StyledLogin = styled.div`
     margin-top: 50px;
   }
   .title {
-    margin-top: 150px;
+    margin-top: 80px;
     font-size: 30px;
     font-weight: 500;
     margin-bottom: 30px;
@@ -144,7 +145,6 @@ const StyledLogin = styled.div`
   }
   .formWrapper {
     width: 600px;
-    height: 800px;
     margin: 0 auto;
   }
   .memberSep {

@@ -31,7 +31,15 @@ export default function Join() {
             <tr>
               <th>ID</th>
               <td>
-                <input type="text" placeholder="ID" {...register("id")} />
+                <div className="idChkWrap">
+                  <input
+                    className="idInput"
+                    type="text"
+                    placeholder="ID"
+                    {...register("id")}
+                  />
+                  <button className="doubleChk">중복확인</button>
+                </div>
               </td>
             </tr>
             <tr>
@@ -112,6 +120,16 @@ export default function Join() {
                 <input className="birth" type="Number" placeholder="day" />
               </td>
             </tr>
+            <tr>
+              <th>성별</th>
+              <td className="genderWrap">
+                <label htmlFor="male">남</label>
+                <input type="radio" id="male" name="gender" value="male" />
+
+                <label htmlFor="female">여</label>
+                <input type="radio" id="female" name="gender" value="female" />
+              </td>
+            </tr>
           </tbody>
           <button className="JoinSubmit">Join Now</button>
         </form>
@@ -121,6 +139,8 @@ export default function Join() {
 }
 
 const StyledJoin = styled.div`
+  margin-top: 80px;
+  height: 625px;
   .ExitBtn {
     top: 5px;
     font-size: 45px;
@@ -130,6 +150,7 @@ const StyledJoin = styled.div`
     cursor: pointer;
     background-color: #fff;
     border: 0;
+    margin-top: 50px;
   }
 
   .Title {
@@ -138,6 +159,7 @@ const StyledJoin = styled.div`
     padding-top: 10px;
     color: #333;
     margin-left: 30px;
+    margin-bottom: 20px;
   }
   .JoinForm {
     width: 1060px;
@@ -159,6 +181,20 @@ const StyledJoin = styled.div`
   input {
     height: 20px;
     width: 280px;
+  }
+  .idChkWrap {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 5px;
+  }
+  .idInput {
+    width: 195px;
+  }
+  .idChkWrap > button {
+    width: 80px;
+    background-color: #fff;
+    color: #aaa;
+    cursor: pointer;
   }
   .NumberChkWrap {
     display: flex;
@@ -196,14 +232,32 @@ const StyledJoin = styled.div`
   .birthWrap {
     display: flex;
     gap: 5px;
+    margin-bottom: 5px;
   }
   .birth {
     width: 85px;
   }
+  .genderWrap {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .genderWrap > label {
+    padding: 0;
+    margin: 0;
+    width: 15px;
+    font-size: 14px;
+  }
+  .genderWrap > input {
+    width: 13px;
+    position: relative;
+    top: -1px;
+  }
   .JoinSubmit {
     position: absolute;
     margin-left: 115px;
-    bottom: 140px;
+    bottom: 90px;
     width: 290px;
     height: 80px;
     background-color: #171717;
