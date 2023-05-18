@@ -25,7 +25,12 @@ export default function Join() {
             <tr>
               <th>Name</th>
               <td>
-                <input type="text" placeholder="Name" {...register("name")} />
+                <input
+                  type="text"
+                  placeholder="Name"
+                  {...register("name")}
+                  required
+                />
               </td>
             </tr>
             <tr>
@@ -37,6 +42,7 @@ export default function Join() {
                     type="text"
                     placeholder="ID"
                     {...register("id")}
+                    required
                   />
                   <button className="doubleChk">중복확인</button>
                 </div>
@@ -49,6 +55,7 @@ export default function Join() {
                   type="password"
                   placeholder="password"
                   {...register("password")}
+                  required
                 />
               </td>
             </tr>
@@ -59,6 +66,7 @@ export default function Join() {
                   type="password"
                   placeholder="password"
                   {...register("password")}
+                  required
                 />
               </td>
             </tr>
@@ -69,6 +77,7 @@ export default function Join() {
                   type="email"
                   placeholder="email"
                   {...register("email")}
+                  required
                 />
               </td>
             </tr>
@@ -79,6 +88,7 @@ export default function Join() {
                   type="tel"
                   placeholder="PhoneNumber"
                   {...register("tel")}
+                  required
                 />
               </td>
             </tr>
@@ -103,6 +113,7 @@ export default function Join() {
                     type="text"
                     placeholder="address"
                     {...register("address")}
+                    required
                   />
                   <button className="ChkBtn">우편번호</button>
                 </div>
