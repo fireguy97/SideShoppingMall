@@ -6,7 +6,7 @@ const SearchList = ({ searchResults }) => {
   return (
     <>
       <div className="itemList_div">
-        <ui className="itemList_ui">
+        <ul className="itemList_ul">
           {searchResults.map((item, i) => {
             return (
               <li className="itemList_li" key={item.id}>
@@ -18,7 +18,7 @@ const SearchList = ({ searchResults }) => {
               </li>
             );
           })}
-        </ui>
+        </ul>
       </div>
     </>
   );

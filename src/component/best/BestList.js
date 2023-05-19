@@ -27,7 +27,7 @@ const BestList = ({ filteredItems }) => {
   return (
     <>
       <div className="itemList_div">
-        <ui className="itemList_ui">
+        <ul className="itemList_ul">
           {bestItems.map((item, i) => {
             return (
               <li className="itemList_li" key={item.id}>
@@ -39,7 +39,7 @@ const BestList = ({ filteredItems }) => {
               </li>
             );
           })}
-        </ui>
+        </ul>
       </div>
     </>
   );

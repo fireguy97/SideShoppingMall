@@ -1,7 +1,7 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
 import userListReducer from "./Redux/userList";
 
-const cart = createSlice({
+const cartSlice = createSlice({
   name: "cart",
   initialState: [],
   reducers: {
@@ -25,7 +25,7 @@ const cart = createSlice({
   },
 });
 
-export const { addItem, deleteItem, plusCount, minusCount } = cart.actions;
+export const { addItem, deleteItem, plusCount, minusCount } = cartSlice.actions;
 
 const likeSlice = createSlice({
   name: "like",
@@ -45,7 +45,7 @@ export const { incrementLikes } = likeSlice.actions;
 
 export default configureStore({
   reducer: {
-    cart: cart.reducer,
+    cart: cartSlice.reducer,
     like: likeSlice.reducer,
     userList: userListReducer,
   },

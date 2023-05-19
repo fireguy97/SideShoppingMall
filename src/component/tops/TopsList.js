@@ -11,7 +11,7 @@ const TopsList = () => {
   return (
     <>
       <div className="itemList_div">
-        <ui className="itemList_ui">
+        <ul className="itemList_ul">
           {filteredItems.map((item, i) => {
             return (
               <li className="itemList_li" key={item.id}>
@@ -23,7 +23,7 @@ const TopsList = () => {
               </li>
             );
           })}
-        </ui>
+        </ul>
       </div>
     </>
   );

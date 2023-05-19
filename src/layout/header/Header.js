@@ -27,14 +27,12 @@ const Header = () => {
             <img
               src={process.env.PUBLIC_URL + "/menu.png"}
               className="header_img1"
-              alt=""
-            ></img>
+              alt=""></img>
             <h3
               className="header_h3"
               onClick={() => {
                 navigate("/");
-              }}
-            >
+              }}>
               KEKEMON
             </h3>
           </div>
@@ -44,40 +42,35 @@ const Header = () => {
                 className="header_li"
                 onClick={() => {
                   navigate("/item/best");
-                }}
-              >
+                }}>
                 Best
               </li>
               <li
                 className="header_li"
                 onClick={() => {
                   navigate("/item/tops");
-                }}
-              >
+                }}>
                 Tops
               </li>
               <li
                 className="header_li"
                 onClick={() => {
                   navigate("/item/pants");
-                }}
-              >
+                }}>
                 Pants
               </li>
               <li
                 className="header_li"
                 onClick={() => {
                   navigate("/item/shoes");
-                }}
-              >
+                }}>
                 Shoes
               </li>
               <li
                 className="header_li"
                 onClick={() => {
                   navigate("/cart");
-                }}
-              >
+                }}>
                 Cart
               </li>
 
