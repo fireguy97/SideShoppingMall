@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import Layout from "../layout/Layout";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteItem, minusCount, plusCount } from "../store";
+
 import { money } from "../func";
+import { deleteItem, minusCount, plusCount } from "../Redux/cartSlice";
 
 const Cart = () => {
   const state = useSelector((state) => state);

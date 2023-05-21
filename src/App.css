@@ -472,7 +472,6 @@ hr {
 @media (max-width: 800px) {
   .itemDetail_left {
     width: 80%;
-    display: block;
   }
   .itemDetail_img {
     width: 80%;
@@ -481,25 +480,15 @@ hr {
   .itemDetail_right {
     width: 80%;
     float: none;
-    margin-top: 2rem;
-  }
-  .itemDetail_info1 {
-    padding: 1.5rem;
   }
   .itemDetail_size {
     width: 100%;
-  }
-  .itemDetail_span3 {
-    padding-left: 2rem;
   }
   .itemDetail_div2 {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
-  .itemDetail_buy {
-    margin-top: 1rem;
   }
 }
 

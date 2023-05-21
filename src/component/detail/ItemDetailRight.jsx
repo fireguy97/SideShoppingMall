@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { money } from "../../func";
-import { useDispatch, useSelector } from "react-redux";
-import { addItem, incrementLikes } from "../../store";
+import { useDispatch } from "react-redux";
+import { incrementLikes } from "../../Redux/likeSlice";
+import { addItem } from "../../Redux/cartSlice";
 
 const ItemDetailRight = ({ filteredItems }) => {
   const { id } = useParams();
@@ -105,7 +106,23 @@ const ItemDetailRight = ({ filteredItems }) => {
               }}>
               Cart
             </span>
-            <span className="itemDetail_buy">Buy</span>
+            <span
+              className="itemDetail_buy"
+              onClick={() => {
+                dispatch(
+                  addItem({
+                    id: findItem.id,
+                    img: findItem.img,
+                    name: findItem.name,
+                    price: findItem.price,
+                    size: itemSize,
+                    count: count,
+                  })
+                );
+                navigate("/buy");
+              }}>
+              Buy
+            </span>
           </div>
           {/* 사이즈 정보 */}
           <div className="itemDetail_sizeInfo">
