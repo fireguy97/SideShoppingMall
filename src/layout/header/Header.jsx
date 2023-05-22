@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import items from "../../db/items.json";
+import * as S from "./HeaderStyles";
 
 const Header = () => {
   const [searchKeyWord, setSearchKeyword] = useState("");
@@ -21,93 +22,79 @@ const Header = () => {
 
   return (
     <>
-      <div className="header">
-        <div className="header_warp">
-          <div className="header_warp1">
-            <img
-              src={process.env.PUBLIC_URL + "/menu.png"}
-              className="header_img1"
-              alt=""
-            ></img>
-            <h3
-              className="header_h3"
+      <S.HeaderCotainer>
+        <S.HeaderWarp>
+          <S.HeaderWarp1>
+            <S.HeaderImg1 src={process.env.PUBLIC_URL + "/menu.png"} alt="" />
+            <S.HeaderH3
               onClick={() => {
                 navigate("/");
-              }}
-            >
+              }}>
               KEKEMON
-            </h3>
-          </div>
-          <div className="header_warp2">
-            <ui className="header_ui">
-              <li
-                className="header_li"
+            </S.HeaderH3>
+          </S.HeaderWarp1>
+          <S.HeaderWarp2>
+            <S.HeaderUl>
+              <S.HeaderLi
                 onClick={() => {
                   navigate("/item/best");
-                }}
-              >
+                }}>
                 Best
-              </li>
-              <li
-                className="header_li"
+              </S.HeaderLi>
+              <S.HeaderLi
                 onClick={() => {
                   navigate("/item/tops");
-                }}
-              >
+                }}>
                 Tops
-              </li>
-              <li
-                className="header_li"
+              </S.HeaderLi>
+              <S.HeaderLi
                 onClick={() => {
                   navigate("/item/pants");
-                }}
-              >
+                }}>
                 Pants
-              </li>
-              <li
-                className="header_li"
+              </S.HeaderLi>
+              <S.HeaderLi
                 onClick={() => {
                   navigate("/item/shoes");
-                }}
-              >
+                }}>
                 Shoes
-              </li>
-              <li
-                className="header_li"
+              </S.HeaderLi>
+              <S.HeaderLi
                 onClick={() => {
                   navigate("/cart");
-                }}
-              >
+                }}>
                 Cart
-              </li>
+              </S.HeaderLi>
+              <S.HeaderLi
+                onClick={() => {
+                  navigate("/buy");
+                }}>
+                Buy
+              </S.HeaderLi>
 
-              <li className="header_li">
-                <input
+              <S.HeaderLi>
+                <S.HeaderInput
                   type="search"
-                  className="header_input"
                   value={searchKeyWord}
                   onChange={(e) => setSearchKeyword(e.target.value)}
                 />
-              </li>
-              <li className="header_li">
-                <img
+              </S.HeaderLi>
+              <S.HeaderLi>
+                <S.HeaderImg2
                   src={process.env.PUBLIC_URL + "/search.png"}
-                  className="header_img2"
                   alt=""
                   onClick={handleSearch}
                 />
-              </li>
-            </ui>
-          </div>
-          <div className="header_warp3">
-            <div className="header_div1" onClick={moveLogin}>
-              Login
-            </div>
-            <div className="header_div2"></div>
-            <div className="header_div1">Help</div>
-          </div>
-        </div>
-      </div>
+              </S.HeaderLi>
+            </S.HeaderUl>
+          </S.HeaderWarp2>
+          <S.HeaderWarp3>
+            <S.HeaderDiv1 onClick={moveLogin}>Login</S.HeaderDiv1>
+            <S.HeaderDiv2></S.HeaderDiv2>
+            <S.HeaderDiv1>Help</S.HeaderDiv1>
+          </S.HeaderWarp3>
+        </S.HeaderWarp>
+      </S.HeaderCotainer>
     </>
   );
 };

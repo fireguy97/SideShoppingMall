@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import mainBannerImg from "../../db/mainBannerImg.json";
+import * as S from "./MainStyles";
 
 const MainBanner = () => {
   const [mainBanner, setMainBanner] = useState(mainBannerImg);
@@ -29,17 +30,13 @@ const MainBanner = () => {
   }, []);
 
   return (
-    <div className="main_banner">
-      <button className="main_prev" onClick={prevClick}>
-        {"<"}
-      </button>
-      <button className="main_next" onClick={nextClick}>
-        {">"}
-      </button>
-      <div className="main_wrap">
-        <img src={mainBanner[index].img} className="main_img" alt="" />
-      </div>
-    </div>
+    <S.MainBanner>
+      <S.MainPrevBtn onClick={prevClick}>{"<"}</S.MainPrevBtn>
+      <S.MainNextBtn onClick={nextClick}>{">"}</S.MainNextBtn>
+      <S.MainWrap>
+        <S.MainImg src={mainBanner[index].img} className="main_img" alt="" />
+      </S.MainWrap>
+    </S.MainBanner>
   );
 };
 

@@ -1,5 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
+import * as S from "./ItemDetailStyles";
 
 const ItemDetailLeft = ({ filteredItems }) => {
   const { id } = useParams();
@@ -7,9 +8,9 @@ const ItemDetailLeft = ({ filteredItems }) => {
 
   return (
     <>
-      <div className="itemDetail_left">
-        <img className="itemDetail_img" src={findItem.img} alt="" />
-      </div>
+      <S.ItemDetailLeft>
+        <S.ItemDetailLeftImg src={findItem.img} alt="" />
+      </S.ItemDetailLeft>
     </>
   );
 };

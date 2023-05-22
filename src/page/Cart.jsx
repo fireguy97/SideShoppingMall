@@ -1,8 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import Layout from "../layout/Layout";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteItem, minusCount, plusCount } from "../store";
 import { money } from "../func";
+import {
+  cartDeleteItem,
+  cartMinusCount,
+  cartPlusCount,
+} from "../Redux/cartSlice";
+import * as S from "../component/cart/CartStyles";
 
 const Cart = () => {
   const state = useSelector((state) => state);
@@ -10,12 +15,12 @@ const Cart = () => {
 
   return (
     <Layout>
-      <div className="cart_div1">
-        <table className="cart_table">
-          <thead className="cart_thead">
+      <S.CartDiv1>
+        <S.CartTable>
+          <S.CartThead>
             <tr>
               <td>
-                <input type="checkbox" className="cart_checkbox" />
+                <S.CartCheckbox type="checkbox" />
               </td>
               <td>item</td>
               <td>name</td>
@@ -24,67 +29,62 @@ const Cart = () => {
               <td>count</td>
               <td>total price</td>
             </tr>
-          </thead>
+          </S.CartThead>
           <tbody>
             {state.cart.map((item) => {
               return (
-                <tr key={item.id} className="cart_tr">
-                  <td className="cart_td">
-                    <input type="checkbox" className="cart_checkbox" />
-                  </td>
+                <S.CartTr key={item.id}>
+                  <S.CartTd>
+                    <S.CartCheckbox type="checkbox" />
+                  </S.CartTd>
                   <td>
-                    <img src={item.img} alt="" className="cart_img" />
+                    <S.CartImg src={item.img} alt="" />
                   </td>
                   <td>{item.name}</td>
                   <td>{item.price} KRW</td>
                   <td>{item.size}</td>
                   <td>
-                    <span
-                      className="itemDetail_span1"
-                      style={{ cursor: "pointer" }}
+                    <S.CartSpan1
                       onClick={() => {
-                        dispatch(minusCount(item.id));
+                        dispatch(cartMinusCount(item.id));
                       }}>
                       -
-                    </span>
-                    <span className="itemDetail_span1">{item.count}</span>
-                    <span
-                      className="itemDetail_span1"
-                      style={{ cursor: "pointer" }}
+                    </S.CartSpan1>
+                    <S.CartSpan2>{item.count}</S.CartSpan2>
+                    <S.CartSpan1
                       onClick={() => {
-                        dispatch(plusCount(item.id));
+                        dispatch(cartPlusCount(item.id));
                       }}>
                       +
-                    </span>
+                    </S.CartSpan1>
                   </td>
                   <td>{money(item.price * item.count)} KRW</td>
                   <td>
-                    <span
-                      className="cart_delete"
+                    <S.CartDelete
                       onClick={() => {
-                        dispatch(deleteItem(item.id));
+                        dispatch(cartDeleteItem(item.id));
                       }}>
                       Delete
-                    </span>
+                    </S.CartDelete>
                   </td>
-                </tr>
+                </S.CartTr>
               );
             })}
           </tbody>
           <tfoot>
-            <tr className="cart_tr">
-              <td className="cart_tfood1">Delete</td>
+            <S.CartTr>
+              <S.CartTfoot1>Delete</S.CartTfoot1>
               <td></td>
               <td></td>
               <td></td>
               <td></td>
               <td></td>
               <td></td>
-              <td className="cart_tfood2">Buy</td>
-            </tr>
+              <S.CartTfoot2>Buy</S.CartTfoot2>
+            </S.CartTr>
           </tfoot>
-        </table>
-      </div>
+        </S.CartTable>
+      </S.CartDiv1>
     </Layout>
   );
 };
