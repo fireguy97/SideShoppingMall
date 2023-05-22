@@ -12,10 +12,12 @@ export default function Join() {
   return (
     <StyledJoin>
       <div className="JoinWrap">
-        <h3 className="Title"> JOIN US </h3>
-        <button className="ExitBtn" onClick={moveLogin}>
-          &times;
-        </button>
+        <div className="joinHead">
+          <h3 className="Title"> JOIN US </h3>
+          <button className="ExitBtn" onClick={moveLogin}>
+            &times;
+          </button>
+        </div>
 
         <form
           className="JoinForm"
@@ -150,103 +152,108 @@ export default function Join() {
 }
 
 const StyledJoin = styled.div`
-  margin-top: 80px;
-  height: 625px;
+  .JoinWrap {
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .joinHead {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   .ExitBtn {
-    top: 5px;
-    font-size: 45px;
-    position: absolute;
-    width: 100px;
-    right: 480px;
+    font-size: 2.8125rem;
+    width: 4.25rem;
     cursor: pointer;
     background-color: #fff;
     border: 0;
-    margin-top: 50px;
   }
 
   .Title {
     text-align: center;
-    margin-top: 2%;
-    padding-top: 10px;
     color: #333;
-    margin-left: 30px;
-    margin-bottom: 20px;
+    margin-right: 100px;
+    margin-left: 150px;
   }
   .JoinForm {
-    width: 1060px;
-    margin: 0 auto;
     display: flex;
-    justify-content: center;
-    margin-left: 200px;
+    flex-direction: column;
     height: 100%;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    margin-right: 130px;
   }
+
   th {
     color: aliceblue;
-    font-size: 13px;
-    padding: 1px 20px 0 0;
+    font-size: 0.8125rem;
+    padding: 0.0625rem 1.25rem 0 0;
   }
   td {
-    padding: 6px 0px 6px;
-    border-bottom: 1px solid #ddd;
+    padding: 0.375rem 0rem 0.375rem;
+    border-bottom: 0.0625rem solid #ddd;
   }
   input {
-    height: 20px;
-    width: 280px;
+    height: 1.25rem;
+    width: 17.5rem;
   }
   .idChkWrap {
     display: flex;
-    gap: 5px;
-    margin-bottom: 5px;
+    gap: 0.3125rem;
+    margin-bottom: 0.3125rem;
   }
   .idInput {
-    width: 195px;
+    width: 12.1875rem;
   }
   .idChkWrap > button {
-    width: 80px;
+    width: 5rem;
     background-color: #fff;
     color: #aaa;
     cursor: pointer;
   }
   .NumberChkWrap {
     display: flex;
-    gap: 5px;
-    margin-bottom: 5px;
+    gap: 0.3125rem;
+    margin-bottom: 0.3125rem;
   }
   .NumberChk {
-    width: 195px;
+    width: 12.1875rem;
   }
   .NumberChkWrap > button {
-    width: 80px;
+    width: 5rem;
     background-color: #fff;
     color: #aaa;
     cursor: pointer;
   }
   .addressWrap {
     display: flex;
-    gap: 5px;
-    margin-bottom: 5px;
+    gap: 0.3125rem;
+    margin-bottom: 0.3125rem;
   }
   .addressWrap > input {
-    width: 195px;
+    width: 12.1875rem;
   }
   .addressWrap > button {
     background-color: #fff;
     cursor: pointer;
     color: #aaa;
-    width: 80px;
+    width: 5rem;
   }
   .moreAddress {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 0.3125rem;
   }
   .birthWrap {
     display: flex;
-    gap: 5px;
-    margin-bottom: 5px;
+    gap: 0.3125rem;
+    margin-bottom: 0.3125rem;
   }
   .birth {
-    width: 85px;
+    width: 5.3125rem;
   }
   .genderWrap {
     position: relative;
@@ -257,25 +264,54 @@ const StyledJoin = styled.div`
   .genderWrap > label {
     padding: 0;
     margin: 0;
-    width: 15px;
-    font-size: 14px;
+    width: 0.9375rem;
+    font-size: 0.875rem;
   }
   .genderWrap > input {
-    width: 13px;
+    width: 0.8125rem;
     position: relative;
-    top: -1px;
+    top: -0.0625rem;
   }
   .JoinSubmit {
-    position: absolute;
-    margin-left: 115px;
-    bottom: 90px;
-    width: 290px;
-    height: 80px;
+    position: relative;
+    margin-left: 7.1875rem;
+    width: 18.125rem;
+    height: 5rem;
     background-color: #171717;
     color: aliceblue;
     cursor: pointer;
   }
   input::placeholder {
     color: lightgrey;
+  }
+  @media (max-width: 768px) {
+    .JoinWrap {
+      margin-top: 30px;
+    }
+    .joinHead {
+      flex-direction: column;
+      align-items: flex-start;
+      margin-bottom: 10px;
+    }
+    .ExitBtn {
+      margin-top: 10px;
+      margin-right: 0;
+    }
+    .Title {
+      margin: 0;
+    }
+    .JoinForm {
+      margin-right: 0;
+    }
+    input {
+      width: 15rem;
+    }
+    .addressWrap > input {
+      width: 11rem;
+    }
+    .JoinSubmit {
+      margin-left: 0;
+      width: 15rem;
+    }
   }
 `;

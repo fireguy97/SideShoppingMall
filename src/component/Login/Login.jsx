@@ -122,7 +122,7 @@ export default function Login() {
 }
 
 const StyledLogin = styled.div`
-  height: 575px;
+  height: 35.9375rem;
   ul,
   ol,
   li {
@@ -133,55 +133,55 @@ const StyledLogin = styled.div`
     text-decoration: none;
   }
   .imsiBtn {
-    margin-top: 50px;
+    margin-top: 3.125rem;
   }
   .title {
-    margin-top: 80px;
-    font-size: 30px;
+    margin-top: 5rem;
+    font-size: 1.875rem;
     font-weight: 500;
-    margin-bottom: 30px;
+    margin-bottom: 1.875rem;
     text-align: center;
-    margin-left: 10px;
+    margin-left: 0.625rem;
   }
   .formWrapper {
-    width: 600px;
+    width: 37.5rem;
     margin: 0 auto;
   }
   .memberSep {
     display: flex;
     justify-content: center;
-    gap: 1px;
-    margin-bottom: 20px;
-    margin-left: 30px;
+    gap: 0.0625rem;
+    margin-bottom: 1.25rem;
+    margin-left: 1.875rem;
   }
   .memberSep > li {
-    width: 200px;
-    border: 1px solid #333;
+    width: 12.5rem;
+    border: 0.0625rem solid #333;
     cursor: pointer;
-    border: 1px solid #d9d9d9;
+    border: 0.0625rem solid #d9d9d9;
     color: #333;
     text-align: center;
-    height: 25px;
+    height: 1.5625rem;
     line-height: 1.5;
   }
   .loginForm {
     display: flex;
     justify-content: center;
-    margin-bottom: 20px;
+    margin-bottom: 1.25rem;
   }
   .loginInputWrap {
     display: flex;
     flex-direction: column;
-    margin-right: 20px;
-    margin-top: 30px;
-    gap: 5px;
+    margin-right: 1.25rem;
+    margin-top: 1.875rem;
+    gap: 0.3125rem;
   }
   .loginInputWrap > label > input {
-    width: 300px;
-    height: 30px;
-    margin-left: 30px;
+    width: 18.75rem;
+    height: 1.875rem;
+    margin-left: 1.875rem;
     color: #8f8f91;
-    border: 1px solid #d9d9d9;
+    border: 0.0625rem solid #d9d9d9;
   }
   .inputEmail::placeholder {
     color: lightgrey;
@@ -190,37 +190,37 @@ const StyledLogin = styled.div`
     color: lightgrey;
   }
   .submitLogin {
-    width: 80px;
-    height: 75px;
+    width: 5rem;
+    height: 4.6875rem;
     background-color: #333;
     color: #fff;
   }
   .loginSubmitWrap {
-    margin-top: 30px;
+    margin-top: 1.875rem;
   }
   .joinAndFinder {
     color: #333;
-    font-size: 14px;
+    font-size: 0.875rem;
     display: flex;
     justify-content: center;
-    margin-left: 10px;
-    gap: 20px;
+    margin-left: 0.625rem;
+    gap: 1.25rem;
   }
   .nonMemberChkWrap {
     display: flex;
-    gap: 20px;
+    gap: 1.25rem;
   }
   .orderChkWrap {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 0.3125rem;
   }
   .orderChkWrap > label > input {
-    width: 275px;
-    height: 25px;
-    margin-left: 30px;
+    width: 17.1875rem;
+    height: 1.5625rem;
+    margin-left: 1.875rem;
     color: #8f8f91;
-    border: 1px solid #d9d9d9;
+    border: 0.0625rem solid #d9d9d9;
   }
   .orderDeliverChkBtn {
     background-color: #333;
@@ -234,5 +234,27 @@ const StyledLogin = styled.div`
   .selected {
     background-color: #333;
     color: #fff !important;
+  }
+  @media only screen and (max-width: 48rem) {
+    .formWrapper {
+      width: 90%;
+    }
+  }
+
+  @media only screen and (max-width: 30rem) {
+    .formWrapper {
+      width: 100%;
+    }
+    .title {
+      font-size: 1.5rem;
+    }
+    .loginInputWrap > label > input,
+    .orderChkWrap > label > input {
+      width: 100%;
+    }
+    .submitLogin {
+      width: 100%;
+      height: 3.125rem;
+    }
   }
 `;

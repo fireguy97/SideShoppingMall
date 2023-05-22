@@ -154,12 +154,12 @@ export default function IdPasswordFind() {
 const StyledIdPasswordFind = styled.div`
   display: flex;
   justify-content: center;
-  height: 625px;
+  height: 39.0625rem;
   .exitBtn {
-    font-size: 45px;
+    font-size: 2.8125rem;
     position: absolute;
-    margin-left: 500px;
-    top: 45px;
+    margin-left: 31.25rem;
+    top: 5.3125rem;
     background-color: #fff;
     border: 0;
     cursor: pointer;
@@ -168,39 +168,39 @@ const StyledIdPasswordFind = styled.div`
   .EmailFindWrap {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 0.625rem;
   }
   .IdTitle {
     text-align: center;
-    margin-top: 80px;
+    margin-top: 8.75rem;
   }
   .PasswordTitle {
     text-align: center;
-    margin-top: 50px;
+    margin-top: 3.125rem;
   }
   .ChooseFindMethod {
     display: flex;
     justify-content: center;
   }
   .ChooseFindMethod > label {
-    margin-right: 5px;
+    margin-right: 0.3125rem;
   }
   .ChooseFindMethod > input {
-    margin-left: 18px;
+    margin-left: 1.125rem;
   }
   .formInputWrap {
     display: flex;
     flex-direction: column;
-    gap: 4px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    gap: 0.25rem;
+    margin-top: 0.625rem;
+    margin-bottom: 0.625rem;
   }
   .nameInput {
     display: flex;
-    gap: 20px;
+    gap: 1.25rem;
   }
   .nameInput > span {
-    padding-right: 61px;
+    padding-right: 3.8125rem;
   }
   .emailInput {
     display: flex;
@@ -208,14 +208,14 @@ const StyledIdPasswordFind = styled.div`
   }
   .phoneNumberInput {
     display: flex;
-    gap: 20px;
+    gap: 1.25rem;
     justify-content: center;
     justify-content: space-between;
   }
   .idFindSub {
     background-color: #333;
     color: #fff;
-    height: 40px;
+    height: 2.5rem;
   }
   .PasswordFindWrap {
     display: flex;
@@ -224,5 +224,42 @@ const StyledIdPasswordFind = styled.div`
   .IDInput {
     display: flex;
     justify-content: space-between;
+  }
+  @media (max-width: 30rem) {
+    .exitBtn {
+      margin-left: 0.625rem;
+    }
+
+    .IdTitle,
+    .PasswordTitle {
+      margin-top: 0.625rem;
+    }
+
+    .ChooseFindMethod {
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      gap: 0.3125rem;
+    }
+
+    .nameInput {
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      gap: 0.3125rem;
+    }
+
+    .nameInput > span {
+      padding-right: 0.3125rem;
+    }
+
+    .emailInput,
+    .phoneNumberInput {
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      gap: 0.3125rem;
+    }
+
+    .idFindSub {
+      width: 100%;
+    }
   }
 `;
