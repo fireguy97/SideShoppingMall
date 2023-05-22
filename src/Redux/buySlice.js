@@ -4,25 +4,26 @@ const buySlice = createSlice({
   name: "buy",
   initialState: [],
   reducers: {
-    plusCount(state, action) {
+    buyPlusCount(state, action) {
       let number = state.findIndex((a) => {
         return a.id === action.payload;
       });
       state[number].count++;
     },
-    minusCount(state, action) {
+    buyMinusCount(state, action) {
       const number = state.findIndex((a) => a.id === action.payload);
       state[number].count--;
     },
-    addItem(state, action) {
+    buyAddItem(state, action) {
       state.push(action.payload);
     },
-    deleteItem(state, action) {
+    buyDeleteItem(state, action) {
       const item = state.filter((x) => x.id !== action.payload);
       return item;
     },
   },
 });
 
-export const { addItem, deleteItem, plusCount, minusCount } = buySlice.actions;
+export const { buyPlusCount, buyMinusCount, buyAddItem, buyDeleteItem } =
+  buySlice.actions;
 export default buySlice.reducer;
