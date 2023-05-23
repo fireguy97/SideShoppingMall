@@ -5,7 +5,8 @@
     "name": "keke denim shirt",
     "price": 77000,
     "category": "tops",
-    "likes": 0
+    "likes": 0,
+    "stock": 100
   },
   {
     "id": 1,
@@ -13,7 +14,8 @@
     "name": "keke good T-shirt",
     "price": 66000,
     "category": "tops",
-    "likes": 0
+    "likes": 0,
+    "stock": 100
   },
   {
     "id": 2,
@@ -21,7 +23,8 @@
     "name": "keke good outer",
     "price": 32000,
     "category": "tops",
-    "likes": 0
+    "likes": 0,
+    "stock": 100
   },
   {
     "id": 3,
@@ -29,7 +32,8 @@
     "name": "keke denim shirt",
     "price": 88000,
     "category": "tops",
-    "likes": 0
+    "likes": 0,
+    "stock": 100
   },
   {
     "id": 4,
@@ -37,7 +41,8 @@
     "name": "keke T-shirt",
     "price": 110000,
     "category": "tops",
-    "likes": 0
+    "likes": 0,
+    "stock": 100
   },
   {
     "id": 5,
@@ -45,7 +50,8 @@
     "name": "keke outer",
     "price": 120000,
     "category": "tops",
-    "likes": 0
+    "likes": 0,
+    "stock": 100
   },
   {
     "id": 6,
@@ -53,7 +59,8 @@
     "name": "keke good T-shirt",
     "price": 59000,
     "category": "tops",
-    "likes": 0
+    "likes": 0,
+    "stock": 100
   },
   {
     "id": 7,
@@ -61,7 +68,8 @@
     "name": "keke red shirt",
     "price": 78000,
     "category": "tops",
-    "likes": 0
+    "likes": 0,
+    "stock": 100
   },
   {
     "id": 8,
@@ -69,7 +77,8 @@
     "name": "keke red pants",
     "price": 77000,
     "category": "pants",
-    "likes": 0
+    "likes": 0,
+    "stock": 100
   },
   {
     "id": 9,
@@ -77,7 +86,8 @@
     "name": "keke good pants",
     "price": 66000,
     "category": "pants",
-    "likes": 0
+    "likes": 0,
+    "stock": 100
   },
   {
     "id": 10,
@@ -85,7 +95,8 @@
     "name": "keke pants",
     "price": 32000,
     "category": "pants",
-    "likes": 0
+    "likes": 0,
+    "stock": 100
   },
   {
     "id": 11,
@@ -93,7 +104,8 @@
     "name": "keke denim pants",
     "price": 88000,
     "category": "pants",
-    "likes": 0
+    "likes": 0,
+    "stock": 100
   },
   {
     "id": 12,
@@ -101,7 +113,8 @@
     "name": "keke pants",
     "price": 110000,
     "category": "pants",
-    "likes": 0
+    "likes": 0,
+    "stock": 100
   },
   {
     "id": 13,
@@ -109,7 +122,8 @@
     "name": "keke good pants",
     "price": 120000,
     "category": "pants",
-    "likes": 0
+    "likes": 0,
+    "stock": 100
   },
   {
     "id": 14,
@@ -117,7 +131,8 @@
     "name": "keke very good pants",
     "price": 59000,
     "category": "pants",
-    "likes": 0
+    "likes": 0,
+    "stock": 100
   },
   {
     "id": 15,
@@ -125,7 +140,8 @@
     "name": "keke pants",
     "price": 78000,
     "category": "pants",
-    "likes": 0
+    "likes": 0,
+    "stock": 100
   },
   {
     "id": 16,
@@ -133,7 +149,8 @@
     "name": "keke shoes",
     "price": 77000,
     "category": "shoes",
-    "likes": 0
+    "likes": 0,
+    "stock": 100
   },
   {
     "id": 17,
@@ -141,7 +158,8 @@
     "name": "keke good shoes",
     "price": 66000,
     "category": "shoes",
-    "likes": 0
+    "likes": 0,
+    "stock": 100
   },
   {
     "id": 18,
@@ -149,7 +167,8 @@
     "name": "keke very good shoes",
     "price": 32000,
     "category": "shoes",
-    "likes": 0
+    "likes": 0,
+    "stock": 100
   },
   {
     "id": 19,
@@ -157,7 +176,8 @@
     "name": "keke denim shoes",
     "price": 88000,
     "category": "shoes",
-    "likes": 0
+    "likes": 0,
+    "stock": 100
   },
   {
     "id": 20,
@@ -165,7 +185,8 @@
     "name": "keke shoes",
     "price": 110000,
     "category": "shoes",
-    "likes": 0
+    "likes": 0,
+    "stock": 100
   },
   {
     "id": 21,
@@ -173,7 +194,8 @@
     "name": "keke shoes",
     "price": 120000,
     "category": "shoes",
-    "likes": 0
+    "likes": 0,
+    "stock": 100
   },
   {
     "id": 22,
@@ -181,7 +203,8 @@
     "name": "keke good shoes",
     "price": 59000,
     "category": "shoes",
-    "likes": 0
+    "likes": 0,
+    "stock": 100
   },
   {
     "id": 23,
@@ -189,6 +212,7 @@
     "name": "keke red shoes",
     "price": 78000,
     "category": "shoes",
-    "likes": 0
+    "likes": 0,
+    "stock": 100
   }
 ]

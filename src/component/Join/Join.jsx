@@ -1,12 +1,31 @@
 import { styled } from "styled-components";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { joinApi } from "../../api/joinApi";
 
 export default function Join() {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
   const moveLogin = () => {
     navigate("/Login");
+  };
+
+  const [error, setError] = useState(null);
+
+  const onSubmit = async (data) => {
+    try {
+      const result = await joinApi(data);
+
+      if (result === "success") {
+        alert("회원 가입이 성공적으로 완료되었습니다.");
+        moveLogin();
+      } else {
+        throw new Error("회원가입 실패했습니다.");
+      }
+    } catch (error) {
+      setError("회원가입 실패했습니다. 다시 시도해주세요.");
+    }
   };
 
   return (
@@ -17,10 +36,7 @@ export default function Join() {
           &times;
         </button>
 
-        <form
-          className="JoinForm"
-          onSubmit={handleSubmit((data) => alert(JSON.stringify(data)))}
-        >
+        <form className="JoinForm" onSubmit={handleSubmit(onSubmit)}>
           <tbody className="JoinWrapper">
             <tr>
               <th>Name</th>
@@ -114,6 +130,7 @@ export default function Join() {
             </tr>
           </tbody>
           <button className="JoinSubmit">Join Now</button>
+          {error && <p className="ErrorMessage">{error}</p>}
         </form>
       </div>
     </StyledJoin>

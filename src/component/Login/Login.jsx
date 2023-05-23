@@ -3,6 +3,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { loginApi } from "../../api/loginApi";
 
 export default function Login() {
   const { register, handleSubmit } = useForm();
@@ -20,6 +21,25 @@ export default function Login() {
   const moveProfile = () => {
     navigate("/Profile");
   };
+  const moveMain = () => {
+    navigate("/");
+  };
+
+  const onSubmit = async (data) => {
+    try {
+      const result = await loginApi(data);
+
+      if (result === "success") {
+        alert("로그인이 성공적으로 완료되었습니다.");
+        moveMain();
+      } else {
+        throw new Error("로그인에 실패했습니다.");
+      }
+    } catch (error) {
+      console.log(error);
+      alert("로그인에 실패했습니다. 다시 시도해주세요.");
+    }
+  };
 
   return (
     <StyledLogin>
@@ -27,23 +47,18 @@ export default function Login() {
         <button onClick={moveManager}>관리자 페이지</button>
         <button onClick={moveProfile}>프로필 페이지</button>
       </div>
-      <form
-        className="formWrapper"
-        onSubmit={handleSubmit((data) => alert(JSON.stringify(data)))}
-      >
+      <form className="formWrapper" onSubmit={handleSubmit(onSubmit)}>
         <div className="title">kekemon</div>
         <div>
           <ul className="memberSep">
             <li
               className={isMember ? "member selected" : "member"}
-              onClick={() => setIsMember(true)}
-            >
+              onClick={() => setIsMember(true)}>
               회원
             </li>
             <li
               className={!isMember ? "nonMember selected" : "nonMember"}
-              onClick={() => setIsMember(false)}
-            >
+              onClick={() => setIsMember(false)}>
               비회원
             </li>
           </ul>
@@ -56,8 +71,8 @@ export default function Login() {
                     <input
                       className="inputEmail"
                       placeholder="ID"
-                      type="email"
-                      {...register("email")}
+                      type="text"
+                      {...register("id")}
                     />
                   </label>
                   <label htmlFor="">

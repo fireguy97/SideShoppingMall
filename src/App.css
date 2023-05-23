@@ -126,3 +126,6 @@ table {
 hr {
   border: 0.0625rem solid #e1e2e3;
 }
+a {
+  text-decoration: none; /* 링크의 밑줄 제거 */
+}
