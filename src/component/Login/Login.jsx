@@ -3,6 +3,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import LoginKakao from "./kakaoLoginComponent";
 
 export default function Login() {
   const { register, handleSubmit } = useForm();
@@ -115,6 +116,9 @@ export default function Login() {
               Join
             </a>
           </div>
+        </div>
+        <div className="kakaoForm">
+          <LoginKakao />
         </div>
       </form>
     </StyledLogin>
@@ -234,6 +238,10 @@ const StyledLogin = styled.div`
   .selected {
     background-color: #333;
     color: #fff !important;
+  }
+  .kakaoForm {
+    display: flex;
+    justify-content: center;
   }
   @media only screen and (max-width: 48rem) {
     .formWrapper {

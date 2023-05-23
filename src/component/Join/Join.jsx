@@ -1,12 +1,21 @@
 import { styled } from "styled-components";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function Join() {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
   const moveLogin = () => {
     navigate("/Login");
+  };
+  const handleJoinSubmit = async (data) => {
+    try {
+      const response = await axios.post("/api/register", data);
+      console.log("회원가입이 완료되었습니다.");
+    } catch (error) {
+      console.error("회원가입이 실패했습니다.");
+    }
   };
 
   return (
@@ -19,10 +28,7 @@ export default function Join() {
           </button>
         </div>
 
-        <form
-          className="JoinForm"
-          onSubmit={handleSubmit((data) => alert(JSON.stringify(data)))}
-        >
+        <form className="JoinForm" onSubmit={handleSubmit(handleJoinSubmit)}>
           <tbody className="JoinWrapper">
             <tr>
               <th>Name</th>
