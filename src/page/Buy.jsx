@@ -73,7 +73,7 @@ const Buy = () => {
                     />
                   </S.CartTd>
                   <td>
-                    <S.CartImg src={item.img} alt="" />
+                    <S.CartImg src={item.img[0]} alt="" />
                   </td>
                   <td>{item.name}</td>
                   <td>{item.price} KRW</td>

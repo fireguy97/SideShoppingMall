@@ -5,20 +5,25 @@ const cartSlice = createSlice({
   initialState: [],
   reducers: {
     cartPlusCount(state, action) {
-      let number = state.findIndex((a) => {
-        return a.id === action.payload;
+      let number = state.findIndex((item) => {
+        return item.id === action.payload;
       });
       state[number].count++;
     },
     cartMinusCount(state, action) {
-      const number = state.findIndex((a) => a.id === action.payload);
+      const number = state.findIndex((item) => item.id === action.payload);
       state[number].count--;
     },
     cartAddItem(state, action) {
-      state.push(action.payload);
+      const existingItem = state.find((item) => item.id === action.payload.id);
+      if (existingItem) {
+        existingItem.count++;
+      } else {
+        state.push(action.payload);
+      }
     },
     cartDeleteItem(state, action) {
-      const item = state.filter((x) => x.id !== action.payload);
+      const item = state.filter((item) => item.id !== action.payload);
       return item;
     },
   },

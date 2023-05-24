@@ -12,20 +12,29 @@ const ItemDetailRight = ({ filteredItems }) => {
   const [findItem, setFindItem] = useState(
     filteredItems.find((item) => item.id === parseInt(id))
   );
-
+  const [itemSize, setItemSize] = useState("");
   useEffect(() => {
     setFindItem(filteredItems.find((item) => item.id === parseInt(id)));
   }, [filteredItems, id]);
 
+  const handleSizeChange = (newSize) => {
+    setItemSize(newSize);
+  };
   return (
     <>
       <S.ItemDetailRight>
         <S.ItemDetailInfo1>
           <ItemDetailInfo filteredItems={filteredItems} />
-          <ItemDetailSize filteredItems={filteredItems} />
-          <ItemDetailBuyButton filteredItems={filteredItems} />
-          <ItemDetailSizeInfo />
-          <ItemDetailContent />
+          <ItemDetailSize
+            filteredItems={filteredItems}
+            onSizeChange={handleSizeChange}
+          />
+          <ItemDetailBuyButton
+            filteredItems={filteredItems}
+            itemSize={itemSize}
+          />
+          <ItemDetailSizeInfo filteredItems={filteredItems} />
+          <ItemDetailContent filteredItems={filteredItems} />
         </S.ItemDetailInfo1>
       </S.ItemDetailRight>
     </>

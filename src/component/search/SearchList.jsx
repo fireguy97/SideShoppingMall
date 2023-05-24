@@ -6,9 +6,7 @@ const SearchList = ({ searchResults }) => {
   return (
     <>
       <S.ItemListDiv>
-        <S.ItemListUl>
-          <SearchItem searchResults={searchResults} />
-        </S.ItemListUl>
+        <SearchItem searchResults={searchResults} />
       </S.ItemListDiv>
     </>
   );
