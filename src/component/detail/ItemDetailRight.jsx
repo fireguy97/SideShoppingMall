@@ -13,6 +13,7 @@ const ItemDetailRight = ({ filteredItems }) => {
     filteredItems.find((item) => item.id === parseInt(id))
   );
   const [itemSize, setItemSize] = useState("");
+
   useEffect(() => {
     setFindItem(filteredItems.find((item) => item.id === parseInt(id)));
   }, [filteredItems, id]);
