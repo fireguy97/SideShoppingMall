@@ -71,6 +71,12 @@ const Header = () => {
                 }}>
                 Buy
               </S.HeaderLi>
+              <S.HeaderLi
+                onClick={() => {
+                  navigate("/order");
+                }}>
+                Order
+              </S.HeaderLi>
 
               <S.HeaderLi>
                 <S.HeaderInput

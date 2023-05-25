@@ -5,17 +5,24 @@ const cartSlice = createSlice({
   initialState: [],
   reducers: {
     cartPlusCount(state, action) {
-      let number = state.findIndex((item) => {
-        return item.id === action.payload;
-      });
-      state[number].count++;
+      const { id, size } = action.payload;
+      const item = state.find((item) => item.id === id && item.size === size);
+      if (item) {
+        item.count += 1;
+      }
     },
     cartMinusCount(state, action) {
-      const number = state.findIndex((item) => item.id === action.payload);
-      state[number].count--;
+      const { id, size } = action.payload;
+      const item = state.find((item) => item.id === id && item.size === size);
+      if (item && item.count > 1) {
+        item.count -= 1;
+      }
     },
     cartAddItem(state, action) {
-      const existingItem = state.find((item) => item.id === action.payload.id);
+      const { id, size } = action.payload;
+      const existingItem = state.find(
+        (item) => item.id === id && item.size === size
+      );
       if (existingItem) {
         existingItem.count++;
       } else {
@@ -23,8 +30,13 @@ const cartSlice = createSlice({
       }
     },
     cartDeleteItem(state, action) {
-      const item = state.filter((item) => item.id !== action.payload);
-      return item;
+      const { id, size } = action.payload;
+      const index = state.findIndex(
+        (item) => item.id === id && item.size === size
+      );
+      if (index !== -1) {
+        state.splice(index, 1);
+      }
     },
   },
 });

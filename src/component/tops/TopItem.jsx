@@ -38,7 +38,7 @@ const TopItem = () => {
               <Link to={`/item/${item.id}`}>
                 <S.ItemListImg src={item.img[0]} alt="" />
                 <S.ItemListDiv1>{item.name}</S.ItemListDiv1>
-                <S.ItemListDiv2>{item.price}</S.ItemListDiv2>
+                <S.ItemListDiv2>{item.price} KRW</S.ItemListDiv2>
               </Link>
             </S.ItemListli>
           );

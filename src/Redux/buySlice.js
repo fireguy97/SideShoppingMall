@@ -5,21 +5,38 @@ const buySlice = createSlice({
   initialState: [],
   reducers: {
     buyPlusCount(state, action) {
-      let number = state.findIndex((a) => {
-        return a.id === action.payload;
-      });
-      state[number].count++;
+      const { id, size } = action.payload;
+      const item = state.find((item) => item.id === id && item.size === size);
+      if (item) {
+        item.count += 1;
+      }
     },
     buyMinusCount(state, action) {
-      const number = state.findIndex((a) => a.id === action.payload);
-      state[number].count--;
+      const { id, size } = action.payload;
+      const item = state.find((item) => item.id === id && item.size === size);
+      if (item && item.count > 1) {
+        item.count -= 1;
+      }
     },
     buyAddItem(state, action) {
-      state.push(action.payload);
+      const { id, size } = action.payload;
+      const existingItem = state.find(
+        (item) => item.id === id && item.size === size
+      );
+      if (existingItem) {
+        existingItem.count++;
+      } else {
+        state.push(action.payload);
+      }
     },
     buyDeleteItem(state, action) {
-      const item = state.filter((x) => x.id !== action.payload);
-      return item;
+      const { id, size } = action.payload;
+      const index = state.findIndex(
+        (item) => item.id === id && item.size === size
+      );
+      if (index !== -1) {
+        state.splice(index, 1);
+      }
     },
   },
 });

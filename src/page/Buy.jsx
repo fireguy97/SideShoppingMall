@@ -4,10 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { money } from "../func";
 import { buyDeleteItem, buyMinusCount, buyPlusCount } from "../Redux/buySlice";
 import * as S from "../component/cart/CartStyles";
+import { useNavigate } from "react-router-dom";
+import { orderAddItem } from "../Redux/orderSlice";
 
 const Buy = () => {
   const buyItems = useSelector((state) => state.buy);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [checkedItems, setCheckedItems] = useState(
     Array(buyItems.length).fill(false)
   );
@@ -36,9 +39,57 @@ const Buy = () => {
     const selectedItems = buyItems.filter((item, index) => checkedItems[index]);
 
     selectedItems.forEach((item) => {
-      dispatch(buyDeleteItem(item.id));
+      dispatch(buyDeleteItem({ id: item.id, size: item.size }));
     });
   };
+
+  const onClickPayment = () => {
+    if (!window.IMP) return;
+    /* 1. 가맹점 식별하기 */
+    const { IMP } = window;
+    IMP.init("imp35857121"); // 가맹점 식별코드
+
+    const selectedItems = buyItems.filter((item, index) => checkedItems[index]);
+    const totalPrice = selectedItems.reduce(
+      (total, item) => total + item.price * item.count,
+      0
+    );
+    /* 2. 결제 데이터 정의하기 */
+    const data = {
+      pg: "html5_inicis", // PG사
+      pay_method: "card", // 결제수단
+      merchant_uid: `mid_${new Date().getTime()}`, // 주문번호
+      amount: totalPrice, // 결제금액
+      name: selectedItems.map((item) => item.name).join(", "), // 주문명
+      buyer_name: "홍길동", // 구매자 이름
+      buyer_tel: "01012341234", // 구매자 전화번호
+      buyer_email: "example@example", // 구매자 이메일
+      buyer_addr: "신사동 661-16", // 구매자 주소
+      buyer_postcode: "06018", // 구매자 우편번호
+    };
+
+    /* 4. 결제 창 호출하기 */
+    IMP.request_pay(data, callback);
+  };
+
+  /* 3. 콜백 함수 정의하기 */
+  function callback(response) {
+    const { success, error_msg } = response;
+
+    if (success) {
+      alert("결제 성공");
+      const selectedItems = buyItems.filter(
+        (item, index) => checkedItems[index]
+      );
+      selectedItems.forEach((item) => {
+        dispatch(orderAddItem(item));
+        dispatch(buyDeleteItem({ id: item.id, size: item.size }));
+      });
+      navigate("/order");
+    } else {
+      alert(`결제 실패: ${error_msg}`);
+    }
+  }
 
   return (
     <Layout>
@@ -81,14 +132,18 @@ const Buy = () => {
                   <td>
                     <S.CartSpan1
                       onClick={() => {
-                        dispatch(buyMinusCount(item.id));
+                        dispatch(
+                          buyMinusCount({ id: item.id, size: item.size })
+                        );
                       }}>
                       -
                     </S.CartSpan1>
                     <S.CartSpan2>{item.count}</S.CartSpan2>
                     <S.CartSpan1
                       onClick={() => {
-                        dispatch(buyPlusCount(item.id));
+                        dispatch(
+                          buyPlusCount({ id: item.id, size: item.size })
+                        );
                       }}>
                       +
                     </S.CartSpan1>
@@ -97,7 +152,9 @@ const Buy = () => {
                   <td>
                     <S.CartDelete
                       onClick={() => {
-                        dispatch(buyDeleteItem(item.id));
+                        dispatch(
+                          buyDeleteItem({ id: item.id, size: item.size })
+                        );
                       }}>
                       Delete
                     </S.CartDelete>
@@ -115,7 +172,7 @@ const Buy = () => {
               <td></td>
               <td></td>
               <td></td>
-              <S.CartTfoot2>Buy</S.CartTfoot2>
+              <S.CartTfoot2 onClick={onClickPayment}>Buy</S.CartTfoot2>
             </S.CartTr>
           </tfoot>
         </S.CartTable>

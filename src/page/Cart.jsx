@@ -45,7 +45,7 @@ const Cart = () => {
     );
 
     selectedItems.forEach((item) => {
-      dispatch(cartDeleteItem(item.id));
+      dispatch(cartDeleteItem({ id: item.id, size: item.size }));
     });
   };
 
@@ -53,10 +53,9 @@ const Cart = () => {
     const selectedItems = cartItems.filter(
       (item, index) => checkedItems[index]
     );
-
     selectedItems.forEach((item) => {
       dispatch(buyAddItem(item));
-      dispatch(cartDeleteItem(item.id));
+      dispatch(cartDeleteItem({ id: item.id, size: item.size }));
     });
     navigate("/buy");
   };
@@ -102,14 +101,18 @@ const Cart = () => {
                   <td>
                     <S.CartSpan1
                       onClick={() => {
-                        dispatch(cartMinusCount(item.id));
+                        dispatch(
+                          cartMinusCount({ id: item.id, size: item.size })
+                        );
                       }}>
                       -
                     </S.CartSpan1>
                     <S.CartSpan2>{item.count}</S.CartSpan2>
                     <S.CartSpan1
                       onClick={() => {
-                        dispatch(cartPlusCount(item.id));
+                        dispatch(
+                          cartPlusCount({ id: item.id, size: item.size })
+                        );
                       }}>
                       +
                     </S.CartSpan1>
@@ -118,7 +121,9 @@ const Cart = () => {
                   <td>
                     <S.CartDelete
                       onClick={() => {
-                        dispatch(cartDeleteItem(item.id));
+                        dispatch(
+                          cartDeleteItem({ id: item.id, size: item.size })
+                        );
                       }}>
                       Delete
                     </S.CartDelete>
