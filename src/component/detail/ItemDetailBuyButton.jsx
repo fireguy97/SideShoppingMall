@@ -5,13 +5,12 @@ import { buyAddItem } from "../../Redux/buySlice";
 import { cartAddItem } from "../../Redux/cartSlice";
 import * as S from "./ItemDetailStyles";
 
-const ItemDetailBuyButton = ({ filteredItems }) => {
+const ItemDetailBuyButton = ({ filteredItems, itemSize }) => {
   const { id } = useParams();
   const [findItem, setFindItem] = useState(
     filteredItems.find((item) => item.id === parseInt(id))
   );
 
-  const [itemSize, setItemSize] = useState("");
   const [count, setCount] = useState(1);
 
   const navigate = useNavigate();

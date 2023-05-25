@@ -7,8 +7,34 @@ export const ItemDetailContainer = styled.div`
 export const ItemDetailLeft = styled.div`
   width: 60%;
   display: inline-block;
+  position: relative;
   @media (max-width: 800px) {
     width: 80%;
+  }
+`;
+export const SliderButton = styled.button`
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3rem;
+  height: 3rem;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  font-size: 2rem;
+  z-index: 10;
+
+  &.left {
+    left: 0;
+  }
+
+  &.right {
+    right: 0;
   }
 `;
 export const ItemDetailLeftImg = styled.img`

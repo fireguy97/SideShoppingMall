@@ -1,17 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import * as S from "./ItemDetailStyles";
+import { useParams } from "react-router-dom";
 
-const ItemDetailSizeInfo = () => {
+const ItemDetailSizeInfo = ({ filteredItems }) => {
+  const { id } = useParams();
+  const [findItem, setFindItem] = useState(
+    filteredItems.find((item) => item.id === parseInt(id))
+  );
+  // const sizeInfoList = findItem.sizeInfo.split("\n"); //실제로는 줄넘김으로 해야함
+  const sizeInfoList = findItem.sizeInfo.split("  "); // sizeInfo를 공백을 기준으로 분리하여 배열로 만듦
   return (
     <>
       <S.ItemDetailSizeInfo1>
         <div>size</div>
         <S.ItemDetailSizeInfo2>
-          46 size : 어깨 49, 가슴단면 60, 팔길이 25, 소매단면 14, 총장 67
-          <br />
-          48 size : 어깨 51, 가슴단면 62.5, 팔길이 26, 소매단면 15, 총장 68
-          <br />
-          50 size : 어깨 53, 가슴단면 65, 팔길이 27, 소매단면 15, 총장 69
+          {sizeInfoList.map((size, index) => (
+            <div key={index}>{size}</div>
+          ))}
         </S.ItemDetailSizeInfo2>
       </S.ItemDetailSizeInfo1>
     </>

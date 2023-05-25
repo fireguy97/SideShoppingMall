@@ -16,6 +16,7 @@ import ManagerPage from "./page/MangerPage";
 import ProfilePage from "./page/ProfilePage";
 import JoinPage from "./page/JoinPage";
 import Buy from "./page/Buy";
+import Order from "./page/Order";
 
 function App() {
   const [searchResults, setSearchResults] = useState([]);
@@ -30,6 +31,7 @@ function App() {
         <Route path="/item/shoes" element={<Shoes />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/buy" element={<Buy />} />
+        <Route path="/order" element={<Order />} />
         <Route path="/Login" element={<LoginPage />} />
         <Route path="/Join" element={<JoinPage />} />
         <Route path="/IdPasswordFind" element={<FindPage />} />

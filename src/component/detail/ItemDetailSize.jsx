@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { money } from "../../func";
 import * as S from "./ItemDetailStyles";
 
-const ItemDetailSize = ({ filteredItems }) => {
+const ItemDetailSize = ({ filteredItems, onSizeChange }) => {
   const { id } = useParams();
   const [findItem, setFindItem] = useState(
     filteredItems.find((item) => item.id === parseInt(id))
@@ -12,16 +12,22 @@ const ItemDetailSize = ({ filteredItems }) => {
   const [count, setCount] = useState(1);
 
   const handleSizeChange = (e) => {
-    setItemSize(e.target.value);
+    const newSize = e.target.value;
+    setItemSize(newSize);
+    onSizeChange(newSize); // onSizeChange 콜백 함수 호출하여 선택된 사이즈 전달
   };
 
   return (
     <>
       <S.ItemDetailSize value={itemSize} onChange={handleSizeChange}>
         <option value="">select size</option>
-        <option value="M">M</option>
-        <option value="L">L</option>
-        <option value="XL">XL</option>
+        {findItem.size.map((size) => {
+          return (
+            <option key={size} value={size}>
+              {size}
+            </option>
+          );
+        })}
       </S.ItemDetailSize>
       {itemSize && (
         <S.ItemDetailInfo2>

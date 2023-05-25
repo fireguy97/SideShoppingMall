@@ -6,9 +6,7 @@ const PantsList = () => {
   return (
     <>
       <S.ItemListDiv>
-        <S.ItemListUl>
-          <PantsItem />
-        </S.ItemListUl>
+        <PantsItem />
       </S.ItemListDiv>
     </>
   );

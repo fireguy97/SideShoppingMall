@@ -5,9 +5,7 @@ const TopsList = () => {
   return (
     <>
       <S.ItemListDiv>
-        <S.ItemListUl>
-          <TopItem />
-        </S.ItemListUl>
+        <TopItem />
       </S.ItemListDiv>
     </>
   );
