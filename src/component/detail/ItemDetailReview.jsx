@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import * as S from "./ItemDetailStyles";
 
 const ItemDetailReview = () => {
   const [reviewName, setReviewName] = useState("");
@@ -66,91 +67,83 @@ const ItemDetailReview = () => {
 
   return (
     <>
-      <div className="itemDetail_review">
-        <div className="itemDetail_review_header">
-          <h3 className="itemDetail_review_h3">Review</h3>
-          <div className="itemDetail_review_div1" onClick={handleWriteClick}>
+      <S.ItemDetailReview>
+        <S.ItemDetailReviewHeader>
+          <S.ItemDetailReviewH3>Review</S.ItemDetailReviewH3>
+          <S.ItemDetailReviewDiv1 onClick={handleWriteClick}>
             Write
-          </div>
-        </div>
+          </S.ItemDetailReviewDiv1>
+        </S.ItemDetailReviewHeader>
         {showForm && (
-          <div className="review_input_modal">
-            <input
+          <S.ReviewInputModal>
+            <S.ReviewInput1
               type="text"
-              className="review_input1"
               value={reviewName}
               onChange={handleReviewName}
               placeholder="이름"
             />
-            <input
+            <S.ReviewInput2
               type="text"
-              className="review_input2"
               value={reviewContent}
               onChange={handleReviewContent}
               placeholder="내용"
             />
-            <input
-              type="file"
-              className="review_input3"
-              onChange={handleReviewFile}
-            />
-            <span
-              onClick={handleReviewSubmit}
-              className="itemDetail_review_div1">
-              Write
-            </span>
-          </div>
+            <S.ReviewInput3 type="file" onChange={handleReviewFile} />
+            <S.ReviewSpan1 onClick={handleReviewSubmit}>Write</S.ReviewSpan1>
+          </S.ReviewInputModal>
         )}
         <div>
-          <table className="itemDetail_review_table">
-            <tr className="itemDetail_review_tr">
-              <td className="itemDetail_review_td1">Name</td>
-              <td className="itemDetail_review_td2">Content</td>
-              <td className="itemDetail_review_td3">Date</td>
-            </tr>
+          <S.ItemDetailReviewTable>
+            <S.ItemDetailReviewTr>
+              <S.ItemDetailReviewTd1>Name</S.ItemDetailReviewTd1>
+              <S.ItemDetailReviewTd2>Content</S.ItemDetailReviewTd2>
+              <S.ItemDetailReviewTd3>Date</S.ItemDetailReviewTd3>
+            </S.ItemDetailReviewTr>
             {reviews.map((review, index) => {
               return (
-                <tr className="itemDetail_review_tr" key={index}>
-                  <td className="itemDetail_review_td1">{review.reviewName}</td>
-                  <td
-                    className="itemDetail_review_td2"
+                <S.ItemDetailReviewTr key={index}>
+                  <S.ItemDetailReviewTd1>
+                    {review.reviewName}
+                  </S.ItemDetailReviewTd1>
+                  <S.ItemDetailReviewTd2
                     onClick={() => handleReviewClick(review)}>
                     {review.reviewContent}
-                  </td>
-                  <td className="itemDetail_review_td3">{review.reviewDate}</td>
-                </tr>
+                  </S.ItemDetailReviewTd2>
+                  <S.ItemDetailReviewTd3>
+                    {review.reviewDate}
+                  </S.ItemDetailReviewTd3>
+                </S.ItemDetailReviewTr>
               );
             })}
             {showReview && selectedReview && (
-              <div className="review_detail_modal">
-                <div className="review_modal_header">
-                  <h3 className="review_detail_h3">Review Detail</h3>
-                  <div
-                    className="review_detail_div1"
-                    onClick={handleCloseReview}>
+              <S.ReviewDetailModal>
+                <div>
+                  <S.ReviewDetailH3>Review Detail</S.ReviewDetailH3>
+                  <S.ReviewDetailDiv1 onClick={handleCloseReview}>
                     &times;
-                  </div>
+                  </S.ReviewDetailDiv1>
                 </div>
 
                 <div className="review_detail_content">
-                  <div className="review_detail_div2">
-                    {selectedReview.reviewName}
-                  </div>
+                  <div>Name : {selectedReview.reviewName}</div>
 
-                  <div className="review_detail_div3">
-                    {selectedReview.reviewContent}
-                  </div>
-                  <div className="review_detail_div4">
+                  <S.ReviewDetailDiv3>
+                    Content : {selectedReview.reviewContent}
+                  </S.ReviewDetailDiv3>
+                  <S.ReviewDetailDiv4>
                     {selectedReview.reviewFile && (
-                      <img src={selectedReview.reviewFile} alt="" />
+                      <S.ReviewDetailImg
+                        src={selectedReview.reviewFile}
+                        alt=""
+                      />
                     )}
-                  </div>
+                  </S.ReviewDetailDiv4>
                 </div>
-              </div>
+              </S.ReviewDetailModal>
             )}
-          </table>
+          </S.ItemDetailReviewTable>
         </div>
-      </div>
+      </S.ItemDetailReview>
     </>
   );
 };

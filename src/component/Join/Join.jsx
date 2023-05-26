@@ -1,4 +1,5 @@
 import { styled } from "styled-components";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -17,6 +18,8 @@ export default function Join() {
       console.error("회원가입이 실패했습니다.");
     }
   };
+
+  const [error, setError] = useState(null);
 
   return (
     <StyledJoin>
@@ -151,6 +154,7 @@ export default function Join() {
             </tr>
           </tbody>
           <button className="JoinSubmit">Join Now</button>
+          {error && <p className="ErrorMessage">{error}</p>}
         </form>
       </div>
     </StyledJoin>

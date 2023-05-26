@@ -25,6 +25,7 @@ export default function Login() {
   const moveProfile = () => {
     navigate("/Profile");
   };
+
   const onSubmit = async (data) => {
     try {
       const requestData = new URLSearchParams();
@@ -45,6 +46,7 @@ export default function Login() {
     } catch (error) {
       console.error(error);
       return alert("이메일 혹은 비밀번호를 확인하세요");
+  
     }
   };
 
@@ -60,14 +62,12 @@ export default function Login() {
           <ul className="memberSep">
             <li
               className={isMember ? "member selected" : "member"}
-              onClick={() => setIsMember(true)}
-            >
+              onClick={() => setIsMember(true)}>
               회원
             </li>
             <li
               className={!isMember ? "nonMember selected" : "nonMember"}
-              onClick={() => setIsMember(false)}
-            >
+              onClick={() => setIsMember(false)}>
               비회원
             </li>
           </ul>
