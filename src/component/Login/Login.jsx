@@ -1,13 +1,17 @@
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import LoginKakao from "./kakaoLoginComponent";
+import axios from "axios";
 
 export default function Login() {
   const { register, handleSubmit } = useForm();
   const [isMember, setIsMember] = useState(false);
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
   const moveJoin = () => {
     navigate("/Join");
@@ -21,6 +25,28 @@ export default function Login() {
   const moveProfile = () => {
     navigate("/Profile");
   };
+  const onSubmit = async (data) => {
+    try {
+      const requestData = new URLSearchParams();
+      //객체에 key : value 형태로 저장
+      requestData.append("loginId", data.loginId);
+      requestData.append("password", data.password);
+
+      const response = await axios.post(
+        "http://119.193.0.189:8080/login",
+        requestData.toString()
+      );
+      const { token } = response.data;
+      const { name } = response.data.userInfo;
+      localStorage.setItem("token", token);
+      localStorage.setItem("name", name);
+      navigate("/");
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+      return alert("이메일 혹은 비밀번호를 확인하세요");
+    }
+  };
 
   return (
     <StyledLogin>
@@ -28,10 +54,7 @@ export default function Login() {
         <button onClick={moveManager}>관리자 페이지</button>
         <button onClick={moveProfile}>프로필 페이지</button>
       </div>
-      <form
-        className="formWrapper"
-        onSubmit={handleSubmit((data) => alert(JSON.stringify(data)))}
-      >
+      <form className="formWrapper" onSubmit={handleSubmit(onSubmit)}>
         <div className="title">kekemon</div>
         <div>
           <ul className="memberSep">
@@ -53,15 +76,16 @@ export default function Login() {
             {isMember ? (
               <>
                 <div className="loginInputWrap">
-                  <label htmlFor="">
+                  <label htmlFor="loginId">
                     <input
+                      id="id"
                       className="inputEmail"
                       placeholder="ID"
-                      type="email"
-                      {...register("email")}
+                      type="text"
+                      {...register("loginId")}
                     />
                   </label>
-                  <label htmlFor="">
+                  <label htmlFor="password">
                     <input
                       type="password"
                       className="inputPassword"

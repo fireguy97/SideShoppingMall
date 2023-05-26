@@ -1,10 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import items from "../../db/items.json";
 
 const Header = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [username, setUsername] = useState("");
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const storedName = localStorage.getItem("name");
+    if (token && storedName) {
+      setUsername(storedName);
+      setIsLoggedIn(true);
+    }
+  }, []);
+
+  const [dropOpen, setDropOpen] = useState(false);
+
   const [searchKeyWord, setSearchKeyword] = useState("");
   const navigate = useNavigate();
+
+  const handleToggle = () => {
+    setDropOpen(!dropOpen);
+  };
 
   const handleSearch = (e) => {
     e.preventDefault(); // 폼 제출 이벤트의 기본 동작을 막음
@@ -17,6 +35,11 @@ const Header = () => {
 
   const moveLogin = () => {
     navigate("/Login");
+  };
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("name");
+    setIsLoggedIn(false);
   };
 
   return (
@@ -100,9 +123,27 @@ const Header = () => {
             </ui>
           </div>
           <div className="header_warp3">
-            <div className="header_div1" onClick={moveLogin}>
-              Login
-            </div>
+            {isLoggedIn ? (
+              <div className="dropdown">
+                <div
+                  className="header_div1"
+                  onClick={handleToggle}
+                  onBlur={() => setDropOpen(false)}
+                >
+                  {username}
+                </div>
+                {dropOpen && (
+                  <ul className="dropdown-menu">
+                    <li onClick={handleLogout}>Logout</li>
+                    <li>좋아요</li>
+                  </ul>
+                )}
+              </div>
+            ) : (
+              <div className="header_div1" onClick={moveLogin}>
+                Login
+              </div>
+            )}
             <div className="header_div2"></div>
             <div className="header_div1">Help</div>
           </div>
