@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { useParams } from "react-router-dom";
 import { money } from "../../func";
 import * as S from "./ItemDetailStyles";
@@ -16,6 +16,14 @@ const ItemDetailSize = ({ filteredItems, onSizeChange }) => {
     setItemSize(newSize);
     onSizeChange(newSize); // onSizeChange 콜백 함수 호출하여 선택된 사이즈 전달
   };
+
+  const handleDecrement = useCallback(() => {
+    setCount((count) => count - 1);
+  }, []);
+
+  const handleIncrement = useCallback(() => {
+    setCount((count) => count + 1);
+  }, []);
 
   return (
     <>
@@ -36,18 +44,14 @@ const ItemDetailSize = ({ filteredItems, onSizeChange }) => {
           <S.ItemDetailSpan1>{findItem.price} KRW</S.ItemDetailSpan1>
           <S.ItemDetailSpan1
             style={{ cursor: "pointer" }}
-            onClick={() => {
-              setCount(count - 1);
-            }}>
+            onClick={handleDecrement}>
             -
           </S.ItemDetailSpan1>
           {/* 수량 */}
           <S.ItemDetailSpan1>{count}</S.ItemDetailSpan1>
           <S.ItemDetailSpan1
             style={{ cursor: "pointer" }}
-            onClick={() => {
-              setCount(count + 1);
-            }}>
+            onClick={handleIncrement}>
             +
           </S.ItemDetailSpan1>
           <S.ItemDetailDiv1>

@@ -23,7 +23,7 @@ const ItemDetailInfo = ({ filteredItems }) => {
   };
 
   return (
-    <>
+    <div>
       <S.ItemDetailName>{findItem.name}</S.ItemDetailName>
 
       <div>{money(findItem.price)} KRW</div>
@@ -32,7 +32,7 @@ const ItemDetailInfo = ({ filteredItems }) => {
         <span onClick={handleLike}>❤️</span>
       </div>
       <div>Current Likes: {findItem.likes}</div>
-    </>
+    </div>
   );
 };
 

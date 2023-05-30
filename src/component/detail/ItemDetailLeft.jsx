@@ -4,24 +4,29 @@ import * as S from "./ItemDetailStyles";
 
 const ItemDetailLeft = ({ filteredItems }) => {
   const { id } = useParams();
-  const findItem = filteredItems.find((item) => item.id == id);
+  const findItem = filteredItems.find((item) => item.id === parseInt(id));
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const prevClick = () => {
-    if (currentIndex > 0) {
-      setCurrentIndex(currentIndex - 1);
-    } else {
-      setCurrentIndex(findItem.img.length - 1);
-    }
+    setCurrentIndex((currentIndex) => {
+      if (currentIndex > 0) {
+        return currentIndex - 1;
+      } else {
+        return findItem.img.length - 1;
+      }
+    });
   };
 
   const nextClick = () => {
-    if (currentIndex < findItem.img.length - 1) {
-      setCurrentIndex(currentIndex + 1);
-    } else {
-      setCurrentIndex(0);
-    }
+    setCurrentIndex((currentIndex) => {
+      if (currentIndex < findItem.img.length - 1) {
+        return currentIndex + 1;
+      } else {
+        return 0;
+      }
+    });
   };
+
   return (
     <>
       <S.ItemDetailLeft>

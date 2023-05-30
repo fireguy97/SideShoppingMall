@@ -1,70 +1,110 @@
-# Getting Started with Create React App
+<img src="https://capsule-render.vercel.app/api?type=waving&color=auto&height=200&section=header&text=Project&fontSize=90" />
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# 브랜드 쇼핑몰 사이드 프로젝트(Front-End-React)
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+### 인원
 
-### `npm start`
+- 박지현
+- 김민규
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## purpose
 
-### `npm test`
+**쇼핑몰을 사용하기 위한 웹 서비스**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## 목차
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- [Stack](#stack)
+- [프로젝트 개요](#summary)
+- [기능 구현 목록](#feature)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Stack
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Language
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- react 18.2.0
+- react-dom 18.2.0
+- react-router-dom 6.11.1
+- axios 1.4.0
+- react-bootstrap 2.7.4
+- react-redux 8.0.5
+- styled-components 6.0.0
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Tools
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- vscode
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 프로젝트 개요
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
+### 개요
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+---
 
-### Analyzing the Bundle Size
+- 관리자 페이지를 통해 회원 관리와 상품 관리를 한다.
+- 카테고리 상의, 하의, 신발로 나누고 해당하는 상품을 보여준다.
+- 상품마다 상세 페이지, 장바구니, 구매 페이지가 있다.
+- 상품을 키워드를 통해 검색할 수 있다.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+---
 
-### Making a Progressive Web App
+### 프로젝트 기간
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- 기획 및 설계, 디자인 23/05/12~23/05/15
+- 개발 23/05 ~ 23/06
 
-### Advanced Configuration
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## 주요 기능 및 역할
 
-### Deployment
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### 디자인 및 기획 (박지현)
 
-### `npm run build` fails to minify
+### 카테고리 및 검색 (박지현)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
+
+- 상품 카테고리
+- 키워드를 통한 상품 검색
+
+### 상세페이지 및 장바구니 (박지현)
+
+---
+
+- 상품 상세페이지 관리
+- 상품 상세페이지에서 장바구니 관리
+
+### 결제 및 상품 등록 (박지현)
+
+---
+
+- 상세페이지 또는 장바구니에서 결제 페이지에 상품 추가
+- 결제 페이지에서 결제 기능
+- 상품 등록 페이지에서 상품 등록 기능
+
+### 회원가입 및 로그인 (김민규)
+
+---
+
+- 회원가입 및 로그인 기능
+- 카카오 소셜 회원가입 및 로그인 기능
+
+### 관리자 페이지 (김민규)
+
+---
+
+- 회원 관리
+- 상품 관리

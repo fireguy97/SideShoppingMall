@@ -9,9 +9,7 @@ import * as S from "./ItemDetailStyles";
 
 const ItemDetailRight = ({ filteredItems }) => {
   const { id } = useParams();
-  const [findItem, setFindItem] = useState(
-    filteredItems.find((item) => item.id === parseInt(id))
-  );
+  const [findItem, setFindItem] = useState(null);
   const [itemSize, setItemSize] = useState("");
 
   useEffect(() => {
@@ -22,23 +20,21 @@ const ItemDetailRight = ({ filteredItems }) => {
     setItemSize(newSize);
   };
   return (
-    <>
-      <S.ItemDetailRight>
-        <S.ItemDetailInfo1>
-          <ItemDetailInfo filteredItems={filteredItems} />
-          <ItemDetailSize
-            filteredItems={filteredItems}
-            onSizeChange={handleSizeChange}
-          />
-          <ItemDetailBuyButton
-            filteredItems={filteredItems}
-            itemSize={itemSize}
-          />
-          <ItemDetailSizeInfo filteredItems={filteredItems} />
-          <ItemDetailContent filteredItems={filteredItems} />
-        </S.ItemDetailInfo1>
-      </S.ItemDetailRight>
-    </>
+    <S.ItemDetailRight>
+      <S.ItemDetailInfo1>
+        <ItemDetailInfo filteredItems={filteredItems} />
+        <ItemDetailSize
+          filteredItems={filteredItems}
+          onSizeChange={handleSizeChange}
+        />
+        <ItemDetailBuyButton
+          filteredItems={filteredItems}
+          itemSize={itemSize}
+        />
+        <ItemDetailSizeInfo filteredItems={filteredItems} />
+        <ItemDetailContent filteredItems={filteredItems} />
+      </S.ItemDetailInfo1>
+    </S.ItemDetailRight>
   );
 };
 
