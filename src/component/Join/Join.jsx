@@ -2,21 +2,83 @@ import { styled } from "styled-components";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useState } from "react";
+import DaumPostcode from "react-daum-postcode";
 
 export default function Join() {
   const { register, handleSubmit } = useForm();
+  const [isFormValid, setIsFormValid] = useState(false);
   const navigate = useNavigate();
+  const [joinId, setJoinId] = useState("");
+  const [openPopup, setOpenPopup] = useState(false);
   const moveLogin = () => {
     navigate("/Login");
   };
   const handleJoinSubmit = async (data) => {
+    if (!isFormValid) {
+      return;
+    }
+    const { year, month, day, ...restData } = data;
+    const joinedData = {
+      ...restData,
+      birth: `${year}${month}${day}`,
+    };
     try {
-      const response = await axios.post("/api/register", data);
-      console.log("회원가입이 완료되었습니다.");
+      const requestData = new URLSearchParams();
+      requestData.append("loginId", data.loginId);
+      requestData.append("name", data.name);
+      requestData.append("password", data.password);
+      requestData.append("email", data.email);
+      requestData.append("phone", data.phone);
+      requestData.append("birth", joinedData.birth);
+      requestData.append("gender", data.gender);
+      requestData.append("address", data.address);
+
+      const response = await axios.post(
+        "http://119.193.0.189:8080/join_loginId",
+        requestData.toString()
+      );
+      if (response.data.result) {
+        console.log("회원가입이 완료되었습니다.");
+        navigate("/Login");
+      } else {
+        console.error("회원가입 실패");
+      }
     } catch (error) {
-      console.error("회원가입이 실패했습니다.");
+      console.error("회원가입이 실패했습니다.", error);
     }
   };
+
+  const checkIdDuple = async () => {
+    try {
+      const response = await axios.get(
+        `http://119.193.0.189:8080/checkid?loginId=${joinId}`
+      );
+
+      if (response.data.result) {
+        alert("아이디가 사용 가능합니다.");
+        setIsFormValid(true);
+      } else {
+        alert("아이디가 이미 사용 중입니다.");
+        setIsFormValid(false);
+      }
+    } catch (error) {
+      console.error("아이디 중복확인 실패", error);
+      setIsFormValid(false);
+    }
+  };
+
+  const ClickOpenPopup = () => {
+    setOpenPopup(true);
+  };
+  const ClickClosePopup = () => {
+    setOpenPopup(false);
+  };
+
+  // const handleAddresPopUp = (data) => {
+  //   const postcode = data.addresscode;
+  //   const address = data.address;
+  // };
 
   return (
     <StyledJoin>
@@ -49,10 +111,18 @@ export default function Join() {
                     className="idInput"
                     type="text"
                     placeholder="ID"
-                    {...register("id")}
+                    {...register("loginId")}
+                    value={joinId}
+                    onChange={(e) => setJoinId(e.target.value)}
                     required
                   />
-                  <button className="doubleChk">중복확인</button>
+                  <button
+                    type="button"
+                    onClick={checkIdDuple}
+                    className="doubleChk"
+                  >
+                    중복확인
+                  </button>
                 </div>
               </td>
             </tr>
@@ -73,7 +143,7 @@ export default function Join() {
                 <input
                   type="password"
                   placeholder="password"
-                  {...register("password")}
+                  {...register("passwordCheck")}
                   required
                 />
               </td>
@@ -95,7 +165,7 @@ export default function Join() {
                 <input
                   type="tel"
                   placeholder="PhoneNumber"
-                  {...register("tel")}
+                  {...register("phone")}
                   required
                 />
               </td>
@@ -123,7 +193,18 @@ export default function Join() {
                     {...register("address")}
                     required
                   />
-                  <button className="ChkBtn">우편번호</button>
+                  <button
+                    onClick={ClickOpenPopup}
+                    className="ChkBtn"
+                    // onComplete={handleAddresPopUp}
+                  >
+                    우편번호
+                    {/* {openPopup && (
+                      <DaumPostcode onClick={checkIdDuple}>
+                        <button onClick={ClickClosePopup}>x</button>
+                      </DaumPostcode>
+                    )} */}
+                  </button>
                 </div>
                 <div className="moreAddress">
                   <input type="text" placeholder="기본주소" />
@@ -134,23 +215,52 @@ export default function Join() {
             <tr>
               <th>생년월일</th>
               <td className="birthWrap">
-                <input className="birth" type="Number" placeholder="year" />
-                <input className="birth" type="Number" placeholder="month" />
-                <input className="birth" type="Number" placeholder="day" />
+                <input
+                  className="birth"
+                  type="Number"
+                  placeholder="year"
+                  {...register("year")}
+                />
+                <input
+                  className="birth"
+                  type="Number"
+                  placeholder="month"
+                  {...register("month")}
+                />
+                <input
+                  className="birth"
+                  type="Number"
+                  placeholder="day"
+                  {...register("day")}
+                />
               </td>
             </tr>
             <tr>
               <th>성별</th>
               <td className="genderWrap">
                 <label htmlFor="male">남</label>
-                <input type="radio" id="male" name="gender" value="male" />
+                <input
+                  type="radio"
+                  id="male"
+                  name="gender"
+                  value="M"
+                  {...register("gender", { defaultvalue: "M" })}
+                />
 
                 <label htmlFor="female">여</label>
-                <input type="radio" id="female" name="gender" value="female" />
+                <input
+                  type="radio"
+                  id="female"
+                  name="gender"
+                  value="F"
+                  {...register("gender", { defaultvalue: "F" })}
+                />
               </td>
             </tr>
           </tbody>
-          <button className="JoinSubmit">Join Now</button>
+          <button type="submit" className="JoinSubmit" disabled={!isFormValid}>
+            Join Now
+          </button>
         </form>
       </div>
     </StyledJoin>
