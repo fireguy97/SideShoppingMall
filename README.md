@@ -1,4 +1,3 @@
-<img src="https://capsule-render.vercel.app/api?type=waving&color=auto&height=200&section=header&text=Project&fontSize=90" />
 
 # 브랜드 쇼핑몰 사이드 프로젝트(Front-End-React)
 
