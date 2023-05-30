@@ -92,7 +92,7 @@ const StyledSideMenu = styled.div`
     line-height: 1;
   }
   .sideMneuWrap {
-    margin-top: 60px;
+    /* margin-top: 60px; */
     float: left;
     width: 200px;
     height: 100%;

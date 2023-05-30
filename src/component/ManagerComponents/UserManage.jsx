@@ -35,6 +35,7 @@ export default function UserManage() {
 }
 
 const StyledUserManage = styled.div`
+  margin-top: 60px;
   .selectedMenu {
     height: 20px;
   }
