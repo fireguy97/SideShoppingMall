@@ -4,25 +4,25 @@ import * as S from "./RegisterStyles";
 const RegisterSize = ({ formData, setFormData }) => {
   const handleSizeChange = (event) => {
     const { name, checked } = event.target;
-    let updatedSizes = [...formData.size]; //재할당이 가능하게 해야함
+    let updatedSizes = [...formData.sizes]; //재할당이 가능하게 해야함
     if (checked) {
       updatedSizes.push(name);
     } else {
-      updatedSizes = updatedSizes.filter((size) => size !== name);
+      updatedSizes = updatedSizes.filter((sizes) => sizes !== name);
     }
-    setFormData({ ...formData, size: updatedSizes });
+    setFormData({ ...formData, sizes: updatedSizes });
   };
 
   return (
     <>
-      {formData.category === "shoes" ? (
+      {formData.categoryCode === "3" ? (
         <div>
           <S.RegisterLabel>Sizes</S.RegisterLabel>
           <label>
             <input
               type="checkbox"
-              name="230"
-              checked={formData.size.includes("230")}
+              name="1"
+              checked={formData.sizes.includes("1")}
               onChange={handleSizeChange}
             />
             230
@@ -30,8 +30,8 @@ const RegisterSize = ({ formData, setFormData }) => {
           <label>
             <input
               type="checkbox"
-              name="240"
-              checked={formData.size.includes("240")}
+              name="2"
+              checked={formData.sizes.includes("2")}
               onChange={handleSizeChange}
             />
             240
@@ -39,8 +39,8 @@ const RegisterSize = ({ formData, setFormData }) => {
           <label>
             <input
               type="checkbox"
-              name="250"
-              checked={formData.size.includes("250")}
+              name="3"
+              checked={formData.sizes.includes("3")}
               onChange={handleSizeChange}
             />
             250
@@ -48,8 +48,8 @@ const RegisterSize = ({ formData, setFormData }) => {
           <label>
             <input
               type="checkbox"
-              name="260"
-              checked={formData.size.includes("260")}
+              name="4"
+              checked={formData.sizes.includes("4")}
               onChange={handleSizeChange}
             />
             260
@@ -57,20 +57,11 @@ const RegisterSize = ({ formData, setFormData }) => {
           <label>
             <input
               type="checkbox"
-              name="270"
-              checked={formData.size.includes("270")}
+              name="5"
+              checked={formData.sizes.includes("5")}
               onChange={handleSizeChange}
             />
             270
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              name="280"
-              checked={formData.size.includes("280")}
-              onChange={handleSizeChange}
-            />
-            280
           </label>
         </div>
       ) : (
@@ -79,8 +70,17 @@ const RegisterSize = ({ formData, setFormData }) => {
           <label>
             <input
               type="checkbox"
-              name="S"
-              checked={formData.size.includes("S")}
+              name="1"
+              checked={formData.sizes.includes("1")}
+              onChange={handleSizeChange}
+            />
+            XS
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              name="2"
+              checked={formData.sizes.includes("2")}
               onChange={handleSizeChange}
             />
             S
@@ -88,8 +88,8 @@ const RegisterSize = ({ formData, setFormData }) => {
           <label>
             <input
               type="checkbox"
-              name="M"
-              checked={formData.size.includes("M")}
+              name="3"
+              checked={formData.sizes.includes("3")}
               onChange={handleSizeChange}
             />
             M
@@ -97,8 +97,8 @@ const RegisterSize = ({ formData, setFormData }) => {
           <label>
             <input
               type="checkbox"
-              name="L"
-              checked={formData.size.includes("L")}
+              name="4"
+              checked={formData.sizes.includes("4")}
               onChange={handleSizeChange}
             />
             L
@@ -106,8 +106,8 @@ const RegisterSize = ({ formData, setFormData }) => {
           <label>
             <input
               type="checkbox"
-              name="XL"
-              checked={formData.size.includes("XL")}
+              name="5"
+              checked={formData.sizes.includes("5")}
               onChange={handleSizeChange}
             />
             XL

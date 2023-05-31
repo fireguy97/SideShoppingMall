@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import Layout from "../layout/Layout";
 import RegisterImg from "../component/register/RegisterImg";
 import RegisterName from "../component/register/RegisterName";
@@ -16,19 +16,17 @@ const Register = () => {
     img: [],
     name: "",
     price: 0,
-    category: "",
-    size: [],
+    categoryCode: "",
+    sizes: [],
     sizeInfo: "",
     content: "",
     stock: 0,
   });
 
-  const idCounter = useRef(0);
-
   const handleSubmit = (event) => {
     event.preventDefault();
     //  폼 데이터를 처리하고 서버로 전송하는 로직을 구현
-    const newProduct = { ...formData, id: idCounter.current++ };
+    const newProduct = { ...formData };
     // console.log(formData);
     console.log("New Product:", newProduct);
     // 폼 데이터 처리 및 서버로 전송하는 로직
@@ -40,8 +38,8 @@ const Register = () => {
       img: [],
       name: "",
       price: 0,
-      category: "",
-      size: [],
+      categoryCode: "",
+      sizes: [],
       sizeInfo: "",
       content: "",
       stock: 0,

@@ -11,12 +11,13 @@ const RegisterCategory = ({ formData, setFormData }) => {
         <S.RegisterLabel>Category : </S.RegisterLabel>
 
         <select
-          name="category"
-          value={formData.category}
+          name="categoryCode"
+          value={formData.categoryCode}
           onChange={handleInputChange}>
-          <option value="tops">Tops</option>
-          <option value="pants">Pants</option>
-          <option value="shoes">Shoes</option>
+          <option value="">select category</option>
+          <option value="1">Tops</option>
+          <option value="2">Pants</option>
+          <option value="3">Shoes</option>
         </select>
       </div>
     </>
