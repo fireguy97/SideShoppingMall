@@ -37,6 +37,9 @@ const Header = () => {
   const moveLogin = () => {
     navigate("/Login");
   };
+  const moveProfile = () => {
+    navigate("/Profile");
+  };
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("name");
@@ -136,17 +139,20 @@ const Header = () => {
                 </S.LoginArea>
                 {dropOpen && (
                   <S.DropdownMenu>
+                    <S.DropdownMenuLi onClick={moveProfile}>
+                      프로필
+                    </S.DropdownMenuLi>
+                    <S.DropdownMenuLi>좋아요</S.DropdownMenuLi>
                     <S.DropdownMenuLi onClick={handleLogout}>
                       Logout
                     </S.DropdownMenuLi>
-                    <S.DropdownMenuLi>좋아요</S.DropdownMenuLi>
                   </S.DropdownMenu>
                 )}
               </S.Dropdown>
             ) : (
               <S.LoginArea onClick={moveLogin}>Login</S.LoginArea>
             )}
-            <div className="header_div2"></div>
+            <div></div>
             <S.Help>Help</S.Help>
           </S.HeaderLogin>
         </S.HeaderWarp>

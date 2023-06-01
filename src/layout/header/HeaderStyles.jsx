@@ -151,6 +151,7 @@ export const Help = styled.div`
 `;
 export const DropdownMenu = styled.ul`
   border: 1px solid #e1e2e3;
+  margin-top: 1px;
 `;
 export const DropdownMenuLi = styled.li`
   height: 30px;
@@ -158,4 +159,6 @@ export const DropdownMenuLi = styled.li`
   background-color: #fff;
   line-height: 2;
   border: 1px solid #e1e2e3;
+  cursor: pointer;
+  position: relative;
 `;
