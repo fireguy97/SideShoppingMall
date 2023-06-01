@@ -1,16 +1,19 @@
-import { styled } from "styled-components";
+import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useState } from "react";
 import DaumPostcode from "react-daum-postcode";
+import styled from "styled-components";
 
 export default function Join() {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, setValue, watch } = useForm();
   const [isFormValid, setIsFormValid] = useState(false);
   const navigate = useNavigate();
   const [joinId, setJoinId] = useState("");
   const [openPopup, setOpenPopup] = useState(false);
+  // const [userAddress, setUserAddress] = useState("");
+
+  const addressRef = useRef(null);
   const moveLogin = () => {
     navigate("/Login");
   };
@@ -68,17 +71,26 @@ export default function Join() {
     }
   };
 
-  const ClickOpenPopup = () => {
-    setOpenPopup(true);
-  };
-  const ClickClosePopup = () => {
+  const handlePostcode = (data) => {
+    const { address, zonecode } = data;
+
+    setValue("address", address);
+    setValue("zonecode", zonecode);
     setOpenPopup(false);
   };
 
-  // const handleAddresPopUp = (data) => {
-  //   const postcode = data.addresscode;
-  //   const address = data.address;
-  // };
+  const openPostcodeModal = () => {
+    setOpenPopup(true);
+  };
+  const postcodeStyle = {
+    position: "absolute",
+    top: "-10px",
+    display: "block",
+    width: "450px",
+    height: "400px",
+    border: "1px solid #333",
+    marginLeft: "130px",
+  };
 
   return (
     <StyledJoin>
@@ -190,24 +202,25 @@ export default function Join() {
                   <input
                     type="text"
                     placeholder="address"
-                    {...register("address")}
-                    required
+                    {...register("zonecode")}
+                    // required
+                    readOnly
                   />
                   <button
-                    onClick={ClickOpenPopup}
+                    type="button"
                     className="ChkBtn"
-                    // onComplete={handleAddresPopUp}
+                    onClick={openPostcodeModal}
                   >
                     우편번호
-                    {/* {openPopup && (
-                      <DaumPostcode onClick={checkIdDuple}>
-                        <button onClick={ClickClosePopup}>x</button>
-                      </DaumPostcode>
-                    )} */}
                   </button>
                 </div>
                 <div className="moreAddress">
-                  <input type="text" placeholder="기본주소" />
+                  <input
+                    type="text"
+                    placeholder="기본주소"
+                    {...register("address")}
+                    readOnly
+                  />
                   <input type="text" placeholder="상세주소" />
                 </div>
               </td>
@@ -217,19 +230,19 @@ export default function Join() {
               <td className="birthWrap">
                 <input
                   className="birth"
-                  type="Number"
+                  type="text"
                   placeholder="year"
                   {...register("year")}
                 />
                 <input
                   className="birth"
-                  type="Number"
+                  type="text"
                   placeholder="month"
                   {...register("month")}
                 />
                 <input
                   className="birth"
-                  type="Number"
+                  type="text"
                   placeholder="day"
                   {...register("day")}
                 />
@@ -258,9 +271,19 @@ export default function Join() {
               </td>
             </tr>
           </tbody>
-          <button type="submit" className="JoinSubmit" disabled={!isFormValid}>
+          {openPopup && (
+            <div>
+              {" "}
+              <DaumPostcode
+                style={postcodeStyle}
+                onComplete={handlePostcode}
+                animation
+              />
+            </div>
+          )}
+          <JoinSubmit type="submit" disabled={!isFormValid}>
             Join Now
-          </button>
+          </JoinSubmit>
         </form>
       </div>
     </StyledJoin>
@@ -351,6 +374,7 @@ const StyledJoin = styled.div`
   }
   .addressWrap > input {
     width: 12.1875rem;
+    color: #aaa;
   }
   .addressWrap > button {
     background-color: #fff;
@@ -362,6 +386,9 @@ const StyledJoin = styled.div`
     display: flex;
     flex-direction: column;
     gap: 0.3125rem;
+  }
+  .moreAddress > input {
+    color: #aaa;
   }
   .birthWrap {
     display: flex;
@@ -388,7 +415,7 @@ const StyledJoin = styled.div`
     position: relative;
     top: -0.0625rem;
   }
-  .JoinSubmit {
+  /* .JoinSubmit {
     position: relative;
     margin-left: 7.1875rem;
     width: 18.125rem;
@@ -396,10 +423,11 @@ const StyledJoin = styled.div`
     background-color: #171717;
     color: aliceblue;
     cursor: pointer;
-  }
+  } */
   input::placeholder {
     color: lightgrey;
   }
+
   @media (max-width: 768px) {
     .JoinWrap {
       margin-top: 30px;
@@ -430,4 +458,14 @@ const StyledJoin = styled.div`
       width: 15rem;
     }
   }
+`;
+
+const JoinSubmit = styled.button`
+  position: relative;
+  margin-left: 7.1875rem;
+  width: 18.125rem;
+  height: 5rem;
+  background-color: #171717;
+  color: aliceblue;
+  cursor: pointer;
 `;

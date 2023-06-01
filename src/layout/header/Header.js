@@ -6,6 +6,10 @@ const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState("");
 
+  const moveProfile = () => {
+    navigate("/Profile");
+  };
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     const storedName = localStorage.getItem("name");
@@ -136,6 +140,7 @@ const Header = () => {
                   <ul className="dropdown-menu">
                     <li onClick={handleLogout}>Logout</li>
                     <li>좋아요</li>
+                    <li onClick={moveProfile}>프로필 페이지 </li>
                   </ul>
                 )}
               </div>

@@ -87,6 +87,7 @@ export default function SideMenu() {
 }
 
 const StyledSideMenu = styled.div`
+  margin-top: 60px;
   .home {
     padding-top: 10px;
     line-height: 1;

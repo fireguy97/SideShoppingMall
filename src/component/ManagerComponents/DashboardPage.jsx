@@ -23,6 +23,7 @@ export default function DashboardPage() {
 }
 
 const StyledDashboardPage = styled.div`
+  margin-top: 60px;
   padding: 10px;
   .ProductRegistWrap {
     position: relative;
