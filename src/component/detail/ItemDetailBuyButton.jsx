@@ -1,28 +1,23 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { buyAddItem } from "../../Redux/buySlice";
 import { cartAddItem } from "../../Redux/cartSlice";
 import * as S from "./ItemDetailStyles";
 
-const ItemDetailBuyButton = ({ filteredItems, itemSize }) => {
-  const { id } = useParams();
-  const [findItem, setFindItem] = useState(null);
+const ItemDetailBuyButton = ({ itemData, itemSize }) => {
+  const findItem = itemData;
 
   const [count, setCount] = useState(1);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    setFindItem(filteredItems.find((item) => item.id === parseInt(id)));
-  }, [filteredItems, id]);
-
   const handleCartClick = useCallback(() => {
     dispatch(
       cartAddItem({
         id: findItem.id,
-        img: findItem.img,
+        img: findItem.images[0],
         name: findItem.name,
         price: findItem.price,
         size: itemSize,
@@ -36,7 +31,7 @@ const ItemDetailBuyButton = ({ filteredItems, itemSize }) => {
     dispatch(
       buyAddItem({
         id: findItem.id,
-        img: findItem.img,
+        img: findItem.images[0],
         name: findItem.name,
         price: findItem.price,
         size: itemSize,

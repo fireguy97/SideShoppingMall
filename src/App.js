@@ -18,6 +18,7 @@ import JoinPage from "./page/JoinPage";
 import Buy from "./page/Buy";
 import Order from "./page/Order";
 import Register from "./page/Register";
+import ItemEdit from "./page/ItemEdit";
 
 function App() {
   const [searchResults, setSearchResults] = useState([]);
@@ -27,13 +28,14 @@ function App() {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/item/best" element={<Best filteredItems={items} />} />
-        <Route path="/item/tops" element={<Tops />} />
-        <Route path="/item/pants" element={<Pants />} />
-        <Route path="/item/shoes" element={<Shoes />} />
+        <Route path="/productList/tops" element={<Tops />} />
+        <Route path="/productList/pants" element={<Pants />} />
+        <Route path="/productList/shoes" element={<Shoes />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/buy" element={<Buy />} />
         <Route path="/order" element={<Order />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/edit" element={<ItemEdit />} />
         <Route path="/Login" element={<LoginPage />} />
         <Route path="/Join" element={<JoinPage />} />
         <Route path="/IdPasswordFind" element={<FindPage />} />
@@ -48,10 +50,7 @@ function App() {
             />
           }
         />
-        <Route
-          path="/item/:id"
-          element={<ItemDetail filteredItems={items} />}
-        />
+        <Route path="/getProduct" element={<ItemDetail />} />
       </Routes>
     </>
   );

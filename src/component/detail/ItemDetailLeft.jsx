@@ -1,25 +1,23 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
 import * as S from "./ItemDetailStyles";
 
-const ItemDetailLeft = ({ filteredItems }) => {
-  const { id } = useParams();
-  const findItem = filteredItems.find((item) => item.id === parseInt(id));
+const ItemDetailLeft = ({ itemData }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const findItem = itemData;
 
   const prevClick = () => {
     setCurrentIndex((currentIndex) => {
       if (currentIndex > 0) {
         return currentIndex - 1;
       } else {
-        return findItem.img.length - 1;
+        return findItem.images.length - 1;
       }
     });
   };
 
   const nextClick = () => {
     setCurrentIndex((currentIndex) => {
-      if (currentIndex < findItem.img.length - 1) {
+      if (currentIndex < findItem.images.length - 1) {
         return currentIndex + 1;
       } else {
         return 0;
@@ -27,13 +25,15 @@ const ItemDetailLeft = ({ filteredItems }) => {
     });
   };
 
+  const imageUrls = findItem.images.map((imageData) => imageData.image);
+
   return (
     <>
       <S.ItemDetailLeft>
         <S.SliderButton className="left" onClick={prevClick}>
           {"<"}
         </S.SliderButton>
-        <S.ItemDetailLeftImg src={findItem.img[currentIndex]} alt="" />
+        <S.ItemDetailLeftImg src={imageUrls[currentIndex]} alt="" />
         <S.SliderButton className="right" onClick={nextClick}>
           {">"}
         </S.SliderButton>
@@ -41,5 +41,4 @@ const ItemDetailLeft = ({ filteredItems }) => {
     </>
   );
 };
-
 export default ItemDetailLeft;

@@ -1,19 +1,54 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../layout/Layout";
 import ItemDetailLeft from "../component/detail/ItemDetailLeft";
-import items from "../db/items.json";
 import ItemDetailRight from "../component/detail/ItemDetailRight";
 import ItemDetailReview from "../component/detail/ItemDetailReview";
 import * as S from "../component/detail/ItemDetailStyles";
+import axios from "axios";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const ItemDetail = () => {
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const id = searchParams.get("id");
+  const [itemData, setItemData] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `http://119.193.0.189:8080/getProduct?id=${id}`
+        );
+        setItemData(response.data);
+        console.log(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, [id]);
+  useEffect(() => {
+    console.log(itemData);
+  }, [itemData]);
+
+  const handleEdit = () => {
+    navigate("/edit", { state: { itemData } });
+  };
+
+  if (!itemData) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <Layout>
       <S.ItemDetailContainer>
-        <ItemDetailLeft filteredItems={items} />
-        <ItemDetailRight filteredItems={items} />
+        <ItemDetailLeft itemData={itemData} />
+        <ItemDetailRight itemData={itemData} />
       </S.ItemDetailContainer>
       <ItemDetailReview />
+      <button onClick={handleEdit}>Edit</button>
     </Layout>
   );
 };

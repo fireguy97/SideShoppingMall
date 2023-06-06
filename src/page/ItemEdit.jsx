@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Layout from "../layout/Layout";
-import RegisterImg from "../component/register/RegisterImg";
 import RegisterName from "../component/register/RegisterName";
 import RegisterPrice from "../component/register/RegisterPrice";
 import RegisterSize from "../component/register/RegisterSize";
@@ -11,17 +10,26 @@ import RegisterBtn from "../component/register/RegisterBtn";
 import * as S from "../component/register/RegisterStyles";
 import RegisterCategory from "../component/register/RegisterCategory";
 import axios from "axios";
+import { useLocation } from "react-router-dom";
+import EditImg from "../component/edit/EditImg";
 
-const Register = () => {
+const ItemEdit = () => {
+  const location = useLocation();
+  const { itemData } = location.state;
   const [formData, setFormData] = useState({
-    images: [],
-    name: "",
-    price: 0,
-    categoryCode: "",
+    id: itemData.id,
+    images: itemData.images.map((image) => ({
+      id: image.id, // 수정: ID 값을 추가해줌
+      seq: image.seq, // 수정: SEQ 값을 추가해줌
+      image: image.image,
+    })),
+    name: itemData.name,
+    price: itemData.price,
+    categoryCode: itemData.categoryCode,
     sizes: [],
-    sizeInfo: "",
-    content: "",
-    stock: 0,
+    sizeInfo: itemData.sizeInfo,
+    content: itemData.content,
+    stock: itemData.stock,
   });
 
   const handleSubmit = async (event) => {
@@ -30,21 +38,31 @@ const Register = () => {
     try {
       const formattedData = {
         ...formData,
-        images: formData.images.map((image) => ({ image })),
+        images: formData.images.map((image) => {
+          if (image.seq) {
+            // 삭제하는 이미지인 경우
+            return { id: image.id, seq: image.seq };
+          } else {
+            // 추가하는 이미지인 경우
+            return { id: image.id, image: image.image };
+          }
+        }),
       };
-      // 상품 등록을 위한 POST 요청을 보냄
-      const apiUrl = "http://119.193.0.189:8080/addProduct";
+      // 상품 수정을 위한 POST 요청을 보냄
+      const apiUrl = "http://119.193.0.189:8080/updateProduct";
       const response = await axios.post(apiUrl, formattedData);
-      console.log("Product added successfully");
+      console.log("Product update successfully");
       resetForm();
-      console.log(response);
+      console.log(response.data);
     } catch (error) {
-      console.error("Error adding product:", error);
+      console.error("Error update product:", error);
+      console.log(error.response);
     }
   };
 
   const resetForm = () => {
     setFormData({
+      id: 0,
       images: [],
       name: "",
       price: 0,
@@ -60,10 +78,14 @@ const Register = () => {
     <Layout>
       <S.RegisterWrap>
         <S.RegisterForm onSubmit={handleSubmit}>
-          <RegisterImg formData={formData} setFormData={setFormData} />
+          <EditImg formData={formData} setFormData={setFormData} />
           <RegisterName formData={formData} setFormData={setFormData} />
           <RegisterPrice formData={formData} setFormData={setFormData} />
-          <RegisterCategory formData={formData} setFormData={setFormData} />
+          <RegisterCategory
+            formData={formData}
+            setFormData={setFormData}
+            disabled={true}
+          />
           <RegisterSize formData={formData} setFormData={setFormData} />
           <RegisterSizeInfo formData={formData} setFormData={setFormData} />
           <RegisterContent formData={formData} setFormData={setFormData} />
@@ -75,4 +97,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default ItemEdit;

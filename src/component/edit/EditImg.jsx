@@ -1,7 +1,7 @@
 import React from "react";
-import * as S from "./RegisterStyles";
+import * as S from "../register/RegisterStyles";
 
-const RegisterImg = ({ formData, setFormData }) => {
+const EditImg = ({ formData, setFormData }) => {
   const handleImageChange = (event) => {
     const { files } = event.target;
     const selectedImages = Array.from(files);
@@ -18,24 +18,37 @@ const RegisterImg = ({ formData, setFormData }) => {
     });
 
     Promise.all(imagePromises).then((images) => {
+      const newImages = images.map((image) => ({
+        id: formData.id,
+        image: image,
+      }));
+
       setFormData((prevFormData) => ({
         ...prevFormData,
-        images: [...prevFormData.images, ...images],
+        images: [...prevFormData.images, ...newImages],
       }));
     });
   };
 
   const handleImageRemove = (index) => {
     setFormData((prevFormData) => {
-      const updatedImages = [...prevFormData.images];
-      updatedImages.splice(index, 1);
+      const updatedImages = prevFormData.images.filter((_, i) => i !== index);
+
       return {
         ...prevFormData,
-        images: updatedImages,
+        images: updatedImages.map((image, i) => {
+          if (i >= index) {
+            return {
+              ...image,
+              id: formData.id, // 이미지 삭제 시 id 값을 빈 문자열로 설정
+              seq: image.seq - 1, // 이미지의 순서에 맞게 seq 값을 조정
+            };
+          }
+          return image;
+        }),
       };
     });
   };
-
   return (
     <>
       <div>
@@ -50,7 +63,7 @@ const RegisterImg = ({ formData, setFormData }) => {
           <S.RegisterImgDiv1>
             {formData.images.map((image, index) => (
               <S.RegisterImgDiv2 key={index}>
-                <S.RegisterImg src={image} alt={`Image ${index}`} />
+                <S.RegisterImg src={image.image} alt={`Image ${index}`} />
                 <S.RegisterImgRemoveButton
                   onClick={() => handleImageRemove(index)}>
                   Remove
@@ -64,4 +77,4 @@ const RegisterImg = ({ formData, setFormData }) => {
   );
 };
 
-export default RegisterImg;
+export default EditImg;

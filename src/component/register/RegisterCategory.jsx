@@ -1,6 +1,6 @@
 import React from "react";
 import * as S from "./RegisterStyles";
-const RegisterCategory = ({ formData, setFormData }) => {
+const RegisterCategory = ({ formData, setFormData, disabled }) => {
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
@@ -13,7 +13,8 @@ const RegisterCategory = ({ formData, setFormData }) => {
         <select
           name="categoryCode"
           value={formData.categoryCode}
-          onChange={handleInputChange}>
+          onChange={handleInputChange}
+          disabled={disabled}>
           <option value="">select category</option>
           <option value="1">Tops</option>
           <option value="2">Pants</option>

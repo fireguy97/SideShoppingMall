@@ -66,19 +66,19 @@ const Header = () => {
               </S.HeaderLi>
               <S.HeaderLi
                 onClick={() => {
-                  navigate("/item/tops");
+                  navigate("/productList/tops");
                 }}>
                 Tops
               </S.HeaderLi>
               <S.HeaderLi
                 onClick={() => {
-                  navigate("/item/pants");
+                  navigate("/productList/pants");
                 }}>
                 Pants
               </S.HeaderLi>
               <S.HeaderLi
                 onClick={() => {
-                  navigate("/item/shoes");
+                  navigate("/productList/shoes");
                 }}>
                 Shoes
               </S.HeaderLi>
