@@ -37,6 +37,16 @@ const ItemDetail = () => {
     navigate("/edit", { state: { itemData } });
   };
 
+  const handleRemove = async () => {
+    try {
+      await axios.post(`http://119.193.0.189:8080/deleteProduct?id=${id}`);
+      console.log("Product deleted successfully");
+      navigate("/item/best"); // 리스트 페이지로 이동
+    } catch (error) {
+      console.error("Error deleting product:", error);
+    }
+  };
+
   if (!itemData) {
     return <div>Loading...</div>;
   }
@@ -49,6 +59,7 @@ const ItemDetail = () => {
       </S.ItemDetailContainer>
       <ItemDetailReview />
       <button onClick={handleEdit}>Edit</button>
+      <button onClick={handleRemove}>Remove</button>
     </Layout>
   );
 };

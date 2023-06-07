@@ -48,6 +48,7 @@ const ItemEdit = () => {
           }
         }),
       };
+
       // 상품 수정을 위한 POST 요청을 보냄
       const apiUrl = "http://119.193.0.189:8080/updateProduct";
       const response = await axios.post(apiUrl, formattedData);
