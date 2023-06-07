@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as S from "./ItemDetailStyles";
 
 const ItemDetailReview = () => {
@@ -9,7 +9,17 @@ const ItemDetailReview = () => {
   const [showForm, setShowForm] = useState(false);
   const [showReview, setShowReview] = useState(false);
   const [selectedReview, setSelectedReview] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userName, setUserName] = useState("");
 
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const storedName = localStorage.getItem("name");
+    if (token && storedName) {
+      setUserName(storedName);
+      setIsLoggedIn(true);
+    }
+  }, []);
   const handleReviewName = (e) => {
     setReviewName(e.target.value);
   };
@@ -37,7 +47,7 @@ const ItemDetailReview = () => {
 
   const handleReviewSubmit = () => {
     const newReview = {
-      reviewName: reviewName,
+      reviewName: isLoggedIn ? userName : reviewName,
       reviewContent: reviewContent,
       reviewFile: reviewFile,
       reviewDate: new Date().toLocaleString(),
@@ -60,7 +70,18 @@ const ItemDetailReview = () => {
     setShowReview(true);
   };
 
+  //리뷰 닫기
   const handleCloseReview = () => {
+    setShowReview(false);
+    setSelectedReview(null);
+  };
+
+  //[리뷰 삭제]
+  const handleDeleteReview = () => {
+    const updatedReviews = reviews.filter(
+      (review) => review !== selectedReview
+    );
+    setReviews(updatedReviews);
     setShowReview(false);
     setSelectedReview(null);
   };
@@ -78,9 +99,10 @@ const ItemDetailReview = () => {
           <S.ReviewInputModal>
             <S.ReviewInput1
               type="text"
-              value={reviewName}
+              value={isLoggedIn ? userName : reviewName}
               onChange={handleReviewName}
               placeholder="이름"
+              readOnly={isLoggedIn}
             />
             <S.ReviewInput2
               type="text"
@@ -124,7 +146,7 @@ const ItemDetailReview = () => {
                   </S.ReviewDetailDiv1>
                 </div>
 
-                <div className="review_detail_content">
+                <S.ReviewDetailContent>
                   <div>Name : {selectedReview.reviewName}</div>
 
                   <S.ReviewDetailDiv3>
@@ -138,7 +160,12 @@ const ItemDetailReview = () => {
                       />
                     )}
                   </S.ReviewDetailDiv4>
-                </div>
+                  {isLoggedIn && selectedReview.reviewName === userName && (
+                    <S.ReviewSpan1 onClick={handleDeleteReview}>
+                      Delete
+                    </S.ReviewSpan1>
+                  )}
+                </S.ReviewDetailContent>
               </S.ReviewDetailModal>
             )}
           </S.ItemDetailReviewTable>

@@ -7,14 +7,8 @@ import ItemDetailSizeInfo from "./ItemDetailSizeInfo";
 import ItemDetailContent from "./ItemDetailContent";
 import * as S from "./ItemDetailStyles";
 
-const ItemDetailRight = ({ filteredItems }) => {
-  const { id } = useParams();
-  const [findItem, setFindItem] = useState(null);
+const ItemDetailRight = ({ itemData }) => {
   const [itemSize, setItemSize] = useState("");
-
-  useEffect(() => {
-    setFindItem(filteredItems.find((item) => item.id === parseInt(id)));
-  }, [filteredItems, id]);
 
   const handleSizeChange = (newSize) => {
     setItemSize(newSize);
@@ -22,17 +16,11 @@ const ItemDetailRight = ({ filteredItems }) => {
   return (
     <S.ItemDetailRight>
       <S.ItemDetailInfo1>
-        <ItemDetailInfo filteredItems={filteredItems} />
-        <ItemDetailSize
-          filteredItems={filteredItems}
-          onSizeChange={handleSizeChange}
-        />
-        <ItemDetailBuyButton
-          filteredItems={filteredItems}
-          itemSize={itemSize}
-        />
-        <ItemDetailSizeInfo filteredItems={filteredItems} />
-        <ItemDetailContent filteredItems={filteredItems} />
+        <ItemDetailInfo itemData={itemData} />
+        <ItemDetailSize itemData={itemData} onSizeChange={handleSizeChange} />
+        <ItemDetailBuyButton itemData={itemData} itemSize={itemSize} />
+        <ItemDetailSizeInfo itemData={itemData} />
+        <ItemDetailContent itemData={itemData} />
       </S.ItemDetailInfo1>
     </S.ItemDetailRight>
   );

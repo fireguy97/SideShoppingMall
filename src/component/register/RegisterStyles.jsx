@@ -45,3 +45,24 @@ export const RegisterButton = styled.button`
     background-color: #45a049;
   }
 `;
+
+export const RegisterImgDiv1 = styled.div`
+  whitespace: nowrap;
+`;
+
+export const RegisterImgDiv2 = styled.div`
+  display: inline-block;
+  marginright: 0.625rem;
+  marginbottom: 0.625rem;
+`;
+
+export const RegisterImg = styled.img`
+  width: 6.25rem;
+  height: 6.25rem;
+`;
+
+export const RegisterImgRemoveButton = styled.div`
+  cursor: pointer;
+  color: #333;
+  font-size: 0.9375rem;
+`;

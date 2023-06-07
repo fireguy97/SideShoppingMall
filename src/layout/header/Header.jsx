@@ -55,8 +55,7 @@ const Header = () => {
             <S.HeaderH3
               onClick={() => {
                 navigate("/");
-              }}
-            >
+              }}>
               KEKEMON
             </S.HeaderH3>
           </S.HeaderWarp1>
@@ -65,50 +64,43 @@ const Header = () => {
               <S.HeaderLi
                 onClick={() => {
                   navigate("/item/best");
-                }}
-              >
+                }}>
                 Best
               </S.HeaderLi>
               <S.HeaderLi
                 onClick={() => {
-                  navigate("/item/tops");
-                }}
-              >
+                  navigate("/productList/tops");
+                }}>
                 Tops
               </S.HeaderLi>
               <S.HeaderLi
                 onClick={() => {
-                  navigate("/item/pants");
-                }}
-              >
+                  navigate("/productList/pants");
+                }}>
                 Pants
               </S.HeaderLi>
               <S.HeaderLi
                 onClick={() => {
-                  navigate("/item/shoes");
-                }}
-              >
+                  navigate("/productList/shoes");
+                }}>
                 Shoes
               </S.HeaderLi>
               <S.HeaderLi
                 onClick={() => {
                   navigate("/cart");
-                }}
-              >
+                }}>
                 Cart
               </S.HeaderLi>
               <S.HeaderLi
                 onClick={() => {
                   navigate("/buy");
-                }}
-              >
+                }}>
                 Buy
               </S.HeaderLi>
               <S.HeaderLi
                 onClick={() => {
                   navigate("/order");
-                }}
-              >
+                }}>
                 Order
               </S.HeaderLi>
 
@@ -133,8 +125,7 @@ const Header = () => {
               <S.Dropdown>
                 <S.LoginArea
                   onClick={handleToggle}
-                  onBlur={() => setDropOpen(false)}
-                >
+                  onBlur={() => setDropOpen(false)}>
                   {username}
                 </S.LoginArea>
                 {dropOpen && (

@@ -1,13 +1,11 @@
 import React, { useCallback, useState } from "react";
-import { useParams } from "react-router-dom";
+
 import { money } from "../../func";
 import * as S from "./ItemDetailStyles";
 
-const ItemDetailSize = ({ filteredItems, onSizeChange }) => {
-  const { id } = useParams();
-  const [findItem, setFindItem] = useState(
-    filteredItems.find((item) => item.id === parseInt(id))
-  );
+const ItemDetailSize = ({ itemData, onSizeChange }) => {
+  const findItem = itemData;
+
   const [itemSize, setItemSize] = useState("");
   const [count, setCount] = useState(1);
 
@@ -18,9 +16,10 @@ const ItemDetailSize = ({ filteredItems, onSizeChange }) => {
   };
 
   const handleDecrement = useCallback(() => {
-    setCount((count) => count - 1);
-  }, []);
-
+    if (count > 1) {
+      setCount((count) => count - 1);
+    }
+  }, [count]);
   const handleIncrement = useCallback(() => {
     setCount((count) => count + 1);
   }, []);
@@ -29,7 +28,7 @@ const ItemDetailSize = ({ filteredItems, onSizeChange }) => {
     <>
       <S.ItemDetailSize value={itemSize} onChange={handleSizeChange}>
         <option value="">select size</option>
-        {findItem.size.map((size) => {
+        {findItem.sizes.map((size) => {
           return (
             <option key={size} value={size}>
               {size}
