@@ -1,8 +1,9 @@
 import { styled } from "styled-components";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import DashboardPage from "./DashboardPage";
+import DashboardPage from "./Dashboard/DashboardPage";
 import UserManage from "./UserManage";
+import Register from "../../page/Register";
 
 export default function SideMenu() {
   const navigate = useNavigate();
@@ -82,6 +83,7 @@ export default function SideMenu() {
       <div className="UserManage">
         {selectedMenu === "user" && <UserManage />}
       </div>
+      <ContentsPage>{selectedMenu === "content" && <Register />}</ContentsPage>
     </StyledSideMenu>
   );
 }
@@ -122,4 +124,8 @@ const StyledSideMenu = styled.div`
   }
   .DashboardPage {
   }
+`;
+
+const ContentsPage = styled.div`
+  background-color: #fff;
 `;

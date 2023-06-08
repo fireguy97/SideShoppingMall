@@ -3,7 +3,7 @@ import * as S from "./RegisterStyles";
 const RegisterBtn = () => {
   return (
     <>
-      <S.RegisterButton type="submit">Submit</S.RegisterButton>
+      <S.RegisterButton type="submit">Register</S.RegisterButton>
     </>
   );
 };

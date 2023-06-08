@@ -11,6 +11,7 @@ export default function Join() {
   const navigate = useNavigate();
   const [joinId, setJoinId] = useState("");
   const [openPopup, setOpenPopup] = useState(false);
+  const popupRef = useRef(null);
 
   const moveLogin = () => {
     navigate("/Login");
@@ -24,29 +25,36 @@ export default function Join() {
       ...restData,
       birth: `${year}${month}${day}`,
     };
+    const { basicaddress, subaddress, ...addrestData } = data;
+    const allAddress = {
+      ...addrestData,
+      address: `${basicaddress}/${subaddress}`,
+    };
     try {
-      const requestData = new URLSearchParams();
-      requestData.append("loginId", data.loginId);
-      requestData.append("name", data.name);
-      requestData.append("password", data.password);
-      requestData.append("email", data.email);
-      requestData.append("phone", data.phone);
-      requestData.append("birth", joinedData.birth);
-      requestData.append("gender", data.gender);
-      requestData.append("address", data.address);
-
+      const requestData = {
+        loginId: data.loginId,
+        name: data.name,
+        password: data.password,
+        email: data.email,
+        phone: data.phone,
+        birth: joinedData.birth,
+        gender: data.gender,
+        address: allAddress.address,
+      };
       const response = await axios.post(
         "http://119.193.0.189:8080/join_loginId",
-        requestData.toString()
+        requestData
       );
       if (response.data.result) {
         console.log("회원가입이 완료되었습니다.");
         navigate("/Login");
+        console.log(requestData);
       } else {
         console.error("회원가입 실패");
       }
     } catch (error) {
       console.error("회원가입이 실패했습니다.", error);
+      console.log(isFormValid);
     }
   };
 
@@ -72,7 +80,7 @@ export default function Join() {
   const handlePostcode = (data) => {
     const { address, zonecode } = data;
 
-    setValue("address", address);
+    setValue("basicaddress", address);
     setValue("zonecode", zonecode);
     setOpenPopup(false);
   };
@@ -89,19 +97,22 @@ export default function Join() {
     border: "1px solid #333",
     marginLeft: "130px",
   };
+  const outsidePostcodeClick = (e) => {
+    if (openPopup && popupRef.current !== e.target) {
+      setOpenPopup(false);
+    }
+  };
 
   return (
     <StyledJoin>
-      <div className="JoinWrap">
-        <div className="joinHead">
+      <JoinWrap ref={popupRef} onClick={outsidePostcodeClick}>
+        <JoinHead>
           <h3 className="Title"> JOIN US </h3>
-          <button className="ExitBtn" onClick={moveLogin}>
-            &times;
-          </button>
-        </div>
+          <ExitBtn onClick={moveLogin}>&times;</ExitBtn>
+        </JoinHead>
 
-        <form className="JoinForm" onSubmit={handleSubmit(handleJoinSubmit)}>
-          <tbody className="JoinWrapper">
+        <JoinForm onSubmit={handleSubmit(handleJoinSubmit)}>
+          <JoinWrapper>
             <tr>
               <th>Name</th>
               <td>
@@ -116,9 +127,8 @@ export default function Join() {
             <tr>
               <th>ID</th>
               <td>
-                <div className="idChkWrap">
-                  <input
-                    className="idInput"
+                <IdChkWrap>
+                  <IdInput
                     type="text"
                     placeholder="ID"
                     {...register("loginId")}
@@ -133,7 +143,7 @@ export default function Join() {
                   >
                     중복확인
                   </button>
-                </div>
+                </IdChkWrap>
               </td>
             </tr>
             <tr>
@@ -183,20 +193,20 @@ export default function Join() {
             <tr>
               <th>citation</th>
               <td>
-                <div className="NumberChkWrap">
+                <NumberChkWrap>
                   <input
                     className="NumberChk"
                     type="number"
                     placeholder="인증번호"
                   />
                   <button className="ChkBtn">인증확인 </button>
-                </div>
+                </NumberChkWrap>
               </td>
             </tr>
             <tr>
               <th>address</th>{" "}
               <td>
-                <div className="addressWrap">
+                <AddressWrap>
                   <input
                     type="text"
                     placeholder="address"
@@ -211,44 +221,48 @@ export default function Join() {
                   >
                     우편번호
                   </button>
-                </div>
-                <div className="moreAddress">
+                </AddressWrap>
+                <MoreAddress>
                   <input
                     type="text"
                     placeholder="기본주소"
-                    {...register("address")}
+                    {...register("basicaddress")}
                     readOnly
                   />
-                  <input type="text" placeholder="상세주소" />
-                </div>
+                  <input
+                    type="text"
+                    placeholder="상세주소"
+                    {...register("subaddress")}
+                  />
+                </MoreAddress>
               </td>
             </tr>
             <tr>
               <th>생년월일</th>
-              <td className="birthWrap">
-                <input
-                  className="birth"
+              <BirthWrap>
+                <Birth
                   type="text"
                   placeholder="year"
                   {...register("year")}
+                  required
                 />
-                <input
-                  className="birth"
+                <Birth
                   type="text"
                   placeholder="month"
                   {...register("month")}
+                  required
                 />
-                <input
-                  className="birth"
+                <Birth
                   type="text"
                   placeholder="day"
                   {...register("day")}
+                  required
                 />
-              </td>
+              </BirthWrap>
             </tr>
             <tr>
               <th>성별</th>
-              <td className="genderWrap">
+              <GenderWrap>
                 <label htmlFor="male">남</label>
                 <input
                   type="radio"
@@ -266,9 +280,9 @@ export default function Join() {
                   value="F"
                   {...register("gender", { defaultvalue: "F" })}
                 />
-              </td>
+              </GenderWrap>
             </tr>
-          </tbody>
+          </JoinWrapper>
           {openPopup && (
             <div>
               {" "}
@@ -282,46 +296,121 @@ export default function Join() {
           <JoinSubmit type="submit" disabled={!isFormValid}>
             Join Now
           </JoinSubmit>
-        </form>
-      </div>
+        </JoinForm>
+      </JoinWrap>
     </StyledJoin>
   );
 }
-
-const StyledJoin = styled.div`
-  .JoinWrap {
-    margin-top: 60px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  .joinHead {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .ExitBtn {
-    font-size: 2.8125rem;
-    width: 4.25rem;
-    cursor: pointer;
+const JoinWrap = styled.div`
+  margin-top: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
+const JoinHead = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+const ExitBtn = styled.button`
+  font-size: 2.8125rem;
+  width: 4.25rem;
+  cursor: pointer;
+  background-color: #fff;
+  border: 0;
+`;
+const JoinForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  margin-right: 130px;
+`;
+const JoinWrapper = styled.tbody``;
+const IdChkWrap = styled.div`
+  display: flex;
+  gap: 0.3125rem;
+  margin-bottom: 0.3125rem;
+  button {
+    width: 5rem;
     background-color: #fff;
-    border: 0;
+    color: #aaa;
+    cursor: pointer;
   }
-
+`;
+const IdInput = styled.input`
+  width: 12.1875rem !important;
+`;
+const NumberChkWrap = styled.div`
+  display: flex;
+  gap: 0.3125rem;
+  margin-bottom: 0.3125rem;
+  button {
+    width: 5rem;
+    background-color: #fff;
+    color: #aaa;
+    cursor: pointer;
+  }
+  .NumberChk {
+    width: 12.1875rem !important;
+  }
+`;
+const AddressWrap = styled.div`
+  display: flex;
+  gap: 0.3125rem;
+  margin-bottom: 0.3125rem;
+  input {
+    width: 12.1875rem !important;
+    color: #aaa;
+  }
+  button {
+    background-color: #fff;
+    cursor: pointer;
+    color: #aaa;
+    width: 5rem;
+  }
+`;
+const MoreAddress = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.3125rem;
+  input {
+    color: #aaa;
+  }
+`;
+const BirthWrap = styled.td`
+  display: flex;
+  gap: 0.3125rem;
+  margin-bottom: 0.3125rem;
+`;
+const Birth = styled.input`
+  width: 5.3125rem !important;
+`;
+const GenderWrap = styled.td`
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  label {
+    padding: 0;
+    margin: 0;
+    width: 0.9375rem;
+    font-size: 0.875rem;
+  }
+  input {
+    width: 0.8125rem !important;
+    position: relative;
+    top: -0.0625rem;
+  }
+`;
+const StyledJoin = styled.div`
   .Title {
     text-align: center;
     color: #333;
     margin-right: 100px;
     margin-left: 150px;
-  }
-  .JoinForm {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    position: relative;
-    align-items: center;
-    justify-content: center;
-    margin-right: 130px;
   }
 
   th {
@@ -337,82 +426,7 @@ const StyledJoin = styled.div`
     height: 1.25rem;
     width: 17.5rem;
   }
-  .idChkWrap {
-    display: flex;
-    gap: 0.3125rem;
-    margin-bottom: 0.3125rem;
-  }
-  .idInput {
-    width: 12.1875rem;
-  }
-  .idChkWrap > button {
-    width: 5rem;
-    background-color: #fff;
-    color: #aaa;
-    cursor: pointer;
-  }
-  .NumberChkWrap {
-    display: flex;
-    gap: 0.3125rem;
-    margin-bottom: 0.3125rem;
-  }
-  .NumberChk {
-    width: 12.1875rem;
-  }
-  .NumberChkWrap > button {
-    width: 5rem;
-    background-color: #fff;
-    color: #aaa;
-    cursor: pointer;
-  }
-  .addressWrap {
-    display: flex;
-    gap: 0.3125rem;
-    margin-bottom: 0.3125rem;
-  }
-  .addressWrap > input {
-    width: 12.1875rem;
-    color: #aaa;
-  }
-  .addressWrap > button {
-    background-color: #fff;
-    cursor: pointer;
-    color: #aaa;
-    width: 5rem;
-  }
-  .moreAddress {
-    display: flex;
-    flex-direction: column;
-    gap: 0.3125rem;
-  }
-  .moreAddress > input {
-    color: #aaa;
-  }
-  .birthWrap {
-    display: flex;
-    gap: 0.3125rem;
-    margin-bottom: 0.3125rem;
-  }
-  .birth {
-    width: 5.3125rem;
-  }
-  .genderWrap {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .genderWrap > label {
-    padding: 0;
-    margin: 0;
-    width: 0.9375rem;
-    font-size: 0.875rem;
-  }
-  .genderWrap > input {
-    width: 0.8125rem;
-    position: relative;
-    top: -0.0625rem;
-  }
+
   /* .JoinSubmit {
     position: relative;
     margin-left: 7.1875rem;
@@ -467,3 +481,185 @@ const JoinSubmit = styled.button`
   color: aliceblue;
   cursor: pointer;
 `;
+
+// import { useRef, useState } from "react";
+// import { useForm } from "react-hook-form";
+// import { useNavigate } from "react-router-dom";
+// import axios from "axios";
+// import styled from "styled-components";
+// import JoinIdForm from "./joinIdForm";
+// import JoinPasswordForm from "./JoinPasswordForm";
+// import JoinEmailForm from "./JoinEmailForm";
+// import JoinTelForm from "./JoinTelForm";
+// import JoinAddressForm from "./JoinAddresForm";
+// import JoinBirth from "./JoinBirth";
+// import JoinGender from "./JoinGender";
+// import JoinSubmitForm from "./JoinSubmitForm";
+// export default function Join() {
+//   const { register, handleSubmit, setValue } = useForm();
+//   const [isFormValid, setIsFormValid] = useState(true);
+//   const navigate = useNavigate();
+//   const [openPopup, setOpenPopup] = useState(false);
+//   const popupRef = useRef(null);
+
+//   const moveLogin = () => {
+//     navigate("/Login");
+//   };
+//   const handleJoinSubmit = async (data) => {
+//     if (!isFormValid) {
+//       return;
+//     }
+//     const { year, month, day, ...restData } = data;
+//     // const joinedData = {
+//     //   ...restData,
+//     //   birth: `${year}${month}${day}`,
+//     // };
+
+//     const joinedData = {
+//       ...restData,
+//       birth: `${year}-${month}-${day}`,
+//     };
+//     try {
+//       const requestData = {
+//         ...joinedData,
+//         loginId: data.loginId,
+//         name: data.name,
+//         password: data.password,
+//         email: data.email,
+//         phone: data.phone,
+
+//         gender: data.gender,
+//         address: data.address,
+//       };
+
+//       const response = await axios.post(
+//         "http://119.193.0.189:8080/join_loginId",
+//         JSON.stringify(requestData),
+//         { headers: { "Content-Type": "application/json" } }
+//       );
+//       if (response.data.result) {
+//         console.log("회원가입이 완료되었습니다.");
+//         navigate("/Login");
+//       } else {
+//         console.error("회원가입 실패");
+//       }
+//     } catch (error) {
+//       console.error("회원가입이 실패했습니다.", error);
+//     }
+//   };
+
+// const outsidePostcodeClick = (e) => {
+//   if (openPopup && popupRef.current !== e.target) {
+//     setOpenPopup(false);
+//   }
+// };
+
+//   return (
+//     <StyledJoin>
+//       <JoinWrap ref={popupRef} onClick={outsidePostcodeClick}>
+//         <JoinHead>
+//           <h3 className="Title"> JOIN US </h3>
+//           <button className="ExitBtn" onClick={moveLogin}>
+//             &times;
+//           </button>
+//         </JoinHead>
+
+//         <JoinForm onSubmit={handleSubmit(handleJoinSubmit)}>
+//           <tbody className="JoinWrapper">
+//             <JoinIdForm />
+//             <JoinPasswordForm />
+//             <JoinEmailForm />
+//             <JoinTelForm />
+//             <JoinAddressForm />
+//             <JoinBirth />
+//             <JoinGender />
+//           </tbody>
+//           <JoinSubmitForm isFormValid={isFormValid} />
+//         </JoinForm>
+//       </JoinWrap>
+//     </StyledJoin>
+//   );
+// }
+
+// const JoinWrap = styled.div`
+//   margin-top: 60px;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+// `;
+
+// const JoinForm = styled.form`
+//   display: flex;
+//   flex-direction: column;
+//   height: 100%;
+//   position: relative;
+//   align-items: center;
+//   justify-content: center;
+//   margin-right: 130px;
+// `;
+// const JoinHead = styled.div`
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// `;
+// const StyledJoin = styled.div`
+//   .ExitBtn {
+//     font-size: 2.8125rem;
+//     width: 4.25rem;
+//     cursor: pointer;
+//     background-color: #fff;
+//     border: 0;
+//   }
+
+//   .Title {
+//     text-align: center;
+//     color: #333;
+//     margin-right: 100px;
+//     margin-left: 150px;
+//   }
+
+//   th {
+//     color: aliceblue;
+//     font-size: 0.8125rem;
+//     padding: 0.0625rem 1.25rem 0 0;
+//   }
+//   td {
+//     padding: 0.375rem 0rem 0.375rem;
+//     border-bottom: 0.0625rem solid #ddd;
+//   }
+
+//   input::placeholder {
+//     color: lightgrey;
+//   }
+
+//   @media (max-width: 768px) {
+//     .JoinWrap {
+//       margin-top: 30px;
+//     }
+//     .joinHead {
+//       flex-direction: column;
+//       align-items: flex-start;
+//       margin-bottom: 10px;
+//     }
+//     .ExitBtn {
+//       margin-top: 10px;
+//       margin-right: 0;
+//     }
+//     .Title {
+//       margin: 0;
+//     }
+//     .JoinForm {
+//       margin-right: 0;
+//     }
+//     input {
+//       width: 15rem;
+//     }
+//     .addressWrap > input {
+//       width: 11rem;
+//     }
+//     .JoinSubmit {
+//       margin-left: 0;
+//       width: 15rem;
+//     }
+//   }
+// `;

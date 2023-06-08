@@ -1,11 +1,19 @@
 import { styled } from "styled-components";
 
+export const RegisterTitle = styled.div`
+  text-align: center;
+  position: relative;
+  font-size: 23px;
+  font-weight: 600;
+  top: -30px;
+`;
+
 export const RegisterWrap = styled.div`
+  width: 300px;
   padding: 3.125rem;
   max-width: 50rem;
-  background-color: #f7f7f7;
+  background-color: aliceblue;
   border-radius: 0.625rem;
-  margin: 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;

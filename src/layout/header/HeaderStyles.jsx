@@ -17,6 +17,7 @@ export const HeaderWarp = styled.div`
   justify-content: space-between;
 `;
 export const HeaderWarp1 = styled.div`
+  position: relative;
   margin-left: 1.25rem;
   display: flex;
   align-items: center;
@@ -152,6 +153,8 @@ export const Help = styled.div`
 export const DropdownMenu = styled.ul`
   border: 1px solid #e1e2e3;
   margin-top: 1px;
+  margin-left: 1px;
+  position: absolute;
 `;
 export const DropdownMenuLi = styled.li`
   height: 30px;

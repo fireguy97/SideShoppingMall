@@ -7,6 +7,10 @@ import React from "react";
 import LoginKakao from "./kakaoLoginComponent";
 import axios from "axios";
 
+import LoginIsMember from "./LoginIsMember";
+import LoginInput from "./LoginInput";
+import LoginNonMember from "./LoginNonMember";
+
 export default function Login() {
   const { register, handleSubmit } = useForm();
   const [isMember, setIsMember] = useState(false);
@@ -39,14 +43,17 @@ export default function Login() {
       );
       const { token } = response.data;
       const { name } = response.data.userInfo;
+      const { loginId } = response.data.userInfo;
+      const { id } = response.data.userInfo;
       localStorage.setItem("token", token);
       localStorage.setItem("name", name);
+      localStorage.setItem("loginId", loginId);
+      localStorage.setItem("id", id);
       navigate("/");
       console.log(response.data);
     } catch (error) {
       console.error(error);
       return alert("이메일 혹은 비밀번호를 확인하세요");
-  
     }
   };
 
@@ -59,77 +66,11 @@ export default function Login() {
       <form className="formWrapper" onSubmit={handleSubmit(onSubmit)}>
         <div className="title">kekemon</div>
         <div>
-          <ul className="memberSep">
-            <li
-              className={isMember ? "member selected" : "member"}
-              onClick={() => setIsMember(true)}>
-              회원
-            </li>
-            <li
-              className={!isMember ? "nonMember selected" : "nonMember"}
-              onClick={() => setIsMember(false)}>
-              비회원
-            </li>
-          </ul>
+          <LoginIsMember isMember={isMember} setIsMember={setIsMember} />
 
-          <div className="loginForm">
-            {isMember ? (
-              <>
-                <div className="loginInputWrap">
-                  <label htmlFor="loginId">
-                    <input
-                      id="id"
-                      className="inputEmail"
-                      placeholder="ID"
-                      type="text"
-                      {...register("loginId")}
-                    />
-                  </label>
-                  <label htmlFor="password">
-                    <input
-                      type="password"
-                      className="inputPassword"
-                      placeholder="Password"
-                      {...register("password")}
-                    />
-                  </label>
-                </div>
-                <div className="loginSubmitWrap">
-                  <button className="submitLogin" type="submit">
-                    {" "}
-                    Login{" "}
-                  </button>
-                </div>
-              </>
-            ) : (
-              <div className="nonMemberChkWrap">
-                <div className="orderChkWrap">
-                  <label htmlFor="">
-                    <input
-                      type="text"
-                      placeholder="Name"
-                      className="orderName"
-                    />
-                  </label>
-                  <label htmlFor="">
-                    <input
-                      type="tel"
-                      placeholder="PhoneNumber"
-                      className="orderPhNum"
-                    />
-                  </label>
-                  <label htmlFor="">
-                    <input
-                      type="number"
-                      placeholder="OrderNumber"
-                      className="orderNum"
-                    />
-                  </label>
-                </div>
-                <button className="orderDeliverChkBtn">Order Check</button>
-              </div>
-            )}
-          </div>
+          <LoginForm>
+            {isMember ? <LoginInput register={register} /> : <LoginNonMember />}
+          </LoginForm>
           <div className="joinAndFinder">
             <a href="#" onClick={moveFind}>
               ID / Password
@@ -149,6 +90,11 @@ export default function Login() {
   );
 }
 
+const LoginForm = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+`;
 const StyledLogin = styled.div`
   height: 35.9375rem;
   ul,
@@ -175,56 +121,11 @@ const StyledLogin = styled.div`
     width: 37.5rem;
     margin: 0 auto;
   }
-  .memberSep {
-    display: flex;
-    justify-content: center;
-    gap: 0.0625rem;
-    margin-bottom: 1.25rem;
-    margin-left: 1.875rem;
-  }
-  .memberSep > li {
-    width: 12.5rem;
-    border: 0.0625rem solid #333;
-    cursor: pointer;
-    border: 0.0625rem solid #d9d9d9;
-    color: #333;
-    text-align: center;
-    height: 1.5625rem;
-    line-height: 1.5;
-  }
+
   .loginForm {
     display: flex;
     justify-content: center;
     margin-bottom: 1.25rem;
-  }
-  .loginInputWrap {
-    display: flex;
-    flex-direction: column;
-    margin-right: 1.25rem;
-    margin-top: 1.875rem;
-    gap: 0.3125rem;
-  }
-  .loginInputWrap > label > input {
-    width: 18.75rem;
-    height: 1.875rem;
-    margin-left: 1.875rem;
-    color: #8f8f91;
-    border: 0.0625rem solid #d9d9d9;
-  }
-  .inputEmail::placeholder {
-    color: lightgrey;
-  }
-  .inputPassword::placeholder {
-    color: lightgrey;
-  }
-  .submitLogin {
-    width: 5rem;
-    height: 4.6875rem;
-    background-color: #333;
-    color: #fff;
-  }
-  .loginSubmitWrap {
-    margin-top: 1.875rem;
   }
   .joinAndFinder {
     color: #333;
@@ -234,31 +135,7 @@ const StyledLogin = styled.div`
     margin-left: 0.625rem;
     gap: 1.25rem;
   }
-  .nonMemberChkWrap {
-    display: flex;
-    gap: 1.25rem;
-  }
-  .orderChkWrap {
-    display: flex;
-    flex-direction: column;
-    gap: 0.3125rem;
-  }
-  .orderChkWrap > label > input {
-    width: 17.1875rem;
-    height: 1.5625rem;
-    margin-left: 1.875rem;
-    color: #8f8f91;
-    border: 0.0625rem solid #d9d9d9;
-  }
-  .orderDeliverChkBtn {
-    background-color: #333;
-    color: #fff;
-  }
-  .orderName::placeholder,
-  .orderPhNum::placeholder,
-  .orderNum::placeholder {
-    color: lightgrey;
-  }
+
   .selected {
     background-color: #333;
     color: #fff !important;
