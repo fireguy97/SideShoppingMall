@@ -8,7 +8,6 @@ import Shoes from "./page/Shoes";
 import Cart from "./page/Cart";
 import ItemDetail from "./page/ItemDetail";
 import items from "./db/items.json";
-import { useState } from "react";
 import Search from "./page/Search";
 import LoginPage from "./page/LoginPage";
 import FindPage from "./page/FindPage";
@@ -21,8 +20,6 @@ import Register from "./page/Register";
 import ItemEdit from "./page/ItemEdit";
 
 function App() {
-  const [searchResults, setSearchResults] = useState([]);
-
   return (
     <>
       <Routes>
@@ -41,15 +38,7 @@ function App() {
         <Route path="/IdPasswordFind" element={<FindPage />} />
         <Route path="/Profile" element={<ProfilePage />} />
         <Route path="/ManagerPage" element={<ManagerPage />} />
-        <Route
-          path="/search/:searchKeyword"
-          element={
-            <Search
-              setSearchResults={setSearchResults}
-              searchResults={searchResults}
-            />
-          }
-        />
+        <Route path="/searchProduct" element={<Search />} />
         <Route path="/getProduct" element={<ItemDetail />} />
       </Routes>
     </>

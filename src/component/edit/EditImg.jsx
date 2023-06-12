@@ -2,7 +2,7 @@ import React from "react";
 import * as S from "../register/RegisterStyles";
 
 const EditImg = ({ formData, setFormData }) => {
-  // p이미지 선택 시 실행되는 함수]
+  // [이미지 선택 시 실행되는 함수]
   const handleImageChange = (event) => {
     const { files } = event.target;
     const selectedImages = Array.from(files);
