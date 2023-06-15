@@ -39,7 +39,9 @@ const Header = () => {
     });
     navigate(`/search/${searchKeyWord}`, { state: { searchResults: results } });
   };
-
+  const moveHome = () => {
+    navigate("/");
+  };
   const moveLogin = () => {
     navigate("/Login");
   };
@@ -54,6 +56,7 @@ const Header = () => {
     localStorage.removeItem("name");
     localStorage.removeItem("loginId");
     setIsLoggedIn(false);
+    moveHome();
   };
 
   return (

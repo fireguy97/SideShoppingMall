@@ -90,6 +90,8 @@ export default function SideMenu() {
 
 const StyledSideMenu = styled.div`
   margin-top: 60px;
+  display: flex;
+  position: sticky;
   .home {
     padding-top: 10px;
     line-height: 1;

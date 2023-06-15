@@ -1,14 +1,31 @@
 import { styled } from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import axios from "axios";
 
 import UserInfoFix from "./UserInfo";
 import PostList from "./PostList";
 import Withdraw from "./UserWithdraw";
 
 export default function Profile() {
+  const dispatch = useDispatch();
+  const userInfo = useSelector((state) => state.userInfo);
   const navigate = useNavigate();
   const moveHome = () => {
     navigate("/");
+  };
+
+  const handleFixComplete = async () => {
+    try {
+      await axios.post(
+        `http://119.193.0.189:8080/updateUserInfo?id=${userInfo.userId}`,
+        userInfo
+      );
+      console.log("User info updated successfully");
+      console.log(userInfo);
+    } catch (error) {
+      console.error("Error updating user info", error);
+    }
   };
   return (
     <StyledProfile>
@@ -21,22 +38,13 @@ export default function Profile() {
       <PageWrpper>
         <div className="userInfoPostListWrap">
           <UserInfo>
-            <InfoCategory>
-              <li>이름</li>
-              <li>아이디</li>
-              <li>생일</li>
-              <li>핸드폰 번호</li>
-              <li>이메일</li>
-              <li>주소</li>
-              <li>SNS 수신동의</li>
-            </InfoCategory>
             <UserInfoFix />
           </UserInfo>
           <PostList />
         </div>
       </PageWrpper>
       <SubmitBtnWrap>
-        <button className="fixComplete">수정완료</button>
+        <FixComplete onClick={handleFixComplete}>수정완료</FixComplete>
         <Withdraw />
       </SubmitBtnWrap>
     </StyledProfile>
@@ -76,21 +84,7 @@ const UserInfo = styled.div`
   position: relative;
   gap: 20px;
 `;
-const InfoCategory = styled.ul`
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  ul li {
-    list-style: none;
-  }
-  li {
-    height: 35px;
-    text-align: center;
-    font-size: 12px;
-    line-height: 3;
-    font-weight: 600;
-  }
-`;
+
 const SubmitBtnWrap = styled.div`
   display: flex;
   gap: 5px;
@@ -102,6 +96,13 @@ const SubmitBtnWrap = styled.div`
     border: 0;
     width: 200px;
   }
+`;
+const FixComplete = styled.button`
+  cursor: pointer;
+  background-color: #333;
+  color: #fff;
+  border: 0;
+  width: 200px;
 `;
 const StyledProfile = styled.div`
   width: 1280px;

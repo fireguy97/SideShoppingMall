@@ -4,6 +4,7 @@ import buyReducer from "./Redux/buySlice";
 import cartReducer from "./Redux/cartSlice";
 import likeReducer from "./Redux/likeSlice";
 import orderReducer from "./Redux/orderSlice";
+import userInfoReducer from "./Redux/userInfoSlice";
 const store = configureStore({
   reducer: {
     cart: cartReducer,
@@ -11,6 +12,7 @@ const store = configureStore({
     like: likeReducer,
     userList: userListReducer,
     order: orderReducer,
+    userInfo: userInfoReducer,
   },
 });
 

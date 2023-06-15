@@ -13,7 +13,7 @@ import LoginNonMember from "./LoginNonMember";
 
 export default function Login() {
   const { register, handleSubmit } = useForm();
-  const [isMember, setIsMember] = useState(false);
+  const [isMember, setIsMember] = useState(true);
   const dispatch = useDispatch();
 
   const navigate = useNavigate();

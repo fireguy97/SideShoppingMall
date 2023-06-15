@@ -2,6 +2,7 @@ import { styled } from "styled-components";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 import IdMethod from "./IdMethodChoose";
 import EmailInput from "./EmailInput";
@@ -9,7 +10,7 @@ import PhNumInput from "./PhNumInput";
 import PassswordMethod from "./PasswordMethod";
 
 export default function IdPasswordFind() {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
   const [findMethod, setFindMethod] = useState("email");
   const [findMethodPassword, setfindMethodPassword] = useState("emailPw");
   const [idPwSelect, setIdPwSelect] = useState("id"); // 초기값을 "id"로 설정
@@ -30,16 +31,48 @@ export default function IdPasswordFind() {
 
   const handleSelectForm = (type) => {
     setIdPwSelect(type);
+    reset();
   };
 
-  const handleSubmitEmailFind = (data) => {
-    alert(JSON.stringify(data));
-    console.log("id찾기");
+  const handleSubmitEmailFind = async (data) => {
+    const { name, email, tel } = data;
+    try {
+      const findType = findMethod === "email" ? 1 : 2;
+      const response = await axios.get(
+        "http://119.193.0.189:8080/findLoginId",
+        {
+          params: {
+            name,
+            findType,
+            findData: findMethod === "email" ? email : tel,
+          },
+        }
+      );
+      console.log(response.data);
+      reset();
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-  const handleSubmitPasswordFind = (data) => {
-    alert(JSON.stringify(data));
-    console.log("pw찾기");
+  const handleSubmitPasswordFind = async (data) => {
+    const { loginId, email, tel } = data;
+    try {
+      const findType = findMethod === "email" ? 1 : 2;
+      const response = await axios.get(
+        "http://119.193.0.189:8080/findLoginPassword",
+        {
+          params: {
+            loginId,
+            findType,
+            findData: findMethod === "email" ? email : tel,
+          },
+        }
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -92,7 +125,7 @@ export default function IdPasswordFind() {
             <FormInputWrap>
               <IDInput>
                 <span>ID</span>
-                <input type="text" placeholder="ID" {...register("id")} />
+                <input type="text" placeholder="ID" {...register("loginId")} />
               </IDInput>
               {/* 패스워드 찾기에서 찾는 방법 email인지 password인지에 따라 다른 내용 */}
               {findMethodPassword === "emailPw" ? (
