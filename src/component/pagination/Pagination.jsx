@@ -5,6 +5,11 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
   return (
     <>
       <S.PaginationWrap>
+        <S.PageNumber
+          onClick={() => onPageChange(currentPage - 1)}
+          disabled={currentPage === 1}>
+          {"<"}
+        </S.PageNumber>
         {Array.from({ length: totalPages }, (_, index) => index + 1).map(
           (page) => (
             <S.PageNumber
@@ -15,6 +20,11 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
             </S.PageNumber>
           )
         )}
+        <S.PageNumber
+          onClick={() => onPageChange(currentPage + 1)}
+          disabled={currentPage === totalPages}>
+          {">"}
+        </S.PageNumber>
       </S.PaginationWrap>
     </>
   );
