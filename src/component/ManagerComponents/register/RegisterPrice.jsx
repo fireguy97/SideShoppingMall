@@ -3,7 +3,7 @@ import * as S from "./RegisterStyles";
 const RegisterPrice = ({ formData, setFormData }) => {
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData({ ...formData, [name]: parseInt(value, 10) });
   };
   return (
     <>

@@ -2,11 +2,11 @@ import React from "react";
 import SearchItem from "./SearchItem";
 import * as S from "../item/ItemStyles";
 
-const SearchList = ({ searchResults }) => {
+const SearchList = () => {
   return (
     <>
       <S.ItemListDiv>
-        <SearchItem searchResults={searchResults} />
+        <SearchItem />
       </S.ItemListDiv>
     </>
   );

@@ -1,13 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import * as S from "./ItemDetailStyles";
-import { useParams } from "react-router-dom";
 
-const ItemDetailSizeInfo = ({ filteredItems }) => {
-  const { id } = useParams();
-  const findItem = filteredItems.find((item) => item.id === parseInt(id));
+const ItemDetailSizeInfo = ({ itemData }) => {
+  const findItem = itemData;
 
-  // const sizeInfoList = findItem.sizeInfo.split("\n"); //실제로는 줄넘김으로 해야함
-  const sizeInfoList = findItem.sizeInfo.split("  "); // sizeInfo를 공백을 기준으로 분리하여 배열로 만듦
+  const sizeInfoList = findItem.sizeInfo.split("\n");
+
   return (
     <div>
       <S.ItemDetailSizeInfo1>

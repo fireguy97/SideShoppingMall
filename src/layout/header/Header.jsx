@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import items from "../../db/items.json";
+
 import * as S from "./HeaderStyles";
 
 const Header = () => {
@@ -33,11 +33,8 @@ const Header = () => {
 
   const handleSearch = (e) => {
     e.preventDefault(); // 폼 제출 이벤트의 기본 동작을 막음
-    // 입력된 검색어를 소문자로 변환하여 검색어와 일치하는 아이템을 필터링하여 결과 배열 생성
-    const results = items.filter((item) => {
-      return item.name.toLowerCase().includes(searchKeyWord.toLowerCase());
-    });
-    navigate(`/search/${searchKeyWord}`, { state: { searchResults: results } });
+    const searchText = searchKeyWord.toLowerCase();
+    navigate(`/searchProduct?searchText=${encodeURIComponent(searchText)}`);
   };
   const moveHome = () => {
     navigate("/");
@@ -68,8 +65,7 @@ const Header = () => {
             <S.HeaderH3
               onClick={() => {
                 navigate("/");
-              }}
-            >
+              }}>
               KEKEMON
             </S.HeaderH3>
           </S.HeaderWarp1>
@@ -78,50 +74,43 @@ const Header = () => {
               <S.HeaderLi
                 onClick={() => {
                   navigate("/item/best");
-                }}
-              >
+                }}>
                 Best
               </S.HeaderLi>
               <S.HeaderLi
                 onClick={() => {
-                  navigate("/item/tops");
-                }}
-              >
+                  navigate("/productList/tops");
+                }}>
                 Tops
               </S.HeaderLi>
               <S.HeaderLi
                 onClick={() => {
-                  navigate("/item/pants");
-                }}
-              >
+                  navigate("/productList/pants");
+                }}>
                 Pants
               </S.HeaderLi>
               <S.HeaderLi
                 onClick={() => {
-                  navigate("/item/shoes");
-                }}
-              >
+                  navigate("/productList/shoes");
+                }}>
                 Shoes
               </S.HeaderLi>
               <S.HeaderLi
                 onClick={() => {
                   navigate("/cart");
-                }}
-              >
+                }}>
                 Cart
               </S.HeaderLi>
               <S.HeaderLi
                 onClick={() => {
                   navigate("/buy");
-                }}
-              >
+                }}>
                 Buy
               </S.HeaderLi>
               <S.HeaderLi
                 onClick={() => {
                   navigate("/order");
-                }}
-              >
+                }}>
                 Order
               </S.HeaderLi>
 
@@ -146,8 +135,7 @@ const Header = () => {
               <S.Dropdown>
                 <S.LoginArea
                   onClick={handleToggle}
-                  onBlur={() => setDropOpen(false)}
-                >
+                  onBlur={() => setDropOpen(false)}>
                   {username}
                 </S.LoginArea>
                 {dropOpen && (
