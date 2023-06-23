@@ -69,6 +69,11 @@ export default function SideMenu() {
           >
             쇼핑
           </li>
+          {/* <li className={`${selectedMenu === "product" ? "active" : ""}`}
+              onClick={()=> handleMenuClick("product")}
+          >
+            상품 관리
+          </li> */}
           <li
             className={`${selectedMenu === "setting" ? "active" : ""}`}
             onClick={() => handleMenuClick("setting")}
