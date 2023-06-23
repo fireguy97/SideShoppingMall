@@ -11,37 +11,40 @@ export default function UserManage() {
         const response = await axios.get(
           "http://119.193.0.189:8080/getUserList"
         );
-        setUsers(response.data);
+        setUsers(response.data.userList);
+        console.log(response.data.userList);
       } catch (error) {
         console.error(error);
       }
     }
     fetchUsers();
   }, []);
+
   return (
     <StyledUserManage>
       <MenuTitle>사용자 목록</MenuTitle>
       <SearchUser type="text" />
       <UserMain>
-        <UserList>
+        <UserListWrap>
           <Membercategory>
             <li>이름</li>
             <li>ID</li>
-            <li>회원 유형</li>
             <li>가입일</li>
+            <li>회원 유형</li>
             <li>누적 구매 금액</li>
             <li>작성한 글</li>
           </Membercategory>
-          {/* {users.map((user)=> {})} */}
-          <UserSubstance>
-            <li>username</li>
-            <li>userID</li>
-            <li>userType</li>
-            <li>userJoinDate</li>
-            <li>userAmount</li>
-            <li>userPost</li>
-          </UserSubstance>
-        </UserList>
+          {users.map((user, index) => (
+            <UserSubstance key={index}>
+              <li>{user.username}</li>
+              <li>{user.userID}</li>
+              <JoinDate>{user.userJoinDate}</JoinDate>
+              <li>{user.userType}</li>
+              <li>{user.userAmount}</li>
+              <li>{user.userPost}</li>
+            </UserSubstance>
+          ))}
+        </UserListWrap>
       </UserMain>
     </StyledUserManage>
   );
@@ -62,7 +65,7 @@ const SearchUser = styled.input`
   width: 788px;
   height: 25px;
 `;
-const UserList = styled.div``;
+const UserListWrap = styled.div``;
 const Membercategory = styled.ul`
   display: flex;
   padding: 0;
@@ -89,7 +92,7 @@ const UserSubstance = styled.ul`
   li {
     border: 1px solid #333;
     width: 131px;
-    height: 50px;
+    height: 60px;
     text-align: center;
     line-height: 3;
   }
@@ -99,4 +102,7 @@ const StyledUserManage = styled.div`
   .selectedMenu {
     height: 20px;
   }
+`;
+const JoinDate = styled.li`
+  overflow: hidden;
 `;

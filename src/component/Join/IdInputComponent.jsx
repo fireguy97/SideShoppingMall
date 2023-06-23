@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
 
@@ -31,18 +30,13 @@ export default function IdInput({
         <IdInputTag
           type="text"
           placeholder="ID"
-          //   value={joinId}
           {...register("loginId", { value: joinId })}
           onChange={(e) => setJoinId(e.target.value)}
           required
         />
-        <button
-          type="button"
-          onClick={handleCheckIdDuple}
-          className="doubleChk"
-        >
+        <DoubleChk type="button" onClick={handleCheckIdDuple}>
           중복확인
-        </button>
+        </DoubleChk>
       </IdChkWrap>
     </div>
   );
@@ -61,3 +55,4 @@ const IdChkWrap = styled.div`
 const IdInputTag = styled.input`
   width: 12.1875rem !important;
 `;
+const DoubleChk = styled.button``;

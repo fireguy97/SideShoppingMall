@@ -1,15 +1,15 @@
 import React, { useRef, useState } from "react";
 import Layout from "../layout/Layout";
-import RegisterImg from "../component/ManagerComponents/contents/register/RegisterImg";
-import RegisterName from "../component/ManagerComponents/contents/register/RegisterName";
-import RegisterPrice from "../component/ManagerComponents/contents/register/RegisterPrice";
-import RegisterSize from "../component/ManagerComponents/contents/register/RegisterSize";
-import RegisterSizeInfo from "../component/ManagerComponents/contents/register/RegisterSizeInfo";
-import RegisterContent from "../component/ManagerComponents/contents/register/RegisterContent";
-import RegisterStock from "../component/ManagerComponents/contents/register/RegisterStock";
-import RegisterBtn from "../component/ManagerComponents/contents/register/RegisterBtn";
-import * as S from "../component/ManagerComponents/contents/register/RegisterStyles";
-import RegisterCategory from "../component/ManagerComponents/contents/register/RegisterCategory";
+import RegisterImg from "../component/ManagerComponents//register/RegisterImg";
+import RegisterName from "../component/ManagerComponents//register/RegisterName";
+import RegisterPrice from "../component/ManagerComponents//register/RegisterPrice";
+import RegisterSize from "../component/ManagerComponents//register/RegisterSize";
+import RegisterSizeInfo from "../component/ManagerComponents//register/RegisterSizeInfo";
+import RegisterContent from "../component/ManagerComponents//register/RegisterContent";
+import RegisterStock from "../component/ManagerComponents//register/RegisterStock";
+import RegisterBtn from "../component/ManagerComponents//register/RegisterBtn";
+import * as S from "../component/ManagerComponents//register/RegisterStyles";
+import RegisterCategory from "../component/ManagerComponents//register/RegisterCategory";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -53,6 +53,7 @@ const Register = () => {
       <S.RegisterWrap>
         <S.RegisterForm onSubmit={handleSubmit}>
           <S.RegisterTitle> 상품등록 </S.RegisterTitle>
+
           <RegisterImg formData={formData} setFormData={setFormData} />
           <RegisterName formData={formData} setFormData={setFormData} />
           <RegisterPrice formData={formData} setFormData={setFormData} />
