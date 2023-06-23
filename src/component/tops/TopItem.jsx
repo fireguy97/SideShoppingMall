@@ -25,6 +25,7 @@ const TopItem = () => {
           `http://119.193.0.189:8080/productList?category=1&page=1&order=1`
         );
         setProductCounts(response.data.counts);
+        console.log(response.data);
       } catch (error) {
         console.log(error);
       }
