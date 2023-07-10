@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DashboardPage from "./Dashboard/DashboardPage";
 import UserManage from "./UserManage";
-import Register from "../../page/Register";
+import RegisterPage from "../../page/management/register/Register";
 import Setting from "./Settings/Setting";
 import Order from "./Order/Orders";
 
@@ -78,7 +78,9 @@ export default function SideMenu() {
       <div className="UserManage">
         {selectedMenu === "user" && <UserManage />}
       </div>
-      <ContentsPage>{selectedMenu === "content" && <Register />}</ContentsPage>
+      <ContentsPage>
+        {selectedMenu === "content" && <RegisterPage />}
+      </ContentsPage>
       <OrderPage>{selectedMenu === "payment" && <Order />}</OrderPage>
       <SettingsPage>{selectedMenu === "setting" && <Setting />}</SettingsPage>
     </StyledSideMenu>
