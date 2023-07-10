@@ -2,6 +2,7 @@ import { styled } from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
+import { API_URL } from "../../api/api";
 
 import UserInfoFix from "./UserInfo";
 import PostList from "./PostList";
@@ -18,7 +19,7 @@ export default function Profile() {
   const handleFixComplete = async () => {
     try {
       await axios.post(
-        `http://119.193.0.189:8080/updateUserInfo?id=${userInfo.userId}`,
+        `${API_URL}/updateUserInfo?id=${userInfo.userId}`,
         userInfo
       );
       console.log("User info updated successfully");

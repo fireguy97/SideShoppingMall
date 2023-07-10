@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
+import { API_URL } from "../../api/api";
 
 import IdInput from "./IdInputComponent";
 import PasswordInput from "./PasswordInputComponent";
@@ -47,10 +48,7 @@ export default function Join() {
         gender: data.gender,
         address: allAddress.address,
       };
-      const response = await axios.post(
-        "http://119.193.0.189:8080/join_loginId",
-        requestData
-      );
+      const response = await axios.post(`${API_URL}/join_loginId`, requestData);
       if (response.data.result) {
         console.log("회원가입이 완료되었습니다.");
         navigate("/Login");

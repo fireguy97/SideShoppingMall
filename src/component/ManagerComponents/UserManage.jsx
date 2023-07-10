@@ -1,6 +1,7 @@
 import { styled } from "styled-components";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { API_URL } from "../../api/api";
 
 export default function UserManage() {
   const [users, setUsers] = useState([]);
@@ -8,9 +9,7 @@ export default function UserManage() {
   useEffect(() => {
     async function fetchUsers() {
       try {
-        const response = await axios.get(
-          "http://119.193.0.189:8080/getUserList"
-        );
+        const response = await axios.get(`${API_URL}/getUserList`);
         setUsers(response.data.userList);
         console.log(response.data.userList);
       } catch (error) {
@@ -22,9 +21,9 @@ export default function UserManage() {
 
   return (
     <StyledUserManage>
-      <MenuTitle>사용자 목록</MenuTitle>
-      <SearchUser type="text" />
       <UserMain>
+        <MenuTitle>사용자 목록</MenuTitle>
+        <SearchUser type="text" />
         <UserListWrap>
           <Membercategory>
             <li>이름</li>
@@ -54,6 +53,7 @@ const UserMain = styled.div`
   margin: 0 auto;
   background-color: #fff;
   display: flex;
+  flex-direction: column;
 `;
 const MenuTitle = styled.h3`
   text-align: center;
@@ -98,7 +98,6 @@ const UserSubstance = styled.ul`
   }
 `;
 const StyledUserManage = styled.div`
-  margin-left: 100px;
   .selectedMenu {
     height: 20px;
   }

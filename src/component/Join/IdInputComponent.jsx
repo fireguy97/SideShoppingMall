@@ -1,5 +1,6 @@
 import axios from "axios";
 import styled from "styled-components";
+import { API_URL } from "../../api/api";
 
 export default function IdInput({
   onCheckIdDuple,
@@ -9,9 +10,7 @@ export default function IdInput({
 }) {
   const handleCheckIdDuple = async () => {
     try {
-      const response = await axios.get(
-        `http://119.193.0.189:8080/checkid?loginId=${joinId}`
-      );
+      const response = await axios.get(`${API_URL}/checkid?loginId=${joinId}`);
 
       if (response.data.result) {
         alert("아이디가 사용 가능합니다.");

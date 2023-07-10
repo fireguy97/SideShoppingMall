@@ -1,12 +1,13 @@
 import KakaoLogin from "react-kakao-login";
 import { styled } from "styled-components";
+import { API_URL } from "../../api/api";
 import axios from "axios";
 
 export default function LoginKakao() {
   const handleLogin = async (response) => {
     try {
       const kakaoToken = response.response.access_token;
-      const result = await axios.post("/api/login", {
+      const result = await axios.post(`${API_URL}`, {
         token: kakaoToken,
       });
       console.log(result.data);

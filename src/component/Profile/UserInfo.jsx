@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect, useRef } from "react";
 import { setUserInfo } from "../../Redux/userInfoSlice";
 import DaumPostcode from "react-daum-postcode";
+import { API_URL } from "../../api/api";
 
 export default function UserInfoFix() {
   const [detailAddress, setDetailAddress] = useState("");
@@ -26,7 +27,7 @@ export default function UserInfoFix() {
       const fetchUserInfo = async () => {
         try {
           const response = await axios.get(
-            `http://119.193.0.189:8080/getUserInfo?id=${userInfo.userId}`
+            `${API_URL}/getUserInfo?id=${userInfo.userId}`
           );
           const fetchedUserInfo = response.data;
           console.log(fetchedUserInfo);

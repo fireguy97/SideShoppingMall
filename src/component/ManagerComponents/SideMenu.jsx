@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import DashboardPage from "./Dashboard/DashboardPage";
 import UserManage from "./UserManage";
 import Register from "../../page/Register";
+import Setting from "./Settings/Setting";
+import Order from "./Order/Orders";
 
 export default function SideMenu() {
   const navigate = useNavigate();
@@ -24,15 +26,13 @@ export default function SideMenu() {
     } else if (menu === "payment") {
       setMenuContent("결제");
     } else if (menu === "shopping") {
-      setMenuContent("쇼핑");
-    } else if (menu === "setting") {
       setMenuContent("환경설정");
     }
   };
   return (
     <StyledSideMenu>
-      <div className="sideMneuWrap">
-        <ul className="sidemenuItemWrap">
+      <SideMneuWrap>
+        <ul className="SidemenuItemWrap">
           <li
             className={`home ${selectedMenu === "home" ? "active" : ""}`}
             onClick={movehome}
@@ -63,17 +63,7 @@ export default function SideMenu() {
           >
             결제
           </li>
-          <li
-            className={`${selectedMenu === "shopping" ? "active" : ""}`}
-            onClick={() => handleMenuClick("shopping")}
-          >
-            쇼핑
-          </li>
-          {/* <li className={`${selectedMenu === "product" ? "active" : ""}`}
-              onClick={()=> handleMenuClick("product")}
-          >
-            상품 관리
-          </li> */}
+
           <li
             className={`${selectedMenu === "setting" ? "active" : ""}`}
             onClick={() => handleMenuClick("setting")}
@@ -81,39 +71,32 @@ export default function SideMenu() {
             환경설정
           </li>
         </ul>
-      </div>
-      <div className="DashboardPage">
+      </SideMneuWrap>
+      <DashboardPageWrap>
         {selectedMenu === "dashboard" && <DashboardPage />}
-      </div>
+      </DashboardPageWrap>
       <div className="UserManage">
         {selectedMenu === "user" && <UserManage />}
       </div>
       <ContentsPage>{selectedMenu === "content" && <Register />}</ContentsPage>
+      <OrderPage>{selectedMenu === "payment" && <Order />}</OrderPage>
+      <SettingsPage>{selectedMenu === "setting" && <Setting />}</SettingsPage>
     </StyledSideMenu>
   );
 }
+const DashboardPageWrap = styled.div`
+  width: 1060px;
+  margin: 0 auto;
+  height: 100%;
+`;
 
-const StyledSideMenu = styled.div`
-  margin-top: 60px;
-  display: flex;
-  position: sticky;
-  .home {
-    padding-top: 10px;
-    line-height: 1;
-  }
-  .sideMneuWrap {
-    /* margin-top: 60px; */
-    float: left;
-    width: 200px;
-    height: 100%;
-    margin-right: 20px;
-  }
-  ul li {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  .sideMneuWrap > ul {
+const SideMneuWrap = styled.div`
+  position: fixed;
+  float: left;
+  width: 200px;
+  height: 100%;
+  margin-right: 20px;
+  ul {
     margin: 0;
     padding: 0;
     display: flex;
@@ -122,17 +105,38 @@ const StyledSideMenu = styled.div`
     line-height: 2;
     gap: 3px;
   }
-  .sidemenuItemWrap > li {
+  li {
     border-bottom: 1px solid #333;
     background-color: #333;
     height: 30px;
     cursor: pointer;
     color: #fff;
   }
+`;
+
+const StyledSideMenu = styled.div`
+  margin-top: 60px;
+
+  .home {
+    padding-top: 10px;
+    line-height: 1;
+  }
+  ul li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
   .DashboardPage {
   }
 `;
 
 const ContentsPage = styled.div`
   background-color: #fff;
+  display: flex;
+  justify-content: center;
 `;
+
+const SettingsPage = styled.div``;
+
+const OrderPage = styled.div``;

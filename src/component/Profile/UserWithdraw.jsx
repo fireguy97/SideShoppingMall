@@ -2,6 +2,7 @@ import { styled } from "styled-components";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { API_URL } from "../../api/api";
 
 export default function Withdraw() {
   const [userId, setUserId] = useState("");
@@ -28,9 +29,7 @@ export default function Withdraw() {
   };
   const handleWithdrawal = async () => {
     try {
-      const response = await axios.post(
-        `http://119.193.0.189:8080/withdraw?id=${userId}`
-      );
+      const response = await axios.post(`${API_URL}/withdraw?id=${userId}`);
       if (response.data.result) {
         handleLogout();
         console.log("회원탈퇴가 완료되었습니다.");

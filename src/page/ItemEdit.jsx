@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import Layout from "../layout/Layout";
-import RegisterName from "../component/register/RegisterName";
-import RegisterPrice from "../component/register/RegisterPrice";
-import RegisterSize from "../component/register/RegisterSize";
-import RegisterSizeInfo from "../component/register/RegisterSizeInfo";
-import RegisterContent from "../component/register/RegisterContent";
-import RegisterStock from "../component/register/RegisterStock";
-import RegisterBtn from "../component/register/RegisterBtn";
-import * as S from "../component/register/RegisterStyles";
-import RegisterCategory from "../component/register/RegisterCategory";
+import RegisterName from "../component/ManagerComponents/register/RegisterName";
+import RegisterPrice from "../component/ManagerComponents/register/RegisterPrice";
+import RegisterSize from "../component/ManagerComponents/register/RegisterSize";
+import RegisterSizeInfo from "../component/ManagerComponents/register/RegisterSizeInfo";
+import RegisterContent from "../component/ManagerComponents/register/RegisterContent";
+import RegisterStock from "../component/ManagerComponents/register/RegisterStock";
+import RegisterBtn from "../component/ManagerComponents/register/RegisterBtn";
+import * as S from "../component/ManagerComponents/register/RegisterStyles";
+import RegisterCategory from "../component/ManagerComponents/register/RegisterCategory";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 import EditImg from "../component/edit/EditImg";
@@ -38,15 +38,20 @@ const ItemEdit = () => {
     try {
       const formattedData = {
         ...formData,
-        images: formData.images.map((image) => {
-          if (image.seq) {
-            // 삭제하는 이미지인 경우
-            return { id: image.id, seq: image.seq };
-          } else {
-            // 추가하는 이미지인 경우
-            return { id: image.id, image: image.image };
-          }
-        }),
+        images: formData.images
+          .map((image) => {
+            if (image.seq && image.isDeleted) {
+              // 삭제하는 이미지인 경우
+              return { id: image.id, seq: image.seq };
+            } else if (!image.seq && !image.isDeleted) {
+              // 추가하는 이미지인 경우
+              return { id: image.id, image: image.image };
+            } else {
+              // 삭제되지 않은 기존 이미지인 경우
+              return null;
+            }
+          })
+          .filter((image) => image !== null),
       };
 
       // 상품 수정을 위한 POST 요청을 보냄

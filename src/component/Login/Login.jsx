@@ -6,6 +6,7 @@ import styled from "styled-components";
 import React from "react";
 import LoginKakao from "./kakaoLoginComponent";
 import axios from "axios";
+import { API_URL } from "../../api/api";
 
 import LoginIsMember from "./LoginIsMember";
 import LoginInput from "./LoginInput";
@@ -38,7 +39,7 @@ export default function Login() {
       requestData.append("password", data.password);
 
       const response = await axios.post(
-        "http://119.193.0.189:8080/login",
+        `${API_URL}/login`,
         requestData.toString()
       );
       const { token } = response.data;

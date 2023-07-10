@@ -9,13 +9,14 @@ export const RegisterTitle = styled.div`
 `;
 
 export const RegisterWrap = styled.div`
-  width: 300px;
+  /* width: 300px; */
   padding: 3.125rem;
   max-width: 50rem;
   background-color: aliceblue;
   border-radius: 0.625rem;
   display: flex;
   justify-content: center;
+  margin: 0 auto;
   align-items: center;
   height: 100vh;
   box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.1);
@@ -33,6 +34,8 @@ export const RegisterLabel = styled.label`
 export const RegisterInputFile = styled.input`
   display: block;
   margin-top: 0.3125rem;
+  position: sticky;
+  margin-bottom: 5px;
 `;
 
 export const RegisterTextarea = styled.textarea`
@@ -55,13 +58,13 @@ export const RegisterButton = styled.button`
 `;
 
 export const RegisterImgDiv1 = styled.div`
-  whitespace: nowrap;
+  white-space: wrap;
 `;
 
 export const RegisterImgDiv2 = styled.div`
   display: inline-block;
-  marginright: 0.625rem;
-  marginbottom: 0.625rem;
+  margin-right: 0.625rem;
+  margin-bottom: 0.625rem;
 `;
 
 export const RegisterImg = styled.img`
@@ -70,7 +73,9 @@ export const RegisterImg = styled.img`
 `;
 
 export const RegisterImgRemoveButton = styled.div`
+  text-align: center;
+  background-color: #333;
   cursor: pointer;
-  color: #333;
+  color: #fff;
   font-size: 0.9375rem;
 `;

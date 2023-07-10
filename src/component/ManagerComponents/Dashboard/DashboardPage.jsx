@@ -2,25 +2,32 @@ import { styled } from "styled-components";
 
 import OrderCount from "./OrderCnt";
 import MonthSales from "./MonthSale";
-import TodatVisitCnt from "./TodayVisit";
+import OrderState from "./OrderState";
 
 export default function DashboardPage() {
   return (
     <ProductRegistWrap>
-      <OrderCount />
+      <DashboarHeader>
+        <OrderCount />
+        <OrderState />
+      </DashboarHeader>
       <MonthSales />
-      <TodatVisitCnt />
     </ProductRegistWrap>
   );
 }
 
 const ProductRegistWrap = styled.div`
-  width: 800pxpx;
-  margin: 0 auto;
-  justify-content: center;
+  /* justify-content: center; */
   position: relative;
   display: flex;
   margin-left: 100px;
   gap: 20px;
   margin-top: 60px;
+  flex-direction: column;
+`;
+const DashboarHeader = styled.div`
+  position: relative;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
 `;

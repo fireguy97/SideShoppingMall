@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { API_URL } from "../../api/api";
 
 import IdMethod from "./IdMethodChoose";
 import EmailInput from "./EmailInput";
@@ -38,16 +39,13 @@ export default function IdPasswordFind() {
     const { name, email, tel } = data;
     try {
       const findType = findMethod === "email" ? 1 : 2;
-      const response = await axios.get(
-        "http://119.193.0.189:8080/findLoginId",
-        {
-          params: {
-            name,
-            findType,
-            findData: findMethod === "email" ? email : tel,
-          },
-        }
-      );
+      const response = await axios.get(`${API_URL}/findLoginId`, {
+        params: {
+          name,
+          findType,
+          findData: findMethod === "email" ? email : tel,
+        },
+      });
       console.log(response.data);
       reset();
     } catch (error) {
@@ -59,16 +57,13 @@ export default function IdPasswordFind() {
     const { loginId, email, tel } = data;
     try {
       const findType = findMethod === "email" ? 1 : 2;
-      const response = await axios.get(
-        "http://119.193.0.189:8080/findLoginPassword",
-        {
-          params: {
-            loginId,
-            findType,
-            findData: findMethod === "email" ? email : tel,
-          },
-        }
-      );
+      const response = await axios.get(`${API_URL}/findLoginPassword`, {
+        params: {
+          loginId,
+          findType,
+          findData: findMethod === "email" ? email : tel,
+        },
+      });
       console.log(response.data);
     } catch (error) {
       console.error(error);
