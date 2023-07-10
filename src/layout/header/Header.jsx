@@ -6,13 +6,19 @@ import * as S from "./HeaderStyles";
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState("");
+  const [userId, setUserId] = useState("");
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     const storedName = localStorage.getItem("name");
+    const storedId = localStorage.getItem("loginId");
+
     if (token && storedName) {
       setUsername(storedName);
+      setUserId(storedId);
       setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
     }
   }, []);
 
@@ -30,14 +36,24 @@ const Header = () => {
     const searchText = searchKeyWord.toLowerCase();
     navigate(`/searchProduct?searchText=${encodeURIComponent(searchText)}`);
   };
-
+  const moveHome = () => {
+    navigate("/");
+  };
   const moveLogin = () => {
     navigate("/Login");
+  };
+  const moveProfile = () => {
+    navigate("/Profile");
+  };
+  const moveManager = () => {
+    navigate("/managerPage");
   };
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("name");
+    localStorage.removeItem("loginId");
     setIsLoggedIn(false);
+    moveHome();
   };
 
   return (
@@ -124,17 +140,26 @@ const Header = () => {
                 </S.LoginArea>
                 {dropOpen && (
                   <S.DropdownMenu>
+                    <S.DropdownMenuLi onClick={moveProfile}>
+                      프로필
+                    </S.DropdownMenuLi>
+
+                    {userId === "admin_crp" && (
+                      <S.DropdownMenuLi onClick={moveManager}>
+                        관리자
+                      </S.DropdownMenuLi>
+                    )}
+                    <S.DropdownMenuLi>좋아요</S.DropdownMenuLi>
                     <S.DropdownMenuLi onClick={handleLogout}>
                       Logout
                     </S.DropdownMenuLi>
-                    <S.DropdownMenuLi>좋아요</S.DropdownMenuLi>
                   </S.DropdownMenu>
                 )}
               </S.Dropdown>
             ) : (
               <S.LoginArea onClick={moveLogin}>Login</S.LoginArea>
             )}
-            <div className="header_div2"></div>
+            <div></div>
             <S.Help>Help</S.Help>
           </S.HeaderLogin>
         </S.HeaderWarp>

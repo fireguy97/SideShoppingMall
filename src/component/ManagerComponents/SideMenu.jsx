@@ -1,8 +1,9 @@
 import { styled } from "styled-components";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import DashboardPage from "./DashboardPage";
+import DashboardPage from "./Dashboard/DashboardPage";
 import UserManage from "./UserManage";
+import Register from "../../page/Register";
 
 export default function SideMenu() {
   const navigate = useNavigate();
@@ -68,6 +69,11 @@ export default function SideMenu() {
           >
             쇼핑
           </li>
+          {/* <li className={`${selectedMenu === "product" ? "active" : ""}`}
+              onClick={()=> handleMenuClick("product")}
+          >
+            상품 관리
+          </li> */}
           <li
             className={`${selectedMenu === "setting" ? "active" : ""}`}
             onClick={() => handleMenuClick("setting")}
@@ -82,11 +88,15 @@ export default function SideMenu() {
       <div className="UserManage">
         {selectedMenu === "user" && <UserManage />}
       </div>
+      <ContentsPage>{selectedMenu === "content" && <Register />}</ContentsPage>
     </StyledSideMenu>
   );
 }
 
 const StyledSideMenu = styled.div`
+  margin-top: 60px;
+  display: flex;
+  position: sticky;
   .home {
     padding-top: 10px;
     line-height: 1;
@@ -121,4 +131,8 @@ const StyledSideMenu = styled.div`
   }
   .DashboardPage {
   }
+`;
+
+const ContentsPage = styled.div`
+  background-color: #fff;
 `;

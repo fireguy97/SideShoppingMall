@@ -1,85 +1,108 @@
 import { styled } from "styled-components";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 export default function UserManage() {
-  const users = useSelector((state) => state.userList.users);
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    async function fetchUsers() {
+      try {
+        const response = await axios.get(
+          "http://119.193.0.189:8080/getUserList"
+        );
+        setUsers(response.data.userList);
+        console.log(response.data.userList);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    fetchUsers();
+  }, []);
+
   return (
     <StyledUserManage>
-      <div className="MenuTitle">사용자 목록</div>
-      <div className="main">
-        <input className="searchUser" type="text" />
-        <div className="userList">
-          <ul className="Membercategory">
+      <MenuTitle>사용자 목록</MenuTitle>
+      <SearchUser type="text" />
+      <UserMain>
+        <UserListWrap>
+          <Membercategory>
             <li>이름</li>
             <li>ID</li>
-            <li>회원 유형</li>
             <li>가입일</li>
+            <li>회원 유형</li>
             <li>누적 구매 금액</li>
             <li>작성한 글</li>
-          </ul>
-          {users.map((user) => (
-            <ul className="userSubstance" key={user.userID}>
+          </Membercategory>
+          {users.map((user, index) => (
+            <UserSubstance key={index}>
               <li>{user.username}</li>
               <li>{user.userID}</li>
+              <JoinDate>{user.userJoinDate}</JoinDate>
               <li>{user.userType}</li>
-              <li>{user.userJoinDate}</li>
               <li>{user.userAmount}</li>
               <li>{user.userPost}</li>
-            </ul>
+            </UserSubstance>
           ))}
-        </div>
-      </div>
+        </UserListWrap>
+      </UserMain>
     </StyledUserManage>
   );
 }
-
+const UserMain = styled.div`
+  width: 800px;
+  margin: 0 auto;
+  background-color: #fff;
+  display: flex;
+`;
+const MenuTitle = styled.h3`
+  text-align: center;
+  font-weight: 600;
+  margin-top: 10px;
+`;
+const SearchUser = styled.input`
+  margin-top: 20px;
+  width: 788px;
+  height: 25px;
+`;
+const UserListWrap = styled.div``;
+const Membercategory = styled.ul`
+  display: flex;
+  padding: 0;
+  margin: 0;
+  margin-top: 20px;
+  max-width: 800px;
+  flex-wrap: wrap;
+  gap: 0;
+  li {
+    border: 1px solid #333;
+    width: 131px;
+    height: 50px;
+    text-align: center;
+    line-height: 3;
+  }
+`;
+const UserSubstance = styled.ul`
+  display: flex;
+  padding: 0;
+  margin: 0;
+  max-width: 800px;
+  flex-wrap: wrap;
+  gap: 0;
+  li {
+    border: 1px solid #333;
+    width: 131px;
+    height: 60px;
+    text-align: center;
+    line-height: 3;
+  }
+`;
 const StyledUserManage = styled.div`
-  margin-top: 60px;
+  margin-left: 100px;
   .selectedMenu {
     height: 20px;
   }
-  .main {
-    width: 800px;
-    margin: 0 auto;
-    background-color: #fff;
-  }
-  .searchUser {
-    margin-top: 20px;
-    width: 788px;
-    height: 25px;
-    display: flex;
-    flex-direction: column;
-  }
-  .Membercategory {
-    display: flex;
-    padding: 0;
-    margin: 0;
-    margin-top: 20px;
-    max-width: 800px;
-    flex-wrap: wrap;
-    gap: 0;
-  }
-  .Membercategory > li {
-    border: 1px solid #333;
-    width: 131px;
-    height: 50px;
-    text-align: center;
-    line-height: 3;
-  }
-  .userSubstance {
-    display: flex;
-    padding: 0;
-    margin: 0;
-    max-width: 800px;
-    flex-wrap: wrap;
-    gap: 0;
-  }
-  .userSubstance > li {
-    border: 1px solid #333;
-    width: 131px;
-    height: 50px;
-    text-align: center;
-    line-height: 3;
-  }
+`;
+const JoinDate = styled.li`
+  overflow: hidden;
 `;

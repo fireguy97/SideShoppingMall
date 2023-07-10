@@ -2,11 +2,19 @@ import { styled } from "styled-components";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
+import IdMethod from "./IdMethodChoose";
+import EmailInput from "./EmailInput";
+import PhNumInput from "./PhNumInput";
+import PassswordMethod from "./PasswordMethod";
 
 export default function IdPasswordFind() {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
   const [findMethod, setFindMethod] = useState("email");
-  const [findMethodPassword, setfindMethodPassword] = useState("emailP");
+  const [findMethodPassword, setfindMethodPassword] = useState("emailPw");
+  const [idPwSelect, setIdPwSelect] = useState("id"); // 초기값을 "id"로 설정
+
   const navigate = useNavigate();
 
   const moveLogin = () => {
@@ -16,215 +24,200 @@ export default function IdPasswordFind() {
   const handleFindMethod = (event) => {
     setFindMethod(event.target.value);
   };
+
   const handleFindMethodPassword = (event) => {
     setfindMethodPassword(event.target.value);
   };
+
+  const handleSelectForm = (type) => {
+    setIdPwSelect(type);
+    reset();
+  };
+
+  const handleSubmitEmailFind = async (data) => {
+    const { name, email, tel } = data;
+    try {
+      const findType = findMethod === "email" ? 1 : 2;
+      const response = await axios.get(
+        "http://119.193.0.189:8080/findLoginId",
+        {
+          params: {
+            name,
+            findType,
+            findData: findMethod === "email" ? email : tel,
+          },
+        }
+      );
+      console.log(response.data);
+      reset();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleSubmitPasswordFind = async (data) => {
+    const { loginId, email, tel } = data;
+    try {
+      const findType = findMethod === "email" ? 1 : 2;
+      const response = await axios.get(
+        "http://119.193.0.189:8080/findLoginPassword",
+        {
+          params: {
+            loginId,
+            findType,
+            findData: findMethod === "email" ? email : tel,
+          },
+        }
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <StyledIdPasswordFind>
-      <button className="exitBtn" onClick={moveLogin}>
-        &times;
-      </button>
+      <SelectWrap>
+        <SelectBtn onClick={() => handleSelectForm("id")}>id</SelectBtn>{" "}
+        {/* 클릭 시 ID 폼 선택 */}
+        <SelectBtn onClick={() => handleSelectForm("pw")}>pw</SelectBtn>{" "}
+        {/* 클릭 시 비밀번호 폼 선택 */}
+      </SelectWrap>
+      <ExitBtn onClick={moveLogin}>&times;</ExitBtn>
       {/* 아이디 찾기 */}
-      <div className="FindWrap">
-        <form
-          className="EmailFindWrap"
-          onSubmit={handleSubmit((data) => alert(JSON.stringify(data)))}
-        >
-          <h3 className="IdTitle">ID FIND</h3>
-          <div className="ChooseFindMethod">
-            <input
-              type="radio"
-              name="findMethod"
-              id="email"
-              value="email"
-              checked={findMethod === "email"}
-              onChange={handleFindMethod}
+      <FindWrap>
+        {idPwSelect === "id" ? ( // idPwSelect 상태에 따라 ID 폼 또는 비밀번호 폼 렌더링
+          <EmailFindWrap onSubmit={handleSubmit(handleSubmitEmailFind)}>
+            <IdTitle>ID FIND</IdTitle>
+            {/* 아이디 찾는 방법 선택 */}
+            <IdMethod
+              findMethod={findMethod}
+              handleFindMethod={handleFindMethod}
             />
-            <label htmlFor="email">Email</label>
-            <input
-              type="radio"
-              name="findMethod"
-              id="phoneNumber"
-              value="phoneNumber"
-              checked={findMethod === "phoneNumber"}
-              onChange={handleFindMethod}
-            />
-            <label htmlFor="phoneNumber">Phone Number</label>
-          </div>
 
-          <div className="formInputWrap">
-            <div className="nameInput">
-              <span>Name</span>
-              <input type="text" placeholder="Name" {...register("name")} />
-            </div>
+            <FormInputWrap>
+              <NameInput>
+                <span>Name</span>
+                <input type="text" placeholder="Name" {...register("name")} />
+              </NameInput>
+              {/* 방법이 email 일 때와 아닐 때 */}
+              {findMethod === "email" ? (
+                <EmailInput register={register} />
+              ) : (
+                <PhNumInput register={register} />
+              )}
+            </FormInputWrap>
+            {/* 방법에 따른 submit 버튼 내용 */}
             {findMethod === "email" ? (
-              <div className="emailInput">
-                <span>Email</span>
-                <input
-                  name="email"
-                  type="email"
-                  placeholder="email"
-                  {...register("email")}
-                />
-              </div>
+              <IdFindSub>Email</IdFindSub>
             ) : (
-              <div className="phoneNumberInput">
-                <span>PhoneNumber</span>
-                <input
-                  type="tel"
-                  name="phoneNumber"
-                  placeholder="PhoneNumber"
-                  {...register("tel")}
-                />
-              </div>
+              <IdFindSub>Phone Number</IdFindSub>
             )}
-          </div>
+          </EmailFindWrap>
+        ) : (
+          <PasswordFindWrap onSubmit={handleSubmit(handleSubmitPasswordFind)}>
+            <PasswordTitle>PASSWORD FIND</PasswordTitle>
+            {/* 패스워드 찾기에서 찾는 방법 email인지 password인지 확인 */}
+            <PassswordMethod
+              findMethodPassword={findMethodPassword}
+              handleFindMethodPassword={handleFindMethodPassword}
+            />
+            <FormInputWrap>
+              <IDInput>
+                <span>ID</span>
+                <input type="text" placeholder="ID" {...register("loginId")} />
+              </IDInput>
+              {/* 패스워드 찾기에서 찾는 방법 email인지 password인지에 따라 다른 내용 */}
+              {findMethodPassword === "emailPw" ? (
+                <EmailInput register={register} />
+              ) : (
+                <PhNumInput register={register} />
+              )}
+            </FormInputWrap>
 
-          {findMethod === "email" ? (
-            <button className="idFindSub">Email</button>
-          ) : (
-            <button className="idFindSub">Phone Number</button>
-          )}
-        </form>
-        {/* 비밀번호 찾기 */}
-        <form
-          className="PasswordFindWrap"
-          onSubmit={handleSubmit((data) => alert(JSON.stringify(data)))}
-        >
-          <h3 className="PasswordTitle">PASSWORD FIND</h3>
-          <div className="ChooseFindMethod">
-            <input
-              type="radio"
-              name="findMethod"
-              id="email"
-              value="emailP"
-              checked={findMethodPassword === "emailP"}
-              onChange={handleFindMethodPassword}
-            />
-            <label htmlFor="emailP">Email</label>
-            <input
-              type="radio"
-              name="findMethod"
-              id="phoneNumber"
-              value="phNum"
-              checked={findMethodPassword === "phNum"}
-              onChange={handleFindMethodPassword}
-            />
-            <label htmlFor="phNum">Phone Number</label>
-          </div>
-          <div className="formInputWrap">
-            <div className="IDInput">
-              <span>ID</span>
-              <input type="text" placeholder="ID" {...register("id")} />
-            </div>
-            {findMethodPassword === "emailP" ? (
-              <div className="emailInput">
-                <span>Email</span>
-                <input
-                  name="email"
-                  type="email"
-                  placeholder="email"
-                  {...register("email")}
-                />
-              </div>
+            {findMethodPassword === "emailPw" ? (
+              <IdFindSub>Email</IdFindSub>
             ) : (
-              <div className="phoneNumberInput">
-                <span>PhoneNumber</span>
-                <input
-                  type="tel"
-                  name="phoneNumber"
-                  placeholder="PhoneNumber"
-                  {...register("tel")}
-                />
-              </div>
+              <IdFindSub>Phone Number</IdFindSub>
             )}
-          </div>
-
-          {findMethodPassword === "emailP" ? (
-            <button className="idFindSub">Email</button>
-          ) : (
-            <button className="idFindSub">Phone Number</button>
-          )}
-        </form>
-      </div>
+          </PasswordFindWrap>
+        )}
+      </FindWrap>
     </StyledIdPasswordFind>
   );
 }
+const SelectWrap = styled.div`
+  top: 11.875rem;
+  display: flex;
+  justify-content: center;
+  justify-content: space-between;
+  position: absolute;
+`;
+const SelectBtn = styled.button`
+  border: 0.0625rem solid #fff;
+  width: 9.375rem;
+  height: 1.875rem;
+  background-color: #333;
+  color: #fff;
+  cursor: pointer;
+`;
 
+const ExitBtn = styled.button`
+  font-size: 2.8125rem;
+  position: absolute;
+  margin-left: 31.25rem;
+  top: 5.3125rem;
+  background-color: #fff;
+  border: 0;
+  cursor: pointer;
+`;
+const FindWrap = styled.div``;
+
+const EmailFindWrap = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+`;
+
+const IdTitle = styled.h3`
+  text-align: center;
+  /* margin-top: 8.75rem; */
+`;
+
+const PasswordTitle = styled.h3`
+  text-align: center;
+  margin-bottom: 0.25rem;
+  position: relative;
+  top: -0.5rem;
+`;
+const FormInputWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-top: 0.625rem;
+  margin-bottom: 0.625rem;
+`;
+const PasswordFindWrap = styled.form`
+  display: flex;
+  flex-direction: column;
+`;
+const NameInput = styled.div`
+  display: flex;
+  gap: 1.25rem;
+  span {
+    padding-right: 3.8125rem;
+  }
+`;
+const IDInput = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
 const StyledIdPasswordFind = styled.div`
+  align-items: center;
   display: flex;
   justify-content: center;
   height: 39.0625rem;
-  .exitBtn {
-    font-size: 2.8125rem;
-    position: absolute;
-    margin-left: 31.25rem;
-    top: 5.3125rem;
-    background-color: #fff;
-    border: 0;
-    cursor: pointer;
-  }
 
-  .EmailFindWrap {
-    display: flex;
-    flex-direction: column;
-    gap: 0.625rem;
-  }
-  .IdTitle {
-    text-align: center;
-    margin-top: 8.75rem;
-  }
-  .PasswordTitle {
-    text-align: center;
-    margin-top: 3.125rem;
-  }
-  .ChooseFindMethod {
-    display: flex;
-    justify-content: center;
-  }
-  .ChooseFindMethod > label {
-    margin-right: 0.3125rem;
-  }
-  .ChooseFindMethod > input {
-    margin-left: 1.125rem;
-  }
-  .formInputWrap {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-    margin-top: 0.625rem;
-    margin-bottom: 0.625rem;
-  }
-  .nameInput {
-    display: flex;
-    gap: 1.25rem;
-  }
-  .nameInput > span {
-    padding-right: 3.8125rem;
-  }
-  .emailInput {
-    display: flex;
-    justify-content: space-between;
-  }
-  .phoneNumberInput {
-    display: flex;
-    gap: 1.25rem;
-    justify-content: center;
-    justify-content: space-between;
-  }
-  .idFindSub {
-    background-color: #333;
-    color: #fff;
-    height: 2.5rem;
-  }
-  .PasswordFindWrap {
-    display: flex;
-    flex-direction: column;
-  }
-  .IDInput {
-    display: flex;
-    justify-content: space-between;
-  }
   @media (max-width: 30rem) {
     .exitBtn {
       margin-left: 0.625rem;
@@ -262,4 +255,11 @@ const StyledIdPasswordFind = styled.div`
       width: 100%;
     }
   }
+`;
+
+const IdFindSub = styled.button`
+  background-color: #333;
+  color: #fff;
+  height: 2.5rem;
+  cursor: pointer;
 `;

@@ -60,6 +60,8 @@ const Register = () => {
     <Layout>
       <S.RegisterWrap>
         <S.RegisterForm onSubmit={handleSubmit}>
+          <S.RegisterTitle> 상품등록 </S.RegisterTitle>
+
           <RegisterImg formData={formData} setFormData={setFormData} />
           <RegisterName formData={formData} setFormData={setFormData} />
           <RegisterPrice formData={formData} setFormData={setFormData} />
