@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DashboardPage from "./Dashboard/DashboardPage";
 import UserManage from "./UserManage";
-import Register from "../../page/Register";
+import RegisterPage from "../../page/management/register/Register";
 
 export default function SideMenu() {
   const navigate = useNavigate();
@@ -35,38 +35,32 @@ export default function SideMenu() {
         <ul className="sidemenuItemWrap">
           <li
             className={`home ${selectedMenu === "home" ? "active" : ""}`}
-            onClick={movehome}
-          >
+            onClick={movehome}>
             kekemon
           </li>
           <li
             className={`${selectedMenu === "dashboard" ? "active" : ""}`}
-            onClick={() => handleMenuClick("dashboard")}
-          >
+            onClick={() => handleMenuClick("dashboard")}>
             대시보드
           </li>
           <li
             className={`${selectedMenu === "user" ? "active" : ""}`}
-            onClick={() => handleMenuClick("user")}
-          >
+            onClick={() => handleMenuClick("user")}>
             사용자 관리
           </li>
           <li
             className={`${selectedMenu === "content" ? "active" : ""}`}
-            onClick={() => handleMenuClick("content")}
-          >
+            onClick={() => handleMenuClick("content")}>
             컨텐츠 관리
           </li>
           <li
             className={`${selectedMenu === "payment" ? "active" : ""}`}
-            onClick={() => handleMenuClick("payment")}
-          >
+            onClick={() => handleMenuClick("payment")}>
             결제
           </li>
           <li
             className={`${selectedMenu === "shopping" ? "active" : ""}`}
-            onClick={() => handleMenuClick("shopping")}
-          >
+            onClick={() => handleMenuClick("shopping")}>
             쇼핑
           </li>
           {/* <li className={`${selectedMenu === "product" ? "active" : ""}`}
@@ -76,8 +70,7 @@ export default function SideMenu() {
           </li> */}
           <li
             className={`${selectedMenu === "setting" ? "active" : ""}`}
-            onClick={() => handleMenuClick("setting")}
-          >
+            onClick={() => handleMenuClick("setting")}>
             환경설정
           </li>
         </ul>
@@ -88,7 +81,9 @@ export default function SideMenu() {
       <div className="UserManage">
         {selectedMenu === "user" && <UserManage />}
       </div>
-      <ContentsPage>{selectedMenu === "content" && <Register />}</ContentsPage>
+      <ContentsPage>
+        {selectedMenu === "content" && <RegisterPage />}
+      </ContentsPage>
     </StyledSideMenu>
   );
 }
