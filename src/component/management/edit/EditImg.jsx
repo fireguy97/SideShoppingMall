@@ -1,5 +1,5 @@
 import React from "react";
-import * as S from "../ManagerComponents/register/RegisterStyles";
+import * as S from "../register/RegisterStyles";
 
 const EditImg = ({ formData, setFormData }) => {
   const handleImageChange = (e) => {

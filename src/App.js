@@ -1,11 +1,11 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import items from "./db/items.json";
-import LoginPage from "./page/LoginPage";
-import FindPage from "./page/FindPage";
-import ManagerPage from "./page/MangerPage";
-import ProfilePage from "./page/ProfilePage";
-import JoinPage from "./page/JoinPage";
+import LoginPage from "./page/login/LoginPage";
+import FindPage from "./page/find/FindPage";
+import ManagerPage from "./page/manager/MangerPage";
+import ProfilePage from "./page/profile/ProfilePage";
+import JoinPage from "./page/join/JoinPage";
 import CartPage from "./page/cart/Cart";
 import BuyPage from "./page/cart/buy/Buy";
 import ShoesPage from "./page/item/shoes/Shoes";

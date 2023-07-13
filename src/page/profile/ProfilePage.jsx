@@ -1,5 +1,5 @@
-import Profile from "../component/Profile/Profile";
-import Layout from "../layout/Layout";
+import Profile from "../../component/profileComponents/Profile";
+import Layout from "../../layout/Layout";
 import { styled } from "styled-components";
 
 export default function ProfilePage() {

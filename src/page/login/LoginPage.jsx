@@ -1,12 +1,12 @@
-import IdPasswordFind from "../component/Find/IdPasswordFind";
-import Layout from "../layout/Layout";
+import Login from "../../component/login/Login";
+import Layout from "../../layout/Layout";
 import { styled } from "styled-components";
 
 export default function LoginPage() {
   return (
     <Layout>
       <StyledLoginPage>
-        <IdPasswordFind />
+        <Login />
       </StyledLoginPage>
     </Layout>
   );

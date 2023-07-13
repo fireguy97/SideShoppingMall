@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
-import SideMenu from "../component/ManagerComponents/SideMenu";
-import Layout from "../layout/Layout";
+import SideMenu from "../../component/ManagerComponents/SideMenu";
+import Layout from "../../layout/Layout";
 
 export default function ManagerPage() {
   return (
