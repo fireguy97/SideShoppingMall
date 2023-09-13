@@ -31,7 +31,7 @@ const SearchItem = () => {
     const searchText = location.search.split("=")[1]; // 검색 텍스트 추출
     if (searchText) {
       axios
-        .get(`http://119.193.0.189:8080/searchProduct`, {
+        .get(`http://119.193.0.189:8081/searchProduct`, {
           params: { searchText: searchText },
         })
         .then((response) => {

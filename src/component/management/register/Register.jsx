@@ -32,7 +32,7 @@ const Register = () => {
         images: formData.images.map((image) => ({ image })),
       };
       // 상품 등록을 위한 POST 요청을 보냄
-      const apiUrl = "http://119.193.0.189:8080/addProduct";
+      const apiUrl = "http://119.193.0.189:8081/addProduct";
       const response = await axios.post(apiUrl, formattedData);
       console.log("Product added successfully");
       resetForm();

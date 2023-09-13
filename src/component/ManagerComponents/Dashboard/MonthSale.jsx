@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import { styled } from "styled-components";
 import * as D from "./DashBoardStyle";
-import { Chart } from "chart.js";
+
 import axios from "axios";
+import { Chart } from "chart.js";
 
 export default function MonthSales() {
   const [salesData, setSalesData] = useState([]);

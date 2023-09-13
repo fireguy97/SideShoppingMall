@@ -18,7 +18,7 @@ const ItemDetail = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://119.193.0.189:8080/getProduct?id=${id}`
+          `http://119.193.0.189:8081/getProduct?id=${id}`
         );
         setItemData(response.data);
         console.log(response.data);

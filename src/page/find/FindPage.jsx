@@ -1,4 +1,4 @@
-import IdPasswordFind from "../../component/find/IdPasswordFind";
+import IdPasswordFind from "../../component/Find/IdPasswordFind";
 import Layout from "../../layout/Layout";
 import { styled } from "styled-components";
 

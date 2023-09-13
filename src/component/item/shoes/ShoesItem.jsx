@@ -22,7 +22,7 @@ const ShoesItem = () => {
     const fetchCounts = async () => {
       try {
         const response = await axios.get(
-          `http://119.193.0.189:8080/productList?category=3&page=1&order=1`
+          `http://119.193.0.189:8081/productList?category=3&page=1&order=1`
         );
         setProductCounts(response.data.counts);
       } catch (error) {
@@ -37,7 +37,7 @@ const ShoesItem = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://119.193.0.189:8080/productList?category=3&page=${currentPage}&order=1`
+          `http://119.193.0.189:8081/productList?category=3&page=${currentPage}&order=1`
         );
         setCurrentItems(response.data.items);
       } catch (error) {
